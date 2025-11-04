@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagamento | FinancePro Master</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="financepromaster.css" />
+  </head>
+  <body>
+    <header class="topbar" aria-label="Barra de navegação">
+      <a class="topbar__logo" href="financepromaster.html">FinancePro<span>Master</span></a>
+      <nav class="topbar__nav" aria-label="Acesso rápido">
+        <a href="financepromaster.html#planos">Voltar aos planos</a>
+        <a href="financepromaster.html#contato">Suporte</a>
+      </nav>
+      <a class="topbar__cta" href="financepromaster.html#contato">Fale com um especialista</a>
+    </header>
+
+    <main class="payment" id="checkout">
+      <section class="section section--highlight payment__hero">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Finalizar assinatura</p>
+          <h1>Confirme seu plano e escolha a forma de pagamento</h1>
+          <p class="section__subtitle">
+            Complete os dados para ativar sua licença com segurança. Pagamentos são
+            processados com criptografia bancária e confirmação imediata via e-mail.
+          </p>
+        </header>
+
+        <div class="payment__grid">
+          <article class="payment__summary" aria-label="Resumo do plano selecionado">
+            <h2>Resumo do plano</h2>
+            <p class="payment__plan-name" data-payment-plan>Plano selecionado</p>
+            <p class="payment__plan-price" data-payment-price></p>
+            <ul class="payment__plan-benefits" data-payment-benefits>
+              <li>Assistente inteligente FinancePro Master</li>
+              <li>Relatórios e alertas personalizados</li>
+              <li>Suporte dedicado conforme o plano</li>
+            </ul>
+            <p class="payment__secure">Transação protegida com criptografia de 256 bits.</p>
+          </article>
+
+          <section class="payment__methods" aria-label="Opções de pagamento">
+            <article class="payment__method" id="cartao">
+              <header>
+                <h3>Cartão de crédito</h3>
+                <p>Pague em até 12x sem juros e ative imediatamente o acesso.</p>
+              </header>
+              <form class="payment__form" aria-label="Formulário de pagamento com cartão">
+                <label>
+                  Nome impresso no cartão
+                  <input type="text" name="cardName" placeholder="Nome completo" required />
+                </label>
+                <label>
+                  Número do cartão
+                  <input type="text" name="cardNumber" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000" required />
+                </label>
+                <div class="payment__form-row">
+                  <label>
+                    Validade
+                    <input type="text" name="cardExpiry" inputmode="numeric" maxlength="5" placeholder="MM/AA" required />
+                  </label>
+                  <label>
+                    CVV
+                    <input type="text" name="cardCvv" inputmode="numeric" maxlength="4" placeholder="123" required />
+                  </label>
+                </div>
+                <label>
+                  CPF do titular
+                  <input type="text" name="cpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" required />
+                </label>
+                <button type="submit" class="btn btn--primary">Pagar com cartão</button>
+                <p class="payment__note">A confirmação é enviada por e-mail em até 5 minutos.</p>
+              </form>
+            </article>
+
+            <article class="payment__method" id="pix">
+              <header>
+                <h3>Pix instantâneo</h3>
+                <p>Pague com QR Code ou chave aleatória e libere o acesso em segundos.</p>
+              </header>
+              <div class="payment__pix">
+                <p>
+                  Use o QR Code gerado após clicar no botão abaixo ou copie a chave Pix
+                  aleatória para concluir a transferência.
+                </p>
+                <button class="btn btn--ghost" type="button">Gerar QR Code Pix</button>
+                <div class="payment__pix-key">
+                  <span class="label">Chave Pix:</span>
+                  <code>financepro@pagamentos.com</code>
+                </div>
+                <p class="payment__note">
+                  Validação automática: identificamos o pagamento em até 1 minuto e você
+                  recebe o acesso completo por e-mail.
+                </p>
+              </div>
+            </article>
+
+            <article class="payment__method" id="deposito">
+              <header>
+                <h3>Depósito bancário</h3>
+                <p>Ideal para empresas ou clientes que preferem transferência tradicional.</p>
+              </header>
+              <div class="payment__bank">
+                <p>Realize o depósito ou TED utilizando os dados abaixo:</p>
+                <ul>
+                  <li><strong>Banco:</strong> 341 - Itaú Unibanco</li>
+                  <li><strong>Agência:</strong> 1234</li>
+                  <li><strong>Conta:</strong> 56789-0</li>
+                  <li><strong>CNPJ:</strong> 12.345.678/0001-99</li>
+                </ul>
+                <p class="payment__note">
+                  Envie o comprovante para <a href="mailto:pagamentos@financepro.com">pagamentos@financepro.com</a>
+                  informando o e-mail de acesso. A liberação ocorre em até 12 horas úteis.
+                </p>
+              </div>
+            </article>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2024 FinancePro Master. Todos os direitos reservados.</p>
+      <div class="footer__links">
+        <a href="financepromaster.html#sobre">Sobre nós</a>
+        <a href="financepromaster.html#blog">Conteúdos</a>
+        <a href="financepromaster.html#contato">Central de ajuda</a>
+      </div>
+    </footer>
+
+    <script>
+      const plans = {
+        teste: {
+          nome: 'Teste grátis 7 dias',
+          preco: 'R$ 0,00',
+          beneficios: [
+            'Exploração completa dos recursos com tour guiado',
+            'Importação ilimitada de contas e cartões',
+            'Diagnóstico inicial personalizado'
+          ]
+        },
+        mensal: {
+          nome: 'Plano Mensal',
+          preco: 'R$ 49,90 / mês',
+          beneficios: [
+            'Acompanhamento contínuo com IA preditiva',
+            'Relatórios estratégicos mensais',
+            'Suporte prioritário via chat'
+          ]
+        },
+        semestral: {
+          nome: 'Plano Semestral',
+          preco: '6x de R$ 29,90',
+          beneficios: [
+            'Consultorias em grupo mensais',
+            'Ferramentas avançadas de quitação de dívidas',
+            'Relatórios comparativos semestrais'
+          ]
+        },
+        anual: {
+          nome: 'Plano Anual',
+          preco: '12x de R$ 19,90',
+          beneficios: [
+            'Mentoria individual trimestral',
+            'Roadmap estratégico personalizado',
+            'Acesso antecipado a novos recursos'
+          ]
+        }
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const plano = params.get('plano');
+      const selectedPlan = plans[plano] || plans.mensal;
+
+      document.querySelector('[data-payment-plan]').textContent = selectedPlan.nome;
+      document.querySelector('[data-payment-price]').textContent = selectedPlan.preco;
+
+      const benefitsList = document.querySelector('[data-payment-benefits]');
+      benefitsList.innerHTML = '';
+      selectedPlan.beneficios.forEach((benefit) => {
+        const li = document.createElement('li');
+        li.textContent = benefit;
+        benefitsList.appendChild(li);
+      });
+    </script>
+  </body>
+</html>
