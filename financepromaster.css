@@ -27,6 +27,10 @@ body {
   min-height: 100vh;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -62,9 +66,11 @@ a:focus {
 
 .topbar__nav {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.4rem;
   font-size: 0.95rem;
   letter-spacing: 0.02em;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .topbar__cta {
@@ -88,6 +94,11 @@ main {
   display: flex;
   flex-direction: column;
   gap: 6rem;
+}
+
+.hero,
+.section {
+  scroll-margin-top: clamp(4.5rem, 10vw, 6.5rem);
 }
 
 .hero {
@@ -235,6 +246,14 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
+.grid--functionalities {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.grid--blog {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
 .feature,
 .card {
   background: rgba(12, 22, 52, 0.75);
@@ -252,15 +271,68 @@ main {
 }
 
 .feature h3,
-.card h3 {
+.card h3,
+.functionality h3,
+.post h3 {
   font-size: 1.3rem;
   margin-bottom: 1rem;
 }
 
 .feature p,
-.card p {
+.card p,
+.functionality p,
+.post p {
   color: var(--color-muted);
   line-height: 1.7;
+}
+
+.functionality {
+  background: rgba(12, 22, 52, 0.78);
+  border: 1px solid rgba(118, 148, 228, 0.32);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.functionality:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-strong);
+}
+
+.post {
+  background: rgba(7, 14, 38, 0.85);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(102, 132, 212, 0.32);
+  padding: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-strong);
+}
+
+.post__link {
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.post__link:hover {
+  text-decoration: underline;
+}
+
+.about {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  color: rgba(218, 226, 250, 0.82);
+  line-height: 1.8;
 }
 
 .section--highlight .plans {
@@ -514,9 +586,21 @@ main {
 
 .footer__links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.4rem;
   font-size: 0.9rem;
   color: rgba(245, 248, 255, 0.65);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer__links,
+.footer__legal {
+  text-align: center;
+}
+
+.footer__legal {
+  font-size: 0.85rem;
+  color: rgba(189, 203, 243, 0.65);
 }
 
 @media (max-width: 768px) {

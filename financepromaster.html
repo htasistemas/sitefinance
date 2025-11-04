@@ -14,18 +14,22 @@
   </head>
   <body>
     <header class="topbar" aria-label="Barra de navegação principal">
-      <div class="topbar__logo">FinancePro<span>Master</span></div>
+      <a class="topbar__logo" href="#home">FinancePro<span>Master</span></a>
       <nav class="topbar__nav" aria-label="Seções principais">
+        <a href="#home">Home</a>
+        <a href="#funcionalidades">Funcionalidades</a>
         <a href="#solucoes">Soluções</a>
         <a href="#recursos">Recursos</a>
         <a href="#planos">Planos</a>
-        <a href="#contato">Contato</a>
+        <a href="#blog">Blog</a>
+        <a href="#sobre">Sobre nós</a>
+        <a href="#contato">Fale conosco</a>
       </nav>
       <a class="topbar__cta" href="#planos">Experimentar grátis</a>
     </header>
 
     <main>
-      <section class="hero" id="inicio">
+      <section class="hero" id="home">
         <div class="hero__content">
           <h1>Assuma o controle total da sua vida financeira.</h1>
           <p>
@@ -62,6 +66,65 @@
               <span class="metric__trend positivo">+3 pts na taxa de poupança</span>
             </article>
           </div>
+        </div>
+      </section>
+
+      <section class="section" id="funcionalidades">
+        <header class="section__header">
+          <p class="eyebrow">Funcionalidades principais</p>
+          <h2>Funcionalidades Pensadas para Você</h2>
+          <p class="section__subtitle">
+            Construa uma rotina financeira sólida com ferramentas práticas que se
+            adaptam ao seu estilo de vida, entregando clareza em cada decisão e
+            autonomia para alcançar os seus objetivos.
+          </p>
+        </header>
+        <div class="grid grid--functionalities">
+          <article class="functionality">
+            <h3>Dashboards inteligentes</h3>
+            <p>
+              Visualize em tempo real a evolução do seu patrimônio, os gastos por
+              categoria e os indicadores-chave que mostram o impacto das suas
+              escolhas.
+            </p>
+          </article>
+          <article class="functionality">
+            <h3>Orçamentos flexíveis</h3>
+            <p>
+              Ajuste limites com poucos cliques e receba sugestões automáticas
+              baseadas nos seus hábitos para manter o controle sem abrir mão do
+              bem-estar.
+            </p>
+          </article>
+          <article class="functionality">
+            <h3>Metas e planejamentos</h3>
+            <p>
+              Defina objetivos por período, acompanhe previsões de conclusão e
+              saiba quais ações priorizar para encurtar o caminho até cada
+              conquista.
+            </p>
+          </article>
+          <article class="functionality">
+            <h3>Controle de cartão de crédito</h3>
+            <p>
+              Monitore faturas, parcelas e limites disponíveis enquanto recebe
+              alertas para aproveitar melhor seus benefícios e evitar juros.
+            </p>
+          </article>
+          <article class="functionality">
+            <h3>Contas bancárias conectadas</h3>
+            <p>
+              Centralize múltiplas contas correntes, poupança e investimentos com
+              sincronização segura que mantém seus dados sempre atualizados.
+            </p>
+          </article>
+          <article class="functionality">
+            <h3>Relatórios inteligentes</h3>
+            <p>
+              Gere análises comparativas, entenda tendências e exporte relatórios
+              completos para acompanhar seu progresso com precisão.
+            </p>
+          </article>
         </div>
       </section>
 
@@ -237,6 +300,65 @@
         </p>
       </section>
 
+      <section class="section section--alt" id="blog">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Conteúdo exclusivo</p>
+          <h2>Blog Finance Pro Master</h2>
+          <p class="section__subtitle">
+            Histórias reais, guias práticos e análises de especialistas para você
+            continuar evoluindo além da plataforma.
+          </p>
+        </header>
+        <div class="grid grid--blog">
+          <article class="post">
+            <h3>Como criar um plano financeiro pessoal eficiente</h3>
+            <p>
+              Conheça os 5 passos utilizados pelos nossos consultores para
+              organizar objetivos, orçamento e reservas em um fluxo semanal.
+            </p>
+            <a class="post__link" href="#contato">Ler guia completo</a>
+          </article>
+          <article class="post">
+            <h3>Planilhas vs. automação: quando migrar?</h3>
+            <p>
+              Entenda os sinais de que chegou a hora de sair das planilhas e como a
+              automação inteligente libera tempo para focar nas suas metas.
+            </p>
+            <a class="post__link" href="#contato">Conferir insights</a>
+          </article>
+          <article class="post">
+            <h3>Estratégias para investir com segurança</h3>
+            <p>
+              Explore abordagens de diversificação, proteção de capital e
+              acompanhamento contínuo para investir com confiança.
+            </p>
+            <a class="post__link" href="#contato">Ler recomendações</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="sobre">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Quem somos</p>
+          <h2>Por que acreditamos na autonomia financeira</h2>
+        </header>
+        <div class="about">
+          <p>
+            O Finance Pro Master nasceu da união de especialistas em finanças,
+            tecnologia e educação que perceberam como a gestão do dinheiro pessoal
+            ainda é tratada de forma complicada. Por isso, criamos uma plataforma
+            robusta e didática, que traduz conceitos complexos em passos claros e
+            aplicáveis.
+          </p>
+          <p>
+            Nosso compromisso é acompanhar você da primeira organização de gastos
+            à conquista de metas ambiciosas, oferecendo suporte humano, conteúdos
+            exclusivos e recursos inteligentes que evoluem com o seu momento de
+            vida.
+          </p>
+        </div>
+      </section>
+
       <section class="section" id="demo">
         <div class="cta">
           <div>
@@ -285,11 +407,17 @@
     </main>
 
     <footer class="footer">
-      <p>© 2025 FinancePro Master. Todos os direitos reservados.</p>
+      <p>© 2023 Finance Pro Master. Todos os direitos reservados.</p>
       <p class="footer__links">
-        <a href="#solucoes">Soluções</a>
+        <a href="#home">Home</a>
+        <a href="#funcionalidades">Funcionalidades</a>
         <a href="#planos">Planos</a>
-        <a href="#contato">Contato</a>
+        <a href="#blog">Blog</a>
+        <a href="#sobre">Sobre nós</a>
+        <a href="#contato">Fale conosco</a>
+      </p>
+      <p class="footer__legal">
+        <a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a>
       </p>
     </footer>
   </body>
