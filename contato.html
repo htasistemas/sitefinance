@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contato | FinancePro Master</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="financepromaster.css" />
+  </head>
+  <body>
+    <header class="topbar" aria-label="Barra de navegação principal">
+      <a class="topbar__logo" href="financepromaster.html">FinancePro<span>Master</span></a>
+      <nav class="topbar__nav" aria-label="Seções principais">
+        <a href="financepromaster.html">Home</a>
+        <a href="funcionalidades.html">Funcionalidades</a>
+        <a href="solucoes.html">Soluções</a>
+        <a href="recursos.html">Recursos</a>
+        <a href="planos.html">Planos</a>
+        <a href="blog.html">Blog</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html" aria-current="page">Fale conosco</a>
+      </nav>
+      <a class="topbar__cta" href="planos.html">Experimentar grátis</a>
+    </header>
+
+    <main>
+      <section class="section section--highlight page-hero">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Contato</p>
+          <h1>Fale com nossos especialistas</h1>
+          <p class="section__subtitle">
+            Estamos prontos para entender seus desafios, apresentar um plano de ação e
+            indicar o melhor caminho dentro da plataforma.
+          </p>
+        </header>
+      </section>
+
+      <section class="section section--alt" id="contato">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Contato</p>
+          <h2>Envie sua mensagem</h2>
+        </header>
+        <form class="form">
+          <div class="form__group">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" placeholder="Como devemos chamar você?" required />
+          </div>
+          <div class="form__group">
+            <label for="email">E-mail principal</label>
+            <input id="email" name="email" type="email" placeholder="voce@email.com" required />
+          </div>
+          <div class="form__group">
+            <label for="mensagem">Mensagem</label>
+            <textarea
+              id="mensagem"
+              name="mensagem"
+              rows="4"
+              placeholder="Conte um pouco sobre seus desafios financeiros"
+            ></textarea>
+          </div>
+          <button class="btn btn--primary" type="submit">Enviar mensagem</button>
+        </form>
+      </section>
+
+      <section class="section" id="suporte-canais">
+        <header class="section__header section__header--center">
+          <h2>Outros canais de atendimento</h2>
+        </header>
+        <div class="grid grid--two">
+          <article class="card card--accent">
+            <h3>Chat prioritário</h3>
+            <p>
+              Assinantes dos planos pagos acessam suporte em tempo real com especialistas
+              de segunda a sexta, das 9h às 19h.
+            </p>
+            <a class="card__link" href="planos.html">Ver planos com suporte premium</a>
+          </article>
+          <article class="card card--accent">
+            <h3>E-mail dedicado</h3>
+            <p>
+              Preferiu escrever com calma? Envie suas dúvidas para
+              <a href="mailto:contato@financepro.com">contato@financepro.com</a> e
+              receba retorno em até 24h úteis.
+            </p>
+            <a class="card__link" href="blog.html">Acessar materiais de apoio</a>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2024 FinancePro Master. Todos os direitos reservados.</p>
+      <p class="footer__links">
+        <a href="financepromaster.html">Home</a>
+        <a href="funcionalidades.html">Funcionalidades</a>
+        <a href="planos.html">Planos</a>
+        <a href="blog.html">Blog</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html" aria-current="page">Fale conosco</a>
+      </p>
+      <p class="footer__legal">
+        <a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a>
+      </p>
+    </footer>
+  </body>
+</html>
