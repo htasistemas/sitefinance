@@ -14,7 +14,13 @@
   </head>
   <body>
     <header class="topbar" aria-label="Barra de navegação principal">
-      <a class="topbar__logo" href="financepromaster.html">FinancePro<span>Master</span></a>
+      <a class="topbar__logo" href="financepromaster.html">
+        <span class="topbar__logo-mark" aria-hidden="true">FP</span>
+        <span class="topbar__logo-text">
+          <span class="topbar__logo-name">Finance<span class="topbar__logo-em">Pro</span> <span class="topbar__logo-highlight">Master</span></span>
+          <span class="topbar__logo-subtitle">Inteligência financeira</span>
+        </span>
+      </a>
       <nav class="topbar__nav" aria-label="Seções principais">
         <a href="financepromaster.html">Home</a>
         <a href="funcionalidades.html">Funcionalidades</a>
@@ -28,12 +34,40 @@
       <a class="topbar__cta" href="planos.html">Experimentar grátis</a>
     </header>
 
-
+    <main>
       <section class="section section--alt" id="contato">
         <header class="section__header section__header--center">
           <p class="eyebrow">Contato</p>
           <h2>Envie sua mensagem</h2>
         </header>
+        <div class="contact__grid">
+          <article class="contact-card contact-card--faq">
+            <h3>Central de Ajuda (FAQ)</h3>
+            <p>
+              Antes de enviar, que tal checar nossas Perguntas Frequentes? A sua dúvida pode já
+              estar respondida!
+            </p>
+            <a class="contact-card__link" href="recursos.html#faq">Acessar o FAQ →</a>
+          </article>
+          <article class="contact-card">
+            <h3>E-mail</h3>
+            <p>Para dúvidas mais complexas ou que exigem anexos.</p>
+            <a class="contact-card__link" href="mailto:suporte@financepromaster.com"
+              >suporte@financepromaster.com</a
+            >
+          </article>
+          <article class="contact-card">
+            <h3>WhatsApp Business</h3>
+            <p>Para um atendimento mais ágil em horário comercial.</p>
+            <a
+              class="contact-card__link"
+              href="https://wa.me/5534992693522"
+              target="_blank"
+              rel="noopener"
+              >Iniciar conversa →</a
+            >
+          </article>
+        </div>
         <form class="form">
           <div class="form__group">
             <label for="nome">Nome</label>
@@ -73,7 +107,7 @@
             <h3>E-mail dedicado</h3>
             <p>
               Preferiu escrever com calma? Envie suas dúvidas para
-              <a href="mailto:contato@financepro.com">contato@financepro.com</a> e
+              <a href="mailto:suporte@financepromaster.com">suporte@financepromaster.com</a> e
               receba retorno em até 24h úteis.
             </p>
             <a class="card__link" href="blog.html">Acessar materiais de apoio</a>
