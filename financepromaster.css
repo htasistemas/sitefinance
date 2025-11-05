@@ -248,6 +248,7 @@ main {
 
 .grid--functionalities {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  align-items: start;
 }
 
 .grid--blog {
@@ -455,7 +456,8 @@ main {
 }
 
 .dashboard-preview__segments li {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 0.45rem;
 }
 
@@ -486,6 +488,46 @@ main {
 .dashboard-preview__percent {
   font-size: 0.75rem;
   color: rgba(176, 194, 240, 0.72);
+}
+
+@media (min-width: 900px) {
+  .dashboard-preview__content {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    grid-template-areas:
+      'chart cards'
+      'segments cards';
+    align-items: start;
+  }
+
+  .dashboard-preview__chart {
+    grid-area: chart;
+    height: 200px;
+  }
+
+  .dashboard-preview__cards {
+    grid-area: cards;
+  }
+
+  .dashboard-preview__segments {
+    grid-area: segments;
+    margin-top: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid--functionalities {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+  }
+
+  .functionality:first-child {
+    grid-column: span 2;
+  }
+
+  .functionality:first-child .functionality__preview {
+    height: 100%;
+  }
 }
 
 .dashboard-preview[data-state='spending'] [data-progress='essentials'] {
