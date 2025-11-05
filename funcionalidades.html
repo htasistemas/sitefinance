@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Funcionalidades | FinancePro Master</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="financepromaster.css" />
+  </head>
+  <body>
+    <header class="topbar" aria-label="Barra de navegação principal">
+      <a class="topbar__logo" href="financepromaster.html">FinancePro<span>Master</span></a>
+      <nav class="topbar__nav" aria-label="Seções principais">
+        <a href="financepromaster.html">Home</a>
+        <a href="funcionalidades.html" aria-current="page">Funcionalidades</a>
+        <a href="solucoes.html">Soluções</a>
+        <a href="recursos.html">Recursos</a>
+        <a href="planos.html">Planos</a>
+        <a href="blog.html">Blog</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html">Fale conosco</a>
+      </nav>
+      <a class="topbar__cta" href="planos.html">Experimentar grátis</a>
+    </header>
+
+    <main>
+      <section class="section section--highlight page-hero">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Ferramentas práticas</p>
+          <h1>Funcionalidades que traduzem números em decisões claras</h1>
+          <p class="section__subtitle">
+            Dashboards interativos, orçamentos inteligentes e monitoramento constante
+            ajudam você a enxergar todo o cenário financeiro em segundos, com
+            explicações didáticas do que fazer a seguir.
+          </p>
+        </header>
+      </section>
+
+      <section class="section" id="funcionalidades">
+        <header class="section__header">
+          <p class="eyebrow">Funcionalidades principais</p>
+          <h2>Funcionalidades Pensadas para Você</h2>
+          <p class="section__subtitle">
+            Construa uma rotina financeira sólida com ferramentas práticas que se
+            adaptam ao seu estilo de vida, entregando clareza em cada decisão e
+            autonomia para alcançar os seus objetivos.
+          </p>
+        </header>
+        <div class="grid grid--functionalities">
+          <article class="functionality">
+            <h3>Dashboards inteligentes</h3>
+            <p>
+              Visualize em tempo real a evolução do seu patrimônio, os gastos por
+              categoria e os indicadores-chave que mostram o impacto das suas
+              escolhas.
+            </p>
+            <div
+              class="functionality__preview"
+              role="group"
+              aria-label="Exemplos interativos de dashboards"
+            >
+              <div class="functionality__tabs" role="tablist">
+                <button
+                  class="functionality__tab is-active"
+                  type="button"
+                  role="tab"
+                  aria-selected="true"
+                  data-dashboard="overview"
+                >
+                  Visão geral
+                </button>
+                <button
+                  class="functionality__tab"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  data-dashboard="spending"
+                >
+                  Gastos
+                </button>
+                <button
+                  class="functionality__tab"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  data-dashboard="projections"
+                >
+                  Projeções
+                </button>
+              </div>
+              <div class="dashboard-preview" data-dashboard-panel>
+                <div class="dashboard-preview__header">
+                  <div>
+                    <p class="dashboard-preview__title">Performance mensal</p>
+                    <p class="dashboard-preview__subtitle">Atualizado há 2 minutos</p>
+                  </div>
+                  <span class="dashboard-preview__chip">Premium</span>
+                </div>
+                <div class="dashboard-preview__content">
+                  <div class="dashboard-preview__chart dashboard-preview__chart--area">
+                    <div class="chart-area__line"></div>
+                    <div class="chart-area__gradient"></div>
+                  </div>
+                  <div class="dashboard-preview__cards">
+                    <article class="dashboard-preview__card">
+                      <h4>Saldo consolidado</h4>
+                      <p class="dashboard-preview__value">R$ <span data-metric="balance">18.450</span></p>
+                      <span class="dashboard-preview__trend positivo"
+                        ><span data-metric="balanceTrend">+12%</span> vs. último mês</span
+                      >
+                    </article>
+                    <article class="dashboard-preview__card">
+                      <h4>Economia mensal</h4>
+                      <p class="dashboard-preview__value">R$ <span data-metric="savings">1.250</span></p>
+                      <span class="dashboard-preview__trend"
+                        ><span data-metric="savingsTrend">+3 pts</span> na taxa</span
+                      >
+                    </article>
+                    <article class="dashboard-preview__card">
+                      <h4>Índice de bem-estar</h4>
+                      <p class="dashboard-preview__value">
+                        <span data-metric="wellbeing">8,7</span>/10
+                      </p>
+                      <span class="dashboard-preview__trend positivo">Insights ativos</span>
+                    </article>
+                  </div>
+                  <ul class="dashboard-preview__segments">
+                    <li>
+                      <span class="dashboard-preview__label">Essenciais</span>
+                      <div class="dashboard-preview__bar">
+                        <span
+                          class="dashboard-preview__bar-fill"
+                          data-progress="essentials"
+                          style="width: 32%"
+                        ></span>
+                      </div>
+                      <span class="dashboard-preview__percent" data-progress-text="essentials">32%</span>
+                    </li>
+                    <li>
+                      <span class="dashboard-preview__label">Qualidade de vida</span>
+                      <div class="dashboard-preview__bar">
+                        <span
+                          class="dashboard-preview__bar-fill"
+                          data-progress="lifestyle"
+                          style="width: 24%"
+                        ></span>
+                      </div>
+                      <span class="dashboard-preview__percent" data-progress-text="lifestyle">24%</span>
+                    </li>
+                    <li>
+                      <span class="dashboard-preview__label">Investimentos</span>
+                      <div class="dashboard-preview__bar">
+                        <span
+                          class="dashboard-preview__bar-fill"
+                          data-progress="investments"
+                          style="width: 44%"
+                        ></span>
+                      </div>
+                      <span class="dashboard-preview__percent" data-progress-text="investments">44%</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="functionality">
+            <h3>Orçamentos flexíveis</h3>
+            <p>
+              Ajuste limites com poucos cliques e receba sugestões automáticas
+              baseadas nos seus hábitos para manter o controle sem abrir mão do
+              bem-estar.
+            </p>
+          </article>
+          <article class="functionality">
+            <h3>Metas e planejamentos</h3>
+            <p>
+              Defina objetivos por período, acompanhe previsões de conclusão e
+              saiba quais ações priorizar para encurtar o caminho até cada
+              conquista.
+            </p>
+          </article>
+          <article class="functionality">
+            <h3>Controle de cartão de crédito</h3>
+            <p>
+              Monitore faturas, parcelas e limites disponíveis enquanto recebe
+              alertas para aproveitar melhor seus benefícios e evitar juros.
+            </p>
+          </article>
+          <article class="functionality">
+            <h3>Contas bancárias conectadas</h3>
+            <p>
+              Centralize múltiplas contas correntes, poupança e investimentos com
+              sincronização segura que mantém seus dados sempre atualizados.
+            </p>
+          </article>
+          <article class="functionality">
+            <h3>Relatórios inteligentes</h3>
+            <p>
+              Gere análises comparativas, entenda tendências e exporte relatórios
+              completos para acompanhar seu progresso com precisão.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2024 FinancePro Master. Todos os direitos reservados.</p>
+      <p class="footer__links">
+        <a href="financepromaster.html">Home</a>
+        <a href="funcionalidades.html" aria-current="page">Funcionalidades</a>
+        <a href="planos.html">Planos</a>
+        <a href="blog.html">Blog</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html">Fale conosco</a>
+      </p>
+      <p class="footer__legal">
+        <a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a>
+      </p>
+    </footer>
+
+    <script>
+      (function () {
+        const dashboardData = {
+          overview: {
+            balance: '18.450',
+            balanceTrend: '+12%',
+            savings: '1.250',
+            savingsTrend: '+3 pts',
+            wellbeing: '8,7',
+            state: 'overview',
+            segments: { essentials: 32, lifestyle: 24, investments: 44 },
+          },
+          spending: {
+            balance: '17.120',
+            balanceTrend: '-6%',
+            savings: '820',
+            savingsTrend: '-2 pts',
+            wellbeing: '7,9',
+            state: 'spending',
+            segments: { essentials: 48, lifestyle: 18, investments: 34 },
+          },
+          projections: {
+            balance: '26.300',
+            balanceTrend: '+42%',
+            savings: '1.980',
+            savingsTrend: '+5 pts',
+            wellbeing: '9,4',
+            state: 'projections',
+            segments: { essentials: 28, lifestyle: 22, investments: 50 },
+          },
+        };
+
+        const tabs = document.querySelectorAll('[data-dashboard]');
+        const panel = document.querySelector('[data-dashboard-panel]');
+        if (!tabs.length || !panel) return;
+
+        const metricTargets = {
+          balance: panel.querySelector('[data-metric="balance"]'),
+          balanceTrend: panel.querySelector('[data-metric="balanceTrend"]'),
+          savings: panel.querySelector('[data-metric="savings"]'),
+          savingsTrend: panel.querySelector('[data-metric="savingsTrend"]'),
+          wellbeing: panel.querySelector('[data-metric="wellbeing"]'),
+        };
+
+        const progressFills = {
+          essentials: panel.querySelector('[data-progress="essentials"]'),
+          lifestyle: panel.querySelector('[data-progress="lifestyle"]'),
+          investments: panel.querySelector('[data-progress="investments"]'),
+        };
+
+        const progressTexts = {
+          essentials: panel.querySelector('[data-progress-text="essentials"]'),
+          lifestyle: panel.querySelector('[data-progress-text="lifestyle"]'),
+          investments: panel.querySelector('[data-progress-text="investments"]'),
+        };
+
+        const updateDashboard = (key) => {
+          const dataset = dashboardData[key];
+          if (!dataset) return;
+
+          panel.setAttribute('data-state', dataset.state || 'overview');
+
+          metricTargets.balance.textContent = dataset.balance;
+          metricTargets.balanceTrend.textContent = dataset.balanceTrend;
+          metricTargets.savings.textContent = dataset.savings;
+          metricTargets.savingsTrend.textContent = dataset.savingsTrend;
+          metricTargets.wellbeing.textContent = dataset.wellbeing;
+
+          const trendElement = metricTargets.balanceTrend.closest('.dashboard-preview__trend');
+          const savingsTrendElement = metricTargets.savingsTrend.closest('.dashboard-preview__trend');
+
+          [trendElement, savingsTrendElement]
+            .filter(Boolean)
+            .forEach((element) => {
+              element.classList.remove('positivo', 'negativo');
+            });
+
+          if (trendElement) {
+            const cleaned = dataset.balanceTrend.trim();
+            if (cleaned.startsWith('+')) {
+              trendElement.classList.add('positivo');
+            } else if (cleaned.startsWith('-')) {
+              trendElement.classList.add('negativo');
+            }
+          }
+
+          if (savingsTrendElement) {
+            const cleaned = dataset.savingsTrend.trim();
+            if (cleaned.startsWith('+')) {
+              savingsTrendElement.classList.add('positivo');
+            } else if (cleaned.startsWith('-')) {
+              savingsTrendElement.classList.add('negativo');
+            }
+          }
+
+          const segments = dataset.segments || {};
+          Object.entries(progressFills).forEach(([key, element]) => {
+            if (!element) return;
+            const value = Number(segments[key]);
+            const bounded = Number.isFinite(value) ? Math.min(100, Math.max(0, value)) : 0;
+            element.style.width = `${bounded}%`;
+          });
+
+          Object.entries(progressTexts).forEach(([key, element]) => {
+            if (!element) return;
+            const value = Number(segments[key]);
+            const bounded = Number.isFinite(value) ? Math.min(100, Math.max(0, value)) : 0;
+            element.textContent = `${bounded}%`;
+          });
+        };
+
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const dashboardKey = tab.getAttribute('data-dashboard');
+
+            tabs.forEach((item) => {
+              const isActive = item === tab;
+              item.classList.toggle('is-active', isActive);
+              item.setAttribute('aria-selected', String(isActive));
+            });
+
+            updateDashboard(dashboardKey);
+          });
+        });
+
+        updateDashboard('overview');
+      })();
+    </script>
+  </body>
+</html>
