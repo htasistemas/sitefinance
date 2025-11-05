@@ -177,7 +177,8 @@
 
       const params = new URLSearchParams(window.location.search);
       const plano = params.get('plano');
-      const selectedPlan = plans[plano] || plans.mensal;
+      const planoSelecionado = plano || 'mensal';
+      const selectedPlan = plans[planoSelecionado] || plans.mensal;
 
       document.querySelector('[data-payment-plan]').textContent = selectedPlan.nome;
       document.querySelector('[data-payment-price]').textContent = selectedPlan.preco;
@@ -189,6 +190,15 @@
         li.textContent = benefit;
         benefitsList.appendChild(li);
       });
+
+      const cardForm = document.querySelector('#cartao .payment__form');
+      if (cardForm) {
+        cardForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const checkoutPlan = plans[planoSelecionado] ? planoSelecionado : 'mensal';
+          window.location.href = `pagseguro.html?plano=${encodeURIComponent(checkoutPlan)}`;
+        });
+      }
     </script>
   </body>
 </html>
