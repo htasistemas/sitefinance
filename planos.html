@@ -15,7 +15,26 @@
   <body>
     <header class="topbar" aria-label="Barra de navegação principal">
       <a class="topbar__logo" href="financepromaster.html">
-        <span class="topbar__logo-mark" aria-hidden="true">FP</span>
+        <span class="topbar__logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" role="presentation" focusable="false">
+            <path
+              d="M4 24.5v-6.8a1.2 1.2 0 0 1 1.2-1.2h3.6a1.2 1.2 0 0 1 1.2 1.2v6.8m6-4.3v-8.7a1.2 1.2 0 0 1 1.2-1.2h3.6a1.2 1.2 0 0 1 1.2 1.2v8.7m6-2.4V7.7a1.2 1.2 0 0 1 1.2-1.2H29"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+            <path
+              d="M3 26.6h26"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="2"
+            />
+            <circle cx="26" cy="6.5" r="2" fill="currentColor" />
+          </svg>
+        </span>
         <span class="topbar__logo-text">
           <span class="topbar__logo-name">Finance<span class="topbar__logo-em">Pro</span> <span class="topbar__logo-highlight">Master</span></span>
           <span class="topbar__logo-subtitle">Inteligência financeira</span>
@@ -31,237 +50,84 @@
         <a href="sobre.html">Sobre nós</a>
         <a href="contato.html">Fale conosco</a>
       </nav>
-      <a class="topbar__cta" href="planos.html">Experimentar grátis</a>
+      <a class="topbar__cta" href="planos.html#teste">Teste grátis</a>
     </header>
 
     <main>
       <section class="section section--highlight" id="planos">
         <header class="section__header section__header--center">
           <p class="eyebrow">Planos Finance Pro Master</p>
-          <h2>Escolha o plano ideal para você</h2>
+          <h2>Escolha como continuar depois do teste</h2>
           <p class="section__subtitle">
-            Comece grátis ou selecione um plano contínuo com orientação premium.
-            Cada oferta combina tecnologia, consultoria e conteúdo educativo para
-            acelerar a sua organização financeira de forma sustentável.
+            Comece com 7 dias de acesso completo e, depois, selecione a assinatura que
+            combina melhor flexibilidade e economia para o seu negócio.
           </p>
         </header>
+        <p class="plans__notice" id="teste">
+          Teste grátis: todos os recursos do Finance Pro Master liberados por 7 dias — sem cartão e sem limitações.
+        </p>
         <div class="plans">
           <article class="plan">
             <header class="plan__header">
-              <h3>Teste Grátis</h3>
-              <p>Acesso total a todos os recursos</p>
-            </header>
-            <p class="plan__price">
-              <span class="plan__currency">R$</span>
-              <span class="plan__amount">0</span>
-              <span class="plan__cents">,00</span>
-              <span class="plan__period plan__period--inline">por 7 dias</span>
-            </p>
-            <p class="plan__tagline">
-              Ideal para experimentar toda a plataforma com orientações guiadas e
-              entender como os algoritmos de previsão podem trabalhar a seu favor.
-            </p>
-            <ul class="plan__benefits">
-              <li>
-                Assistente inteligente para importar contas, cartões e investimentos em
-                minutos
-              </li>
-              <li>Trilhas educativas completas com checklists interativos</li>
-              <li>Alertas proativos sobre faturas, metas e oportunidades de economia</li>
-            </ul>
-            <div class="plan__value">
-              <h4>Resultados em 7 dias</h4>
-              <p>
-                Configure o painel completo, projete cenários e receba um diagnóstico
-                do seu comportamento financeiro antes de decidir por um plano pago.
-              </p>
-            </div>
-            <a class="btn btn--plan" href="pagamento.html?plano=teste">Começar meu teste</a>
-            <p class="plan__guarantee">Não requer cartão de crédito e pode ser cancelado a qualquer momento.</p>
-          </article>
-
-          <article class="plan plan--muted">
-            <header class="plan__header">
               <h3>Plano Mensal</h3>
-              <p>Pagamento mês a mês com consultoria on-demand para decisões rápidas.</p>
+              <p>Renovação flexível, cancele quando quiser.</p>
             </header>
-            <p class="plan__price">
+            <p class="plan__price plan__price--highlight">
               <span class="plan__currency">R$</span>
               <span class="plan__amount">49</span>
               <span class="plan__cents">,90</span>
               <span class="plan__period plan__period--inline">/mês</span>
             </p>
-            <p class="plan__tagline">
-              Para quem deseja acompanhamento contínuo, metas ilimitadas e sugestões de
-              otimização personalizadas em tempo real.
-            </p>
             <ul class="plan__benefits">
-              <li>
-                <strong>Controle preditivo</strong> com inteligência artificial para
-                antecipar riscos de estouro de orçamento
-              </li>
-              <li>
-                <strong>Metas e simuladores ilimitados</strong> com cenários automatizados
-                de aportes e quitação de dívidas
-              </li>
-              <li>
-                <strong>Suporte prioritário</strong> via chat com especialistas financeiros
-                certificados
-              </li>
+              <li>Acesso completo ao sistema após o teste.</li>
+              <li>Dashboards e automações atualizados diariamente.</li>
+              <li>Cancelamento simples direto pelo painel.</li>
             </ul>
-            <div class="plan__value">
-              <h4>Ideal para</h4>
-              <p>
-                Profissionais autônomos e famílias que precisam de previsibilidade
-                mensal com relatórios executivos para decisões rápidas.
-              </p>
-            </div>
-            <a class="btn btn--ghost" href="pagseguro.html?plano=mensal">Assinar plano</a>
-            <p class="plan__guarantee">Garantia de reembolso integral em até 30 dias.</p>
+            <a class="btn btn--plan" href="pagseguro.html?plano=mensal">Assinar plano mensal</a>
           </article>
 
           <article class="plan plan--muted">
             <header class="plan__header">
               <h3>Plano Semestral</h3>
-              <p>Total de R$ 179,40 por semestre com economia garantida de 40%.</p>
+              <p>Economia para quem quer estabilidade.</p>
             </header>
             <p class="plan__price">
               <span class="plan__currency">R$</span>
               <span class="plan__amount">29</span>
               <span class="plan__cents">,90</span>
-              <span class="plan__period">por mês se assinar semestralmente</span>
-            </p>
-            <p class="plan__tagline">
-              Combine consultorias em grupo com planos de ação revisados a cada trimestre
-              para acelerar metas específicas, como quitar dívidas ou formar reservas.
+              <span class="plan__period">por mês no ciclo semestral</span>
             </p>
             <ul class="plan__benefits">
-              <li>
-                <strong>Consultorias financeiras em grupo</strong> mensais com foco em
-                execução e accountability
-              </li>
-              <li>
-                <strong>Ferramentas avançadas</strong> de renegociação e quitação de dívidas
-                com simulações completas
-              </li>
-              <li>
-                <strong>Relatórios comparativos semestrais</strong> com benchmarks e planos
-                de ajuste automático
-              </li>
+              <li>Pagamentos a cada 6 meses.</li>
+              <li>Todos os recursos do Finance Pro Master incluídos.</li>
+              <li>Continuidade garantida das automações configuradas.</li>
             </ul>
-            <div class="plan__value">
-              <h4>Ideal para</h4>
-              <p>
-                Pessoas em processo de reestruturação financeira que precisam de metas
-                agressivas, revisão periódica e incentivos de longo prazo.
-              </p>
-            </div>
-            <a class="btn btn--ghost" href="pagseguro.html?plano=semestral">Assinar plano</a>
-            <p class="plan__guarantee">Economize mais mantendo flexibilidade a cada semestre.</p>
+            <a class="btn btn--ghost" href="pagseguro.html?plano=semestral">Assinar plano semestral</a>
           </article>
 
           <article class="plan plan--popular">
-            <span class="plan__badge">Mais popular</span>
+            <span class="plan__badge">Mais economia</span>
             <header class="plan__header">
               <h3>Plano Anual</h3>
-              <p>Total de R$ 238,80 por ano. Economize 60% com acompanhamento contínuo.</p>
+              <p>Pagando uma vez, você garante o ano inteiro.</p>
             </header>
             <p class="plan__price plan__price--highlight">
               <span class="plan__currency">R$</span>
               <span class="plan__amount">19</span>
               <span class="plan__cents">,90</span>
-              <span class="plan__period">por mês se assinar anualmente</span>
-            </p>
-            <p class="plan__tagline">
-              A experiência completa com mentorias individuais, roadmap estratégico e
-              visão anual de construção patrimonial.
+              <span class="plan__period">por mês no ciclo anual</span>
             </p>
             <ul class="plan__benefits">
-              <li>
-                <strong>Mentoria individual trimestral</strong> focada em metas de longo
-                prazo e estratégia de investimentos
-              </li>
-              <li>
-                <strong>Diagnóstico completo</strong> com benchmark da sua evolução e plano
-                de ajustes contínuos
-              </li>
-              <li>
-                <strong>Prioridade máxima</strong> no suporte, roadmap e acesso antecipado a
-                novos recursos
-              </li>
+              <li>Menor valor mensal efetivo.</li>
+              <li>Atualizações e melhorias incluídas automaticamente.</li>
+              <li>Sem perda das personalizações criadas no teste.</li>
             </ul>
-            <div class="plan__value">
-              <h4>Ideal para</h4>
-              <p>
-                Quem quer acelerar patrimônio com planejamento estratégico, integração com
-                assessores e governança financeira completa.
-              </p>
-            </div>
-            <a class="btn btn--primary" href="pagseguro.html?plano=anual">Assinar plano</a>
-            <p class="plan__guarantee">Bônus exclusivo: revisão anual com especialista certificado CFP®.</p>
+            <a class="btn btn--primary" href="pagseguro.html?plano=anual">Assinar plano anual</a>
           </article>
         </div>
         <p class="plans__disclaimer">
-          Cancele quando quiser. Pagamentos processados com segurança e garantia de
-          reembolso integral nos primeiros 30 dias dos planos pagos.
+          Assine apenas após testar. Você controla a renovação diretamente na plataforma.
         </p>
-        <section class="plans__comparison" aria-label="Comparativo detalhado dos planos">
-          <h3>Comparativo rápido dos benefícios</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Recurso</th>
-                <th>Teste Grátis</th>
-                <th>Plano Mensal</th>
-                <th>Plano Semestral</th>
-                <th>Plano Anual</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Metas ilimitadas e simuladores</td>
-                <td>✓</td>
-                <td>✓</td>
-                <td>✓</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Consultoria com especialistas</td>
-                <td>Suporte comunitário</td>
-                <td>Chat individual</td>
-                <td>Sessões em grupo</td>
-                <td>Mentoria individual</td>
-              </tr>
-              <tr>
-                <td>Relatórios estratégicos</td>
-                <td>Básicos</td>
-                <td>Mensais avançados</td>
-                <td>Semestrais comparativos</td>
-                <td>Dashboard executivo completo</td>
-              </tr>
-              <tr>
-                <td>Benefícios extras</td>
-                <td>Trilhas educativas</td>
-                <td>Alertas proativos</td>
-                <td>Planos de ação trimestrais</td>
-                <td>Roadmap exclusivo e testes beta</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-      </section>
-
-      <section class="section" id="cta-planos">
-        <div class="cta">
-          <div>
-            <h2>Precisa de ajuda para escolher?</h2>
-            <p>
-              Fale com a nossa equipe e receba uma recomendação personalizada com base
-              no seu momento financeiro.
-            </p>
-          </div>
-          <a class="btn btn--ghost" href="contato.html">Conversar com um especialista</a>
-        </div>
       </section>
     </main>
 

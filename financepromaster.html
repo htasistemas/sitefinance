@@ -15,7 +15,26 @@
   <body>
     <header class="topbar" aria-label="Barra de navegação principal">
       <a class="topbar__logo" href="financepromaster.html">
-        <span class="topbar__logo-mark" aria-hidden="true">FP</span>
+        <span class="topbar__logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" role="presentation" focusable="false">
+            <path
+              d="M4 24.5v-6.8a1.2 1.2 0 0 1 1.2-1.2h3.6a1.2 1.2 0 0 1 1.2 1.2v6.8m6-4.3v-8.7a1.2 1.2 0 0 1 1.2-1.2h3.6a1.2 1.2 0 0 1 1.2 1.2v8.7m6-2.4V7.7a1.2 1.2 0 0 1 1.2-1.2H29"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+            <path
+              d="M3 26.6h26"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="2"
+            />
+            <circle cx="26" cy="6.5" r="2" fill="currentColor" />
+          </svg>
+        </span>
         <span class="topbar__logo-text">
           <span class="topbar__logo-name">Finance<span class="topbar__logo-em">Pro</span> <span class="topbar__logo-highlight">Master</span></span>
           <span class="topbar__logo-subtitle">Inteligência financeira</span>
@@ -31,63 +50,66 @@
         <a href="sobre.html">Sobre nós</a>
         <a href="contato.html">Fale conosco</a>
       </nav>
-      <a class="topbar__cta" href="planos.html">Experimentar grátis</a>
+      <a class="topbar__cta" href="planos.html#teste">Teste grátis</a>
     </header>
 
     <main>
       <section class="hero" id="home">
         <div class="hero__content">
-          <h1>Assuma o controle total da sua vida financeira.</h1>
-          <p>
-            O Finance Pro Master é a plataforma completa para você organizar suas
-            contas, planejar seu futuro e alcançar suas metas. Simples, inteligente e
-            seguro.
+          <span class="hero__eyebrow">Domine suas finanças agora</span>
+          <h1>Domine suas finanças com o poder do Finance Pro Master.</h1>
+          <p class="hero__lead">
+            Tenha acesso completo e ilimitado ao sistema por 7 dias grátis — sem
+            limitações, sem cartão, sem compromisso.
           </p>
-          <ul class="hero__highlights">
-            <li>Diagnóstico guiado que mostra onde ajustar o orçamento em minutos.</li>
-            <li>Trilhas educativas com linguagem simples e exemplos reais.</li>
-            <li>Alertas personalizados para manter foco nas metas mais importantes.</li>
-          </ul>
-          <p class="hero__cta-note">
-            Junte-se a milhares de pessoas que transformaram suas finanças.
+          <p class="hero__description">
+            👉 Teste agora e descubra porque centenas de gestores estão trocando
+            planilhas por automação inteligente.
           </p>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="planos.html">Quero começar agora</a>
-            <a class="btn btn--ghost" href="funcionalidades.html">Ver funcionalidades</a>
+            <a class="btn btn--primary" href="planos.html#teste">🔹 Testar Grátis por 7 Dias</a>
+            <a class="btn btn--ghost" href="planos.html">Ver opções de assinatura</a>
           </div>
+          <p class="hero__note">Automatize o fluxo financeiro sem perder o que já construiu.</p>
         </div>
-        <div class="hero__card" role="presentation">
-          <h2>Mapa de evolução financeira</h2>
-          <p class="hero__card-intro">
-            Todas as semanas você recebe um resumo didático com progresso, alertas e
-            próximos passos recomendados pelos nossos especialistas.
-          </p>
-          <ul class="hero__milestones">
-            <li>
-              <strong>Semana 1:</strong> importação guiada de contas, definição de metas
-              e diagnóstico com linguagem acessível.
-            </li>
-            <li>
-              <strong>Semana 3:</strong> ajustes automáticos no orçamento e conteúdo
-              educativo para negociar dívidas.
-            </li>
-            <li>
-              <strong>Semana 6:</strong> projeções de investimentos e plano de ação
-              validado pelo suporte consultivo.
-            </li>
+        <div class="hero__visuals">
+          <figure class="dashboard-shot">
+            <img
+              src="https://images.unsplash.com/photo-1580894908361-967195033215?auto=format&fit=crop&w=860&q=80"
+              alt="Dashboard financeiro do Finance Pro Master com gráficos de fluxo de caixa"
+              loading="lazy"
+            />
+            <figcaption>Fluxo de caixa consolidado em tempo real.</figcaption>
+          </figure>
+          <figure class="dashboard-shot dashboard-shot--secondary">
+            <img
+              src="https://images.unsplash.com/photo-1582719478250-5c64a1f39c73?auto=format&fit=crop&w=860&q=80"
+              alt="Painel de metas com indicadores de performance"
+              loading="lazy"
+            />
+            <figcaption>Metas monitoradas com indicadores automáticos.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section section--conversion" id="pos-teste">
+        <div class="conversion">
+          <header class="conversion__header">
+            <h2>Seção de conversão após o teste</h2>
+            <p>
+              Após os 7 dias, você decide se quer continuar. Nenhuma surpresa — só o
+              mesmo painel inteligente pronto para crescer com você.
+            </p>
+          </header>
+          <ul class="conversion__list">
+            <li>🔹 Sem contrato longo.</li>
+            <li>🔹 Sem taxas escondidas.</li>
+            <li>🔹 Planos acessíveis e expansão por licença.</li>
           </ul>
-          <div class="hero__scorecard" role="group" aria-label="Indicadores de impacto">
-            <article>
-              <h3>Satisfação dos assinantes</h3>
-              <p class="hero__score">97%</p>
-              <span>Relatório 2024 com 4.200 respostas</span>
-            </article>
-            <article>
-              <h3>Tempo médio para sentir resultados</h3>
-              <p class="hero__score">21 dias</p>
-              <span>Metas replanejadas com economia comprovada</span>
-            </article>
-          </div>
+          <p class="conversion__note">
+            Continue com o Finance Pro Master e mantenha tudo o que configurou durante o teste —
+            dados, relatórios e personalizações.
+          </p>
         </div>
       </section>
 
@@ -96,8 +118,8 @@
           <p class="eyebrow">Método FinancePro</p>
           <h2>Transforme sua rotina financeira em três etapas guiadas</h2>
           <p class="section__subtitle">
-            Aprenda com conteúdo didático, acompanhe dados em dashboards intuitivos e
-            receba recomendações práticas para manter o foco nas suas metas.
+            Em poucos minutos, conecte contas, acompanhe dashboards reais e ative
+            automações que trabalham por você todos os dias.
           </p>
         </header>
         <div class="grid grid--three steps">
@@ -105,8 +127,8 @@
             <span class="step__number">1</span>
             <h3>Diagnosticar</h3>
             <p>
-              Conecte contas, cartões e investimentos de forma segura e visualize,
-              com linguagem simples, onde estão os principais desequilíbrios.
+              Conecte contas, cartões e investimentos de forma segura e veja o
+              panorama completo sem planilhas manuais.
             </p>
             <a class="step__link" href="recursos.html">Conhecer recursos</a>
           </article>
@@ -114,8 +136,8 @@
             <span class="step__number">2</span>
             <h3>Aprender</h3>
             <p>
-              Siga trilhas de educação financeira com vídeos, checklists e exemplos
-              aplicados ao seu momento para decidir com confiança.
+              Explore dashboards didáticos com indicadores prontos para apoiar cada
+              decisão financeira.
             </p>
             <a class="step__link" href="blog.html">Explorar conteúdos</a>
           </article>
@@ -123,8 +145,8 @@
             <span class="step__number">3</span>
             <h3>Agir</h3>
             <p>
-              Receba alertas inteligentes, listas de tarefas e suporte consultivo para
-              executar o plano semanalmente sem se perder nos números.
+              Ative alertas inteligentes, automatize lançamentos e acompanhe resultados
+              em tempo real.
             </p>
             <a class="step__link" href="solucoes.html">Ver soluções</a>
           </article>
@@ -136,9 +158,8 @@
           <p class="eyebrow">Resultados comprovados</p>
           <h2>Informação clara que gera mudanças reais</h2>
           <p class="section__subtitle">
-            Quem utiliza FinancePro Master combina conhecimento, automação e suporte
-            para tomar decisões com mais segurança. Os números abaixo mostram o que
-            acontece após os primeiros 90 dias.
+            Quem utiliza Finance Pro Master substitui planilhas por dashboards vivos e
+            acompanha indicadores confiáveis para decidir com segurança.
           </p>
         </header>
         <ul class="stats" aria-label="Indicadores de sucesso dos clientes">
@@ -160,43 +181,50 @@
         </ul>
       </section>
 
-      <section class="section" id="suporte">
+      <section class="section section--dashboards" id="dashboards">
         <header class="section__header">
-          <p class="eyebrow">Acompanhamento completo</p>
-          <h2>Conte com especialistas, comunidade e recursos interativos</h2>
+          <p class="eyebrow">Dashboards reais</p>
+          <h2>Visualize o que importa para decidir com clareza</h2>
           <p class="section__subtitle">
-            Além da plataforma, você recebe acompanhamento constante para tirar
-            dúvidas e manter o plano atualizado. Combine suporte humano com
-            ferramentas inteligentes para acelerar cada etapa.
+            Painéis atualizados automaticamente mostram desempenho de contas,
+            evolução de metas e projeções sem necessidade de planilhas externas.
           </p>
         </header>
-        <div class="grid grid--two">
-          <article class="card card--accent">
-            <h3>Suporte consultivo</h3>
-            <p>
-              Sessões individuais e em grupo ajudam a revisar estratégias, comparar
-              cenários e priorizar ações semanais.
-            </p>
-            <a class="card__link" href="sobre.html">Conheça nossa equipe</a>
-          </article>
-          <article class="card card--accent">
-            <h3>Comunidade ativa</h3>
-            <p>
-              Eventos exclusivos, masterclasses e materiais complementares
-              compartilhados com quem busca evolução contínua.
-            </p>
-            <a class="card__link" href="blog.html">Participar dos próximos eventos</a>
-          </article>
+        <div class="dashboard-grid">
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=860&q=80"
+              alt="Dashboard financeiro com gráfico de barras"
+              loading="lazy"
+            />
+            <figcaption>Visão de receitas e despesas segmentada por categorias.</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=860&q=80"
+              alt="Relatórios financeiros com indicadores visuais"
+              loading="lazy"
+            />
+            <figcaption>Relatórios configuráveis com indicadores-chave diários.</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=860&q=80"
+              alt="Painel de metas alcançadas"
+              loading="lazy"
+            />
+            <figcaption>Painel de metas consolidado com alertas automáticos.</figcaption>
+          </figure>
         </div>
       </section>
 
       <section class="section section--highlight" id="cta">
         <div class="cta">
           <div>
-            <h2>Pronto para dominar suas finanças com orientação didática?</h2>
+            <h2>Pronto para continuar após o teste?</h2>
             <p>
-              Comece hoje com o plano gratuito, explore todos os recursos e avance
-              para uma assinatura quando estiver confiante.
+              Assine em poucos cliques, mantenha suas configurações e leve a automação
+              financeira para o próximo nível.
             </p>
           </div>
           <a class="btn btn--primary" href="planos.html">Ver planos disponíveis</a>
