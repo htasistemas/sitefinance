@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecionando para PagSeguro | FinancePro Master</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="financepromaster.css" />
+    <style>
+      .pagseguro {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 4rem 1.5rem;
+        gap: 1.5rem;
+      }
+
+      .pagseguro__status {
+        max-width: 520px;
+      }
+
+      .pagseguro__status h1 {
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        margin-bottom: 1rem;
+      }
+
+      .pagseguro__status p {
+        color: var(--color-neutral);
+      }
+
+      .pagseguro__spinner {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 4px solid rgba(21, 95, 255, 0.15);
+        border-top-color: var(--color-primary);
+        animation: pagseguro-spin 1s linear infinite;
+      }
+
+      @keyframes pagseguro-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="pagseguro" aria-live="polite">
+      <div class="pagseguro__spinner" role="presentation"></div>
+      <section class="pagseguro__status">
+        <h1>Redirecionando para o PagSeguro…</h1>
+        <p>
+          Estamos preparando o checkout seguro do seu plano. Caso o redirecionamento
+          não ocorra automaticamente em alguns segundos, utilize o botão abaixo.
+        </p>
+      </section>
+      <a
+        id="pagseguro-link"
+        class="btn btn--primary"
+        href="https://pagseguro.uol.com.br/"
+        rel="noreferrer noopener"
+      >
+        Abrir PagSeguro
+      </a>
+      <a class="btn btn--ghost" href="planos.html">Voltar aos planos</a>
+    </main>
+
+    <script>
+      const checkoutLinks = {
+        mensal: 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code=PLANO_MENSAL',
+        semestral:
+          'https://pagseguro.uol.com.br/v2/checkout/payment.html?code=PLANO_SEMESTRAL',
+        anual: 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code=PLANO_ANUAL'
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const plan = params.get('plano');
+      const checkoutUrl = checkoutLinks[plan] || checkoutLinks.mensal;
+
+      const link = document.getElementById('pagseguro-link');
+      link.href = checkoutUrl;
+
+      window.setTimeout(() => {
+        window.location.href = checkoutUrl;
+      }, 1500);
+    </script>
+  </body>
+</html>
