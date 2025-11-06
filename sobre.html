@@ -15,7 +15,7 @@
   <body>
     <header class="topbar" aria-label="Barra de navegação principal">
       <a class="topbar__logo" href="financepromaster.html">
-                <span class="topbar__logo-mark" aria-hidden="true">
+        <span class="topbar__logo-mark" aria-hidden="true">
           <svg viewBox="0 0 32 32" role="presentation" focusable="false">
             <path
               d="M4 24.5v-6.8a1.2 1.2 0 0 1 1.2-1.2h3.6a1.2 1.2 0 0 1 1.2 1.2v6.8m6-4.3v-8.7a1.2 1.2 0 0 1 1.2-1.2h3.6a1.2 1.2 0 0 1 1.2 1.2v8.7m6-2.4V7.7a1.2 1.2 0 0 1 1.2-1.2H29"
@@ -43,10 +43,8 @@
       <nav class="topbar__nav" aria-label="Seções principais">
         <a href="financepromaster.html">Home</a>
         <a href="funcionalidades.html">Funcionalidades</a>
-        <a href="solucoes.html">Soluções</a>
-        <a href="recursos.html">Recursos</a>
+        <a href="recursos.html">Recursos e soluções</a>
         <a href="planos.html">Planos</a>
-        <a href="blog.html">Blog</a>
         <a href="faq.html">FAQ</a>
         <a href="sobre.html" aria-current="page">Sobre nós</a>
         <a href="contato.html">Fale conosco</a>
@@ -55,69 +53,259 @@
     </header>
 
     <main>
-      <section class="section" id="sobre">
-        <header class="section__header section__header--center">
-          <p class="eyebrow">Quem somos</p>
-          <h2>Por que acreditamos na autonomia financeira</h2>
-        </header>
-        <div class="about">
+      <section class="page-hero about-hero" id="sobre">
+        <div class="about-hero__content">
+          <span class="eyebrow">Nossa essência</span>
+          <h1>Transformamos inteligência financeira em liberdade para pessoas e negócios.</h1>
           <p>
-            O Finance Pro Master nasceu da união de especialistas em finanças,
-            tecnologia e educação que perceberam como a gestão do dinheiro pessoal
-            ainda é tratada de forma complicada. Por isso, criamos uma plataforma
-            robusta e didática, que traduz conceitos complexos em passos claros e
-            aplicáveis.
+            Somos estrategistas, educadores e tecnólogos dedicados a traduzir dados em decisões
+            humanas. A cada novo cliente, desenhamos rotinas financeiras sustentáveis com tecnologia
+            acessível, suporte próximo e conteúdos que mudam a relação com o dinheiro.
           </p>
-          <p>
-            Nosso compromisso é acompanhar você da primeira organização de gastos
-            à conquista de metas ambiciosas, oferecendo suporte humano, conteúdos
-            exclusivos e recursos inteligentes que evoluem com o seu momento de
-            vida.
-          </p>
+          <ul class="about-hero__list">
+            <li>Equipe multidisciplinar com especialistas em finanças comportamentais, UX e dados.</li>
+            <li>Metodologia proprietária que combina educação contínua e automação guiada.</li>
+            <li>Compromisso com resultados mensuráveis e impacto positivo na vida financeira.</li>
+          </ul>
+        </div>
+        <div class="about-hero__visual" aria-hidden="true">
+          <div class="about-hero__glow"></div>
+          <figure class="about-hero__dashboard">
+            <img
+              src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=960&q=80"
+              alt="Equipe colaborando ao redor de gráficos financeiros"
+              loading="lazy"
+            />
+            <figcaption>Planejamento financeiro cocriado com os nossos clientes.</figcaption>
+          </figure>
         </div>
       </section>
 
-      <section class="section section--alt" id="historia">
+      <section class="section section--alt" id="nossos-numeros">
         <header class="section__header section__header--center">
-          <p class="eyebrow">Nossa história</p>
-          <h2>Como o Finance Pro Master ganhou vida</h2>
+          <p class="eyebrow">Impacto em escala</p>
+          <h2>Resultados consistentes para quem quer ir além das planilhas</h2>
+          <p class="section__subtitle">
+            Crescemos ao lado de clientes que confiam na transparência dos nossos dados e no cuidado
+            próximo da nossa equipe de especialistas.
+          </p>
         </header>
-        <div class="about">
-          <p>
-            Cansados de planilhas complicadas, anotações em cadernos e aplicativos
-            que não se conversavam, nós, um grupo de amigos (e entusiastas de
-            finanças), decidimos criar a solução definitiva.
-          </p>
-          <p>
-            O Finance Pro Master nasceu em 2023 com um objetivo simples: criar a
-            plataforma de gestão financeira mais intuitiva e poderosa do Brasil.
-            Hoje, ajudamos dezenas de milhares de pessoas a transformar sua relação
-            com o dinheiro.
-          </p>
+        <div class="metrics metrics--highlight">
+          <article class="metric">
+            <p class="metric__value">97%</p>
+            <p class="metric__label">de renovação após o primeiro ano de uso</p>
+          </article>
+          <article class="metric">
+            <p class="metric__value">120 mil</p>
+            <p class="metric__label">decisões financeiras tomadas com suporte do FinancePro Master</p>
+          </article>
+          <article class="metric">
+            <p class="metric__value">18 países</p>
+            <p class="metric__label">com clientes ativos e comunidade de embaixadores</p>
+          </article>
+          <article class="metric">
+            <p class="metric__value">35 dias</p>
+            <p class="metric__label">tempo médio para reorganizar dívidas e fluxo de caixa</p>
+          </article>
         </div>
       </section>
 
-      <section class="section" id="missao">
-        <header class="section__header section__header--center">
-          <p class="eyebrow">Nossa missão</p>
-          <h2>Democratizar a saúde financeira</h2>
-        </header>
-        <div class="about">
-          <p>
-            Nossa missão é democratizar a saúde financeira. Provando que qualquer
-            pessoa pode se tornar um 'Finance Pro Master' com as ferramentas certas e
-            a orientação correta.
+      <section class="section" id="historia">
+        <header class="section__header">
+          <p class="eyebrow">Nossa jornada</p>
+          <h2>De uma planilha compartilhada para uma plataforma completa</h2>
+          <p class="section__subtitle">
+            A jornada do FinancePro Master nasceu em um coworking de Belo Horizonte, onde seis amigos
+            - consultores financeiros, analistas de dados e designers - perceberam que a maioria das
+            ferramentas ignorava o fator humano das finanças.
           </p>
+        </header>
+        <div class="about-story">
+          <div class="about-story__text">
+            <p>
+              Em 2023, lançamos a primeira versão da plataforma com foco em clareza visual e linguagem
+              simples. Em poucos meses, acumulamos feedbacks suficientes para entender que precisávamos
+              ir além: mais integrações bancárias, mais contexto para cada recomendação e um suporte que
+              falasse a mesma língua do usuário final.
+            </p>
+            <p>
+              Desde então, mantemos um ciclo contínuo de escuta ativa com nossa comunidade. Organizamos
+              laboratórios de produto quinzenais, entrevistas em profundidade com clientes e um conselho
+              consultivo composto por educadores financeiros, psicólogos econômicos e especialistas em
+              segurança de dados.
+            </p>
+          </div>
+          <ol class="timeline" aria-label="Linha do tempo do FinancePro Master">
+            <li class="timeline__item">
+              <span class="timeline__year">2023</span>
+              <h3 class="timeline__title">Lançamento do beta fechado</h3>
+              <p>
+                200 usuários iniciais ajudaram a validar dashboards, categorização inteligente e o
+                simulador de objetivos.
+              </p>
+            </li>
+            <li class="timeline__item">
+              <span class="timeline__year">2024</span>
+              <h3 class="timeline__title">Expansão e parcerias</h3>
+              <p>
+                Integrações com cinco bureaus de crédito, certificação LGPD e programas de educação
+                financeira em universidades.
+              </p>
+            </li>
+            <li class="timeline__item">
+              <span class="timeline__year">2025</span>
+              <h3 class="timeline__title">Comunidade e impacto</h3>
+              <p>
+                Lançamos a Escola FinancePro, criamos trilhas de aprendizado gamificadas e alcançamos
+                clientes em 18 países.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section section--alt" id="cultura">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Nosso jeito de trabalhar</p>
+          <h2>Valores que guiamos na prática, não apenas no discurso</h2>
+          <p class="section__subtitle">
+            Cada funcionalidade lançada precisa reforçar estes pilares. Eles orientam decisões de
+            produto, experiência do cliente e cultura interna.
+          </p>
+        </header>
+        <div class="values-grid">
+          <article class="value-card">
+            <h3>Transparência radical</h3>
+            <p>
+              Abrimos os números do produto, compartilhamos roadmaps públicos e explicamos cada insight
+              com linguagem clara para que você sempre saiba o porquê das recomendações.
+            </p>
+          </article>
+          <article class="value-card">
+            <h3>Ciência de dados humanizada</h3>
+            <p>
+              Combinamos algoritmos e especialistas para interpretar comportamentos, evitando decisões
+              automáticas que não respeitem seus objetivos ou contexto de vida.
+            </p>
+          </article>
+          <article class="value-card">
+            <h3>Educação contínua</h3>
+            <p>
+              Criamos trilhas, guias e mentorias que evoluem junto com o usuário, promovendo autonomia
+              real para gerir o dinheiro com confiança.
+            </p>
+          </article>
+          <article class="value-card">
+            <h3>Segurança em primeiro lugar</h3>
+            <p>
+              Investimos em criptografia ponta a ponta, auditorias independentes e governança de dados
+              para garantir que cada informação esteja protegida.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="lideranca">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Liderança próxima</p>
+          <h2>Quem conduz a evolução do FinancePro Master</h2>
+        </header>
+        <div class="team">
+          <article class="team-card">
+            <img
+              src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=640&q=80"
+              alt="Retrato de Ana Luiza"
+              loading="lazy"
+            />
+            <div class="team-card__content">
+              <h3>Ana Luiza Martins</h3>
+              <p class="team-card__role">CEO &amp; Co-fundadora</p>
+              <p>
+                Especialista em finanças comportamentais, lidera a visão estratégica e garante que o
+                produto entregue clareza e acolhimento em todas as interações.
+              </p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img
+              src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=640&q=80"
+              alt="Retrato de Marcelo"
+              loading="lazy"
+            />
+            <div class="team-card__content">
+              <h3>Marcelo Freitas</h3>
+              <p class="team-card__role">CTO</p>
+              <p>
+                Engenheiro de dados com 12 anos de experiência em fintechs, coordena as integrações,
+                infraestrutura e a segurança do ecossistema FinancePro Master.
+              </p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img
+              src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=640&q=80"
+              alt="Retrato de Priscila"
+              loading="lazy"
+            />
+            <div class="team-card__content">
+              <h3>Priscila Andrade</h3>
+              <p class="team-card__role">Head de Educação Financeira</p>
+              <p>
+                Responsável pelas trilhas de conteúdo, programas de mentoria e pela comunidade de
+                educadores parceiros espalhados pelo Brasil.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--alt" id="impacto">
+        <header class="section__header">
+          <p class="eyebrow">Histórias reais</p>
+          <h2>Construímos sucesso em parceria com nossos clientes</h2>
+          <p class="section__subtitle">
+            Ouvimos continuamente empresas, famílias e profissionais liberais para aprimorar os
+            resultados. Cada história reforça nosso propósito.
+          </p>
+        </header>
+        <div class="impact-grid">
+          <article class="impact-card">
+            <h3>Grupo Aurora</h3>
+            <p class="impact-card__meta">Rede de clínicas médicas • Cliente desde 2023</p>
+            <p>
+              "Reduzimos em 42% o tempo gasto em controles operacionais e criamos reservas para abrir
+              três novas unidades. O suporte consultivo do FinancePro Master fez toda a diferença."
+            </p>
+            <p class="impact-card__author">— Camila Ribeiro, CFO</p>
+          </article>
+          <article class="impact-card">
+            <h3>Projeto Navegar</h3>
+            <p class="impact-card__meta">Organização educacional sem fins lucrativos</p>
+            <p>
+              "Conseguimos planejar doações recorrentes, acompanhar metas de impacto e prestar contas
+              com transparência para os mantenedores."
+            </p>
+            <p class="impact-card__author">— Tiago Costa, Diretor Executivo</p>
+          </article>
+          <article class="impact-card">
+            <h3>Família Vasconcelos</h3>
+            <p class="impact-card__meta">Plano familiar completo</p>
+            <p>
+              "Saímos das dívidas em oito meses, construímos uma reserva de emergência e começamos a
+              investir com confiança. O painel mostra exatamente onde ajustar."
+            </p>
+            <p class="impact-card__author">— Juliana e Renato</p>
+          </article>
         </div>
       </section>
 
       <section class="section" id="demo">
         <div class="cta">
           <div>
-            <h2>Pronto para transformar sua relação com o dinheiro?</h2>
+            <h2>Pronto para cocriar sua estratégia financeira com especialistas?</h2>
             <p>
-              Agende uma sessão guiada com um especialista Finance Pro Master e descubra
-              como adaptar cada recurso à sua rotina financeira pessoal.
+              Agende uma sessão guiada com o time FinancePro Master, descubra oportunidades rápidas de
+              otimização e leve um plano personalizado para implementar imediatamente.
             </p>
           </div>
           <a class="btn btn--primary" href="contato.html">Quero uma sessão guiada</a>
@@ -143,7 +331,7 @@
             <ul>
               <li><a href="funcionalidades.html">Funcionalidades</a></li>
               <li><a href="planos.html">Planos e preços</a></li>
-              <li><a href="recursos.html">Recursos</a></li>
+              <li><a href="recursos.html">Recursos e soluções</a></li>
               <li><a href="financepromaster.html#dashboards">Dashboards</a></li>
             </ul>
           </div>
