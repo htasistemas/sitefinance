@@ -1820,6 +1820,16 @@ main {
   letter-spacing: 0.06em;
 }
 
+.plan-card__note {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  background: rgba(10, 138, 91, 0.08);
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.9rem;
+  text-align: left;
+  letter-spacing: 0.02em;
+}
+
 .plan-card__features {
   list-style: none;
   display: grid;
@@ -2885,6 +2895,11 @@ main {
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
+.footer__social svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
 .footer__social a:hover,
 .footer__social a:focus-visible {
   background: rgba(255, 255, 255, 0.22);
@@ -2906,6 +2921,7 @@ main {
   font-size: 0.95rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: #ffffff;
 }
 
 .footer__column ul {
