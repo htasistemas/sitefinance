@@ -43,10 +43,8 @@
       <nav class="topbar__nav" aria-label="Seções principais">
         <a href="financepromaster.html">Home</a>
         <a href="funcionalidades.html">Funcionalidades</a>
-        <a href="solucoes.html">Soluções</a>
-        <a href="recursos.html">Recursos</a>
+        <a href="recursos.html">Recursos e soluções</a>
         <a href="planos.html" aria-current="page">Planos</a>
-        <a href="blog.html">Blog</a>
         <a href="faq.html">FAQ</a>
         <a href="sobre.html">Sobre nós</a>
         <a href="contato.html">Fale conosco</a>
@@ -55,99 +53,197 @@
     </header>
 
     <main>
+      <section class="page-hero plans-hero" id="teste">
+        <div class="plans-hero__content">
+          <span class="eyebrow">Planos FinancePro Master</span>
+          <h1>Escolha o plano que combina performance, suporte humano e automação inteligente.</h1>
+          <p>
+            Teste grátis por 7 dias com acesso completo. Depois, selecione a assinatura que entrega o
+            equilíbrio ideal entre previsibilidade, consultoria e expansão contínua.
+          </p>
+          <ul class="plans-hero__list">
+            <li>Acesso integral a dashboards, playbooks e automações durante o teste.</li>
+            <li>Onboarding guiado com especialista em até 48 horas após a ativação.</li>
+            <li>Garantia de satisfação: cancele em até 30 dias sem perder suas configurações.</li>
+          </ul>
+        </div>
+        <div class="plans-hero__aside">
+          <div class="guarantee">
+            <h2>Garantia FinancePro</h2>
+            <p>
+              Se o FinancePro Master não transformar sua rotina financeira nos primeiros 30 dias pagos,
+              devolvemos 100% do valor. Sem perguntas, sem burocracia.
+            </p>
+            <div class="guarantee__badge">Satisfação ou seu dinheiro de volta</div>
+          </div>
+        </div>
+      </section>
+
       <section class="section section--highlight" id="planos">
         <header class="section__header section__header--center">
-          <p class="eyebrow">Planos Finance Pro Master</p>
-          <h2>Escolha como continuar depois do teste</h2>
-          <p class="section__subtitle">
-            Comece com 7 dias de acesso completo e, depois, selecione a assinatura que
-            combina melhor flexibilidade e economia para o seu negócio.
-          </p>
+          <p class="eyebrow">Assinaturas flexíveis</p>
+          <h2>Planos pensados para cada estágio da sua jornada financeira</h2>
         </header>
-        <p class="plans__notice" id="teste">
-          Teste grátis: todos os recursos do Finance Pro Master liberados por 7 dias — sem cartão e sem limitações.
-        </p>
-        <div class="plans">
-          <article class="plan plan--trial">
-            <header class="plan__header">
-              <h3>Teste gratuito de 7 dias</h3>
-              <p>Ative agora e explore todos os recursos sem custos.</p>
-            </header>
-            <p class="plan__price plan__price--highlight">
-              <span class="plan__currency">R$</span>
-              <span class="plan__amount">0</span>
-              <span class="plan__cents">,00</span>
-              <span class="plan__period">por 7 dias</span>
-            </p>
-            <ul class="plan__benefits">
-              <li>Acesso total a dashboards, alertas e playbooks.</li>
-              <li>Importação de dados e automações liberadas.</li>
-              <li>Sem necessidade de cartão ou compromisso.</li>
-            </ul>
-            <a class="btn btn--primary" href="#teste">Começar agora</a>
-          </article>
-
-          <article class="plan">
-            <header class="plan__header">
+        <div class="pricing-grid">
+          <article class="plan-card">
+            <header class="plan-card__header">
+              <span class="plan-card__tag">Comece agora</span>
               <h3>Plano Mensal</h3>
-              <p>Renovação flexível, cancele quando quiser.</p>
+              <p>Ideal para validar o método com flexibilidade total.</p>
             </header>
-            <p class="plan__price plan__price--highlight">
-              <span class="plan__currency">R$</span>
-              <span class="plan__amount">49</span>
-              <span class="plan__cents">,90</span>
-              <span class="plan__period plan__period--inline">/mês</span>
+            <p class="plan-card__price">
+              <span class="plan-card__currency">R$</span>
+              <span class="plan-card__amount">49</span>
+              <span class="plan-card__cents">,90</span>
+              <span class="plan-card__period">por mês</span>
             </p>
-            <ul class="plan__benefits">
-              <li>Acesso completo ao sistema após o teste.</li>
-              <li>Dashboards e automações atualizados diariamente.</li>
-              <li>Cancelamento simples direto pelo painel.</li>
+            <ul class="plan-card__features">
+              <li>Dashboards completos e alertas em tempo real.</li>
+              <li>Importação automática de contas e cartões.</li>
+              <li>Suporte via chat e biblioteca de playbooks.</li>
             </ul>
-            <a class="btn btn--plan" href="pagseguro.html?plano=mensal">Assinar plano mensal</a>
+            <a class="btn btn--ghost" href="pagseguro.html?plano=mensal">Assinar plano mensal</a>
           </article>
 
-          <article class="plan plan--muted">
-            <header class="plan__header">
+          <article class="plan-card plan-card--featured">
+            <span class="plan-card__badge">Mais escolhido</span>
+            <header class="plan-card__header">
+              <span class="plan-card__tag">Consistência</span>
               <h3>Plano Semestral</h3>
-              <p>Economia para quem quer estabilidade.</p>
+              <p>Para quem busca economia e acompanhamento contínuo.</p>
             </header>
-            <p class="plan__price">
-              <span class="plan__currency">R$</span>
-              <span class="plan__amount">29</span>
-              <span class="plan__cents">,90</span>
-              <span class="plan__period">por mês no ciclo semestral</span>
+            <p class="plan-card__price">
+              <span class="plan-card__currency">R$</span>
+              <span class="plan-card__amount">29</span>
+              <span class="plan-card__cents">,90</span>
+              <span class="plan-card__period">mensais no ciclo semestral</span>
             </p>
-            <ul class="plan__benefits">
-              <li>Pagamentos a cada 6 meses.</li>
-              <li>Todos os recursos do Finance Pro Master incluídos.</li>
-              <li>Continuidade garantida das automações configuradas.</li>
+            <ul class="plan-card__features">
+              <li>Mentoria financeira coletiva mensal.</li>
+              <li>Playbooks premium e relatórios personalizados.</li>
+              <li>Prioridade em novas integrações e dashboards.</li>
             </ul>
-            <a class="btn btn--ghost" href="pagseguro.html?plano=semestral">Assinar plano semestral</a>
+            <a class="btn btn--primary" href="pagseguro.html?plano=semestral">Assinar plano semestral</a>
           </article>
 
-          <article class="plan plan--popular">
-            <span class="plan__badge">Mais economia</span>
-            <header class="plan__header">
+          <article class="plan-card">
+            <header class="plan-card__header">
+              <span class="plan-card__tag">Visão de longo prazo</span>
               <h3>Plano Anual</h3>
-              <p>Pagando uma vez, você garante o ano inteiro.</p>
+              <p>Maximize resultados com o menor custo efetivo mensal.</p>
             </header>
-            <p class="plan__price plan__price--highlight">
-              <span class="plan__currency">R$</span>
-              <span class="plan__amount">19</span>
-              <span class="plan__cents">,90</span>
-              <span class="plan__period">por mês no ciclo anual</span>
+            <p class="plan-card__price">
+              <span class="plan-card__currency">R$</span>
+              <span class="plan-card__amount">19</span>
+              <span class="plan-card__cents">,90</span>
+              <span class="plan-card__period">mensais no ciclo anual</span>
             </p>
-            <ul class="plan__benefits">
-              <li>Menor valor mensal efetivo.</li>
-              <li>Atualizações e melhorias incluídas automaticamente.</li>
-              <li>Sem perda das personalizações criadas no teste.</li>
+            <ul class="plan-card__features">
+              <li>Sessão estratégica trimestral com especialista dedicado.</li>
+              <li>Trilhas de educação financeira exclusivas.</li>
+              <li>Convites para eventos e labs FinancePro Master.</li>
             </ul>
-            <a class="btn btn--primary" href="pagseguro.html?plano=anual">Assinar plano anual</a>
+            <a class="btn btn--ghost" href="pagseguro.html?plano=anual">Assinar plano anual</a>
           </article>
         </div>
-        <p class="plans__disclaimer">
-          Assine apenas após testar. Você controla a renovação diretamente na plataforma.
+        <p class="plans__notice">
+          Comece pelo teste gratuito de 7 dias. Você só será cobrado se optar por continuar após o período
+          de degustação e poderá cancelar diretamente no painel a qualquer momento.
         </p>
+      </section>
+
+      <section class="section" id="comparativo">
+        <header class="section__header">
+          <p class="eyebrow">Compare os recursos</p>
+          <h2>Todos os planos incluem tecnologia completa. Veja o que muda em cada assinatura</h2>
+        </header>
+        <div class="comparison">
+          <table aria-label="Tabela comparativa de planos" class="comparison__table">
+            <thead>
+              <tr>
+                <th>Recursos</th>
+                <th>Mensal</th>
+                <th>Semestral</th>
+                <th>Anual</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Dashboards e alertas ilimitados</td>
+                <td>Incluído</td>
+                <td>Incluído</td>
+                <td>Incluído</td>
+              </tr>
+              <tr>
+                <td>Onboarding guiado com especialista</td>
+                <td>Único</td>
+                <td>Único + revisão aos 90 dias</td>
+                <td>Único + revisões trimestrais</td>
+              </tr>
+              <tr>
+                <td>Playbooks premium e trilhas educacionais</td>
+                <td>Biblioteca padrão</td>
+                <td>Biblioteca completa</td>
+                <td>Biblioteca completa + novos lançamentos antecipados</td>
+              </tr>
+              <tr>
+                <td>Relatórios personalizados</td>
+                <td>Mensais</td>
+                <td>Quinzenais</td>
+                <td>Semanais</td>
+              </tr>
+              <tr>
+                <td>Suporte prioritário</td>
+                <td>Chat em horário comercial</td>
+                <td>Chat e WhatsApp Business</td>
+                <td>Chat, WhatsApp e canal dedicado</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section section--alt" id="beneficios">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Resultados reais</p>
+          <h2>Porque nossos clientes decidem permanecer após o teste</h2>
+        </header>
+        <div class="benefits-grid">
+          <article class="benefit-card">
+            <h3>Economia visível</h3>
+            <p>
+              Usuários do plano semestral relatam redução média de 27% nas despesas desnecessárias em seis
+              meses, graças aos alertas preditivos e relatórios de oportunidades.
+            </p>
+          </article>
+          <article class="benefit-card">
+            <h3>Decisões mais rápidas</h3>
+            <p>
+              Dashboards executivos e simuladores de cenários ajudam a aprovar investimentos 40% mais
+              rápido, mantendo diretoria e equipes alinhadas.
+            </p>
+          </article>
+          <article class="benefit-card">
+            <h3>Suporte que entende o seu contexto</h3>
+            <p>
+              Do onboarding à expansão, especialistas acompanham a evolução do seu plano financeiro e
+              sugerem ajustes personalizados.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="cta-planos">
+        <div class="cta cta--center">
+          <div>
+            <h2>Vamos destravar sua inteligência financeira?</h2>
+            <p>
+              Ative o teste gratuito agora mesmo. Em menos de uma hora você terá dashboards configurados e
+              um roadmap personalizado para seguir após os 7 dias.
+            </p>
+          </div>
+          <a class="btn btn--primary" href="planos.html#teste">Quero testar sem compromisso</a>
+        </div>
       </section>
     </main>
 
@@ -168,8 +264,8 @@
             <h3>Produto</h3>
             <ul>
               <li><a href="funcionalidades.html">Funcionalidades</a></li>
-              <li><a href="planos.html">Planos e preços</a></li>
-              <li><a href="recursos.html">Recursos</a></li>
+              <li><a href="planos.html" aria-current="page">Planos e preços</a></li>
+              <li><a href="recursos.html">Recursos e soluções</a></li>
               <li><a href="financepromaster.html#dashboards">Dashboards</a></li>
             </ul>
           </div>
