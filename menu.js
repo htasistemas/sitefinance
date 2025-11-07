@@ -13,6 +13,34 @@
     });
   }
 
+  function applyMenuLabels(menu) {
+    const labels = menu.querySelectorAll('[data-menu-label]');
+    if (!labels.length) {
+      return;
+    }
+
+    const rootStyles = getComputedStyle(document.documentElement);
+
+    labels.forEach((element) => {
+      const key = element.getAttribute('data-menu-label');
+      if (!key) {
+        return;
+      }
+
+      const cssValue = rootStyles.getPropertyValue(`--menu-${key}`);
+      if (!cssValue) {
+        return;
+      }
+
+      const normalized = cssValue.replace(/^\s*['"]?/, '').replace(/['"]?\s*$/, '');
+      if (normalized) {
+        element.textContent = normalized;
+        element.setAttribute('aria-label', normalized);
+        element.setAttribute('title', normalized);
+      }
+    });
+  }
+
   function injectMenu(placeholder) {
     fetch('menu.html')
       .then((response) => {
@@ -28,6 +56,7 @@
 
         if (menu) {
           placeholder.replaceWith(menu);
+          applyMenuLabels(menu);
           highlightCurrent(menu);
         }
       })
