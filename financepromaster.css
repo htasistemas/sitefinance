@@ -2998,3 +2998,35 @@ main {
     scroll-behavior: auto !important;
   }
 }
+
+.hero {
+  margin-bottom: 0; /* remove margem inferior */
+  padding-bottom: 0; /* remove padding inferior */
+}
+
+.hero__content {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.hero + .section {
+  margin-top: 0; /* remove o espaço entre o hero e a próxima seção */
+  padding-top: 0;
+}
+.hero {
+  padding-top: 2rem; /* valor original pode ser 6rem ou mais — reduza para 3rem */
+  padding-bottom: 4rem; /* mantém espaço inferior agradável */
+}
+/* Ajuste do espaçamento no topo da página Funcionalidades */
+body.funcionalidades .functionality-overview,
+body.funcionalidades .section--alt:first-of-type {
+  padding-top: 3rem; /* antes provavelmente 6rem ou mais */
+}
+
+@media (max-width: 768px) {
+  body.funcionalidades .functionality-overview,
+  body.funcionalidades .section--alt:first-of-type {
+    padding-top: 2rem;
+  }
+}
+
