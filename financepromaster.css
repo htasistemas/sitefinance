@@ -19,6 +19,8 @@
   --gradient-emerald-soft: linear-gradient(145deg, rgba(50, 210, 138, 0.18), rgba(10, 138, 91, 0.08));
   --shadow-soft: 0 18px 40px rgba(10, 79, 61, 0.12);
   --shadow-strong: 0 30px 68px rgba(7, 80, 59, 0.22);
+  --page-max-width: 1180px;
+  --page-gutter: clamp(1.5rem, 6vw, 5rem);
 }
 
 * {
@@ -31,6 +33,9 @@ body {
   background: linear-gradient(180deg, #fafdff 0%, var(--color-sky) 45%, #effaf5 100%);
   color: var(--color-light);
   min-height: 100vh;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
 }
 
 html {
@@ -67,7 +72,7 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem clamp(1.5rem, 6vw, 5rem);
+  padding: 1.25rem max(var(--page-gutter), calc((100vw - var(--page-max-width)) / 2));
   position: sticky;
   top: 0;
   background: rgba(255, 255, 255, 0.92);
@@ -192,6 +197,19 @@ main {
   display: flex;
   flex-direction: column;
   gap: clamp(2.5rem, 6vw, 4rem);
+  width: min(100%, var(--page-max-width));
+  margin-inline: auto;
+  flex: 1;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .hero,
@@ -203,7 +221,7 @@ main {
   display: grid;
   gap: clamp(2rem, 4vw, 4rem);
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  padding: 5rem clamp(1.5rem, 6vw, 5rem) 3rem;
+  padding: 5rem var(--page-gutter) 3rem;
 }
 
 .hero__content {
@@ -297,7 +315,7 @@ main {
 }
 
 .section {
-  padding: clamp(3rem, 6vw, 4.5rem) clamp(1.5rem, 6vw, 5rem);
+  padding: clamp(3rem, 6vw, 4.5rem) var(--page-gutter);
 }
 
 .section--alt {
@@ -319,7 +337,7 @@ main {
   gap: clamp(2rem, 5vw, 3.5rem);
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   align-items: start;
-  padding: clamp(3rem, 6vw, 4.5rem) clamp(1.5rem, 6vw, 5rem);
+  padding: clamp(3rem, 6vw, 4.5rem) var(--page-gutter);
 }
 
 .access-hero__content {
@@ -874,7 +892,7 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: clamp(2rem, 6vw, 4rem);
   align-items: center;
-  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+  padding: clamp(4rem, 8vw, 6rem) var(--page-gutter);
   position: relative;
 }
 
@@ -1186,7 +1204,7 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: clamp(2rem, 6vw, 4.5rem);
   align-items: center;
-  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+  padding: clamp(4rem, 8vw, 6rem) var(--page-gutter);
   background: linear-gradient(150deg, rgba(231, 242, 255, 0.9), rgba(214, 249, 233, 0.8));
   position: relative;
   overflow: hidden;
@@ -1484,7 +1502,7 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: clamp(2rem, 6vw, 4rem);
-  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+  padding: clamp(4rem, 8vw, 6rem) var(--page-gutter);
   background: linear-gradient(160deg, rgba(231, 242, 255, 0.65), rgba(214, 249, 233, 0.65));
 }
 
@@ -1758,7 +1776,7 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: clamp(2rem, 6vw, 4rem);
-  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+  padding: clamp(4rem, 8vw, 6rem) var(--page-gutter);
   background: linear-gradient(145deg, rgba(214, 249, 233, 0.75), rgba(231, 242, 255, 0.75));
 }
 
@@ -2439,6 +2457,24 @@ main {
 }
 
 @media (max-width: 640px) {
+  .topbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .topbar__nav {
+    order: 1;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .topbar__cta {
+    width: 100%;
+    justify-content: center;
+    order: 2;
+  }
+
   .functionality__preview {
     padding: 1.25rem;
   }
@@ -2954,7 +2990,7 @@ main {
 .footer {
   background: linear-gradient(135deg, #034e2c 0%, #056a42 100%);
   color: #ffffff;
-  padding: 3.5rem clamp(1.5rem, 6vw, 5rem) 2.5rem;
+  padding: 3.5rem var(--page-gutter) 2.5rem;
 }
 
 .footer a {
