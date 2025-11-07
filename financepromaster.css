@@ -3020,7 +3020,8 @@ main {
 /* Ajuste do espaçamento no topo da página Funcionalidades */
 body.funcionalidades .functionality-overview,
 body.funcionalidades .section--alt:first-of-type {
-  padding-top: 3rem; /* antes provavelmente 6rem ou mais */
+
+  padding-top: 1rem; /* antes provavelmente 6rem ou mais */
 }
 
 @media (max-width: 768px) {
@@ -3029,4 +3030,9 @@ body.funcionalidades .section--alt:first-of-type {
     padding-top: 2rem;
   }
 }
+/* Ajuste do espaçamento no topo da página Funcionalidades */
+body.planos .functionality-overview,
+body.planos .section--alt:first-of-type {
 
+  padding-top: 1rem; /* antes provavelmente 6rem ou mais */
+}
