@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Redirecionando para PagSeguro | FinancePro Master</title>
+    <title>Pagamento com Cartão | FinancePro Master</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -11,43 +11,254 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="financepromaster.css" />
+    <link rel="stylesheet" href="menu.css" />
+    <script src="menu.js" defer></script>
     <style>
-      .pagseguro {
+      .checkout {
         min-height: 100vh;
+        padding: 4rem 1.5rem 6rem;
+        background: linear-gradient(180deg, rgba(21, 95, 255, 0.05), transparent);
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        gap: 2.5rem;
+      }
+
+      .checkout__intro {
+        max-width: 720px;
+        margin: 0 auto;
         text-align: center;
-        padding: 4rem 1.5rem;
-        gap: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
       }
 
-      .pagseguro__status {
-        max-width: 520px;
+      .checkout__intro h1 {
+        font-size: clamp(2rem, 5vw, 2.75rem);
+        line-height: 1.2;
       }
 
-      .pagseguro__status h1 {
-        font-size: clamp(1.75rem, 4vw, 2.5rem);
-        margin-bottom: 1rem;
-      }
-
-      .pagseguro__status p {
+      .checkout__intro p {
         color: var(--color-neutral);
       }
 
-      .pagseguro__spinner {
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        border: 4px solid rgba(21, 95, 255, 0.15);
-        border-top-color: var(--color-primary);
-        animation: pagseguro-spin 1s linear infinite;
+      .checkout__grid {
+        display: grid;
+        gap: 2.5rem;
+        grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+        align-items: start;
       }
 
-      @keyframes pagseguro-spin {
-        to {
-          transform: rotate(360deg);
+      .checkout-card {
+        background: #fff;
+        border-radius: 1.5rem;
+        box-shadow: 0 30px 60px rgba(28, 48, 74, 0.15);
+        padding: 2.5rem 2.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .checkout-card h2,
+      .checkout-card h3 {
+        font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+        margin-bottom: 0.35rem;
+      }
+
+      .checkout__summary {
+        position: sticky;
+        top: 2rem;
+        align-self: start;
+        border: 1px solid rgba(21, 95, 255, 0.08);
+      }
+
+      .checkout__summary-header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .checkout__amount {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: var(--color-primary);
+        display: flex;
+        gap: 0.25rem;
+        align-items: baseline;
+      }
+
+      .checkout__amount span {
+        font-size: 1rem;
+        color: var(--color-neutral);
+        font-weight: 400;
+      }
+
+      .checkout__summary ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .checkout__summary li::before {
+        content: "";
+        display: inline-block;
+        width: 0.65rem;
+        height: 0.65rem;
+        background: var(--color-primary);
+        border-radius: 50%;
+        margin-right: 0.5rem;
+      }
+
+      .checkout__notice,
+      .checkout__feedback {
+        border-radius: 0.85rem;
+        padding: 1rem 1.25rem;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      .checkout__notice {
+        background: rgba(21, 95, 255, 0.08);
+        color: #0d2a73;
+      }
+
+      .checkout__feedback {
+        background: rgba(4, 185, 110, 0.12);
+        color: #036347;
+        border: 1px solid rgba(4, 185, 110, 0.25);
+      }
+
+      .checkout__feedback[data-state="error"] {
+        background: rgba(229, 72, 77, 0.12);
+        border-color: rgba(229, 72, 77, 0.4);
+        color: #8f141e;
+      }
+
+      .checkout__feedback[data-state="info"] {
+        background: rgba(21, 95, 255, 0.12);
+        border-color: rgba(21, 95, 255, 0.25);
+        color: #0d2a73;
+      }
+
+      .checkout__form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      .checkout__form label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        font-weight: 500;
+        color: var(--color-dark);
+      }
+
+      .checkout__form input,
+      .checkout__form select {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        border-radius: 0.75rem;
+        border: 1px solid rgba(31, 53, 89, 0.18);
+        font-family: inherit;
+        font-size: 1rem;
+        transition: border 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .checkout__form input:focus,
+      .checkout__form select:focus {
+        outline: none;
+        border-color: rgba(21, 95, 255, 0.55);
+        box-shadow: 0 0 0 4px rgba(21, 95, 255, 0.15);
+      }
+
+      .checkout__row {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      }
+
+      .checkout__brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--color-neutral);
+      }
+
+      .checkout__brand strong {
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--color-dark);
+      }
+
+      .checkout__installments {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .checkout__installments small {
+        color: var(--color-neutral);
+      }
+
+      .checkout__token {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        background: rgba(4, 185, 110, 0.08);
+        border: 1px dashed rgba(4, 185, 110, 0.45);
+        border-radius: 0.75rem;
+        padding: 1rem 1.25rem;
+        font-family: "Fira Code", "Courier New", monospace;
+        word-break: break-all;
+      }
+
+      .checkout__token code {
+        font-size: 0.95rem;
+      }
+
+      .checkout__footer-note {
+        font-size: 0.85rem;
+        color: var(--color-neutral);
+      }
+
+      .checkout__actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .checkout__actions .btn {
+        justify-content: center;
+      }
+
+      .checkout__disabled {
+        opacity: 0.55;
+        pointer-events: none;
+      }
+
+      @media (max-width: 1080px) {
+        .checkout__grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .checkout__summary {
+          position: relative;
+          top: 0;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .checkout {
+          padding: 3rem 1rem 4rem;
+        }
+
+        .checkout-card {
+          padding: 2rem 1.5rem;
         }
       }
     </style>
@@ -94,45 +305,490 @@
         </div>
       </noscript>
     </header>
->>>>>>> bfbb8ad65f2aebff6b9f716bd4cfdd069dd0991d
-    <main class="pagseguro" aria-live="polite">
-      <div class="pagseguro__spinner" role="presentation"></div>
-      <section class="pagseguro__status">
-        <h1>Redirecionando para o PagSeguro…</h1>
+
+    <main class="checkout" aria-live="polite">
+      <section class="checkout__intro">
+        <p class="eyebrow">Pagamentos seguros com PagSeguro</p>
+        <h1>Finalize sua assinatura com cartão de crédito</h1>
         <p>
-          Estamos preparando o checkout seguro do seu plano. Caso o redirecionamento
-          não ocorra automaticamente em alguns segundos, utilize o botão abaixo.
+          Informe os dados do cartão na plataforma oficial do PagSeguro para gerar o token do pagamento
+          e concluir a cobrança no seu servidor com segurança total.
+        </p>
+        <p class="checkout__notice" data-session-warning hidden>
+          Não foi possível localizar o identificador de sessão do PagSeguro. Solicite um novo ID de sessão
+          ao seu servidor antes de enviar os dados do cartão.
+        </p>
+        <p class="checkout__notice" data-free-plan hidden>
+          O plano selecionado não exige pagamento. Retorne à página de planos e escolha uma assinatura
+          paga para prosseguir com o checkout via cartão.
         </p>
       </section>
-      <a
-        id="pagseguro-link"
-        class="btn btn--primary"
-        href="https://pagseguro.uol.com.br/"
-        rel="noreferrer noopener"
-      >
-        Abrir PagSeguro
-      </a>
-      <a class="btn btn--ghost" href="planos.html">Voltar aos planos</a>
+
+      <div class="checkout__grid">
+        <aside class="checkout-card checkout__summary" aria-label="Resumo da assinatura">
+          <div class="checkout__summary-header">
+            <h2 data-plan-name>Plano FinancePro Master</h2>
+            <p class="checkout__amount">
+              <strong data-plan-amount>R$ 49,90</strong>
+              <span data-plan-price>por mês</span>
+            </p>
+          </div>
+          <ul data-plan-benefits>
+            <li>Dashboards completos e alertas inteligentes.</li>
+            <li>Playbooks financeiros personalizados.</li>
+            <li>Suporte dedicado conforme o plano.</li>
+          </ul>
+          <div class="checkout__actions">
+            <a class="btn btn--ghost" href="planos.html">Escolher outro plano</a>
+            <p class="checkout__footer-note">
+              Transações protegidas com criptografia de 256 bits e monitoramento antifraude PagSeguro.
+            </p>
+          </div>
+        </aside>
+
+        <section class="checkout-card" aria-label="Formulário de pagamento com cartão">
+          <div class="checkout__feedback" data-feedback hidden role="status"></div>
+          <form class="checkout__form" data-card-form autocomplete="off" novalidate>
+            <label>
+              Nome impresso no cartão
+              <input type="text" name="cardName" placeholder="Nome completo do titular" required />
+            </label>
+            <label>
+              Número do cartão
+              <input
+                type="text"
+                name="cardNumber"
+                inputmode="numeric"
+                maxlength="19"
+                placeholder="0000 0000 0000 0000"
+                required
+              />
+              <span class="checkout__brand">Bandeira: <strong data-card-brand>—</strong></span>
+            </label>
+            <div class="checkout__row">
+              <label>
+                Validade (MM/AA)
+                <input
+                  type="text"
+                  name="cardExpiry"
+                  inputmode="numeric"
+                  maxlength="5"
+                  placeholder="MM/AA"
+                  required
+                />
+              </label>
+              <label>
+                Código de segurança (CVV)
+                <input
+                  type="text"
+                  name="cardCvv"
+                  inputmode="numeric"
+                  maxlength="4"
+                  placeholder="123"
+                  required
+                />
+              </label>
+            </div>
+            <div class="checkout__row">
+              <label>
+                CPF do titular
+                <input type="text" name="cardCpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" required />
+              </label>
+              <label>
+                Data de nascimento
+                <input type="date" name="cardBirth" required />
+              </label>
+            </div>
+            <div class="checkout__row">
+              <label>
+                Telefone (DDD + número)
+                <input type="tel" name="cardPhone" inputmode="tel" placeholder="(11) 90000-0000" required />
+              </label>
+              <label>
+                E-mail para confirmação
+                <input type="email" name="cardEmail" placeholder="voce@exemplo.com" required />
+              </label>
+            </div>
+            <div class="checkout__installments">
+              <label>
+                Parcelamento
+                <select name="installment" required disabled>
+                  <option value="">Selecione a quantidade de parcelas</option>
+                </select>
+              </label>
+              <small data-installment-info>As opções aparecerão após identificarmos a bandeira.</small>
+            </div>
+            <button type="submit" class="btn btn--primary">Gerar token seguro</button>
+          </form>
+
+          <div class="checkout__token" data-token-wrapper hidden>
+            <strong>Token do cartão gerado pelo PagSeguro:</strong>
+            <code data-card-token></code>
+            <p data-installment-summary></p>
+            <p>
+              Envie este token, junto aos demais dados do pedido (parcela, valor e titular), para o seu
+              servidor finalizar a cobrança via API PagSeguro.
+            </p>
+          </div>
+        </section>
+      </div>
     </main>
 
+    <script src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
     <script>
-      const checkoutLinks = {
-        mensal: 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code=PLANO_MENSAL',
-        semestral:
-          'https://pagseguro.uol.com.br/v2/checkout/payment.html?code=PLANO_SEMESTRAL',
-        anual: 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code=PLANO_ANUAL'
-      };
+      (function () {
+        const plans = {
+          gratuito: {
+            name: 'Plano Gratuito',
+            price: 'Sem cobrança',
+            amountLabel: 'R$ 0,00',
+            amount: 0,
+            benefits: [
+              'Acesso limitado às funcionalidades FinancePro Master.',
+              'Playbooks introdutórios de organização financeira.',
+              'Suporte via base de conhecimento.',
+            ],
+            installmentsNoInterest: 1,
+          },
+          mensal: {
+            name: 'Plano Mensal',
+            price: 'R$ 49,90/mês',
+            amountLabel: 'R$ 49,90',
+            amount: 49.9,
+            benefits: [
+              'Dashboards completos e alertas em tempo real.',
+              'Importação automática de contas e cartões.',
+              'Suporte via chat e biblioteca de playbooks.',
+            ],
+            installmentsNoInterest: 12,
+          },
+          semestral: {
+            name: 'Plano Semestral',
+            price: 'Total de R$ 179,40 em 6 meses',
+            amountLabel: 'R$ 179,40',
+            amount: 179.4,
+            benefits: [
+              'Mentoria financeira coletiva mensal.',
+              'Playbooks premium e relatórios personalizados.',
+              'Prioridade em novas integrações e dashboards.',
+            ],
+            installmentsNoInterest: 6,
+          },
+          anual: {
+            name: 'Plano Anual',
+            price: 'Total de R$ 238,80 no ano',
+            amountLabel: 'R$ 238,80',
+            amount: 238.8,
+            benefits: [
+              'Sessão estratégica trimestral com especialista dedicado.',
+              'Trilhas exclusivas de educação financeira.',
+              'Convites para eventos e labs FinancePro Master.',
+            ],
+            installmentsNoInterest: 12,
+          },
+        };
 
-      const params = new URLSearchParams(window.location.search);
-      const plan = params.get('plano');
-      const checkoutUrl = checkoutLinks[plan] || checkoutLinks.mensal;
+        const params = new URLSearchParams(window.location.search);
+        const selectedPlanKey = params.get('plano') || 'mensal';
+        const sessionId = params.get('session');
+        const plan = plans[selectedPlanKey] || plans.mensal;
 
-      const link = document.getElementById('pagseguro-link');
-      link.href = checkoutUrl;
+        const planName = document.querySelector('[data-plan-name]');
+        const planPrice = document.querySelector('[data-plan-price]');
+        const planAmount = document.querySelector('[data-plan-amount]');
+        const planBenefits = document.querySelector('[data-plan-benefits]');
+        const sessionWarning = document.querySelector('[data-session-warning]');
+        const freePlanNotice = document.querySelector('[data-free-plan]');
+        const form = document.querySelector('[data-card-form]');
+        const feedback = document.querySelector('[data-feedback]');
+        const tokenWrapper = document.querySelector('[data-token-wrapper]');
+        const tokenField = document.querySelector('[data-card-token]');
+        const installmentSummary = document.querySelector('[data-installment-summary]');
+        const installmentsSelect = form.querySelector('select[name="installment"]');
+        const installmentInfo = document.querySelector('[data-installment-info]');
+        const submitButton = form.querySelector('button[type="submit"]');
+        const cardNumberInput = form.querySelector('input[name="cardNumber"]');
+        const expiryInput = form.querySelector('input[name="cardExpiry"]');
+        const cvvInput = form.querySelector('input[name="cardCvv"]');
+        const cardBrandField = document.querySelector('[data-card-brand]');
+        const formControls = form.querySelectorAll('input, select, button');
 
-      window.setTimeout(() => {
-        window.location.href = checkoutUrl;
-      }, 1500);
+        let detectedBrand = '';
+        let currentBin = '';
+
+        function formatCurrency(value) {
+          return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        function sanitizeDigits(value) {
+          return (value || '').replace(/\D+/g, '');
+        }
+
+        function setFeedback(message, state = 'success') {
+          if (!feedback) {
+            return;
+          }
+
+          if (!message) {
+            feedback.hidden = true;
+            feedback.textContent = '';
+            feedback.removeAttribute('data-state');
+            return;
+          }
+
+          feedback.hidden = false;
+          feedback.textContent = message;
+          feedback.dataset.state = state;
+        }
+
+        function disableForm() {
+          formControls.forEach((control) => {
+            control.disabled = true;
+          });
+          form.classList.add('checkout__disabled');
+        }
+
+        function enableForm() {
+          formControls.forEach((control) => {
+            control.disabled = false;
+          });
+          form.classList.remove('checkout__disabled');
+        }
+
+        function populateBenefits(items) {
+          planBenefits.innerHTML = '';
+          items.forEach((benefit) => {
+            const li = document.createElement('li');
+            li.textContent = benefit;
+            planBenefits.appendChild(li);
+          });
+        }
+
+        function mountInstallments(installmentsList) {
+          installmentsSelect.innerHTML = '<option value="">Selecione a quantidade de parcelas</option>';
+
+          installmentsList.forEach((item) => {
+            const quantity = Number(item.quantity);
+            const installmentAmount = Number(item.installmentAmount);
+            const totalAmount = Number(item.totalAmount);
+            const option = document.createElement('option');
+            option.value = `${quantity}|${installmentAmount.toFixed(2)}`;
+            option.dataset.total = totalAmount.toFixed(2);
+            option.dataset.interestFree = item.interestFree ? 'true' : 'false';
+            const label = `${quantity}x de ${formatCurrency(installmentAmount)} ${
+              item.interestFree ? 'sem juros' : 'com juros'
+            }`;
+            option.textContent = label;
+            installmentsSelect.appendChild(option);
+          });
+
+          installmentsSelect.disabled = false;
+          installmentInfo.textContent = 'Escolha a melhor condição de parcelamento para o seu cartão.';
+        }
+
+        function fetchInstallments(brand) {
+          if (!sessionId || !window.PagSeguroDirectPayment) {
+            return;
+          }
+
+          setFeedback('Carregando parcelas disponíveis…', 'info');
+
+          window.PagSeguroDirectPayment.getInstallments({
+            amount: plan.amount,
+            brand,
+            maxInstallmentNoInterest: plan.installmentsNoInterest,
+            success(response) {
+              const installmentsList = response.installments && response.installments[brand];
+              if (!Array.isArray(installmentsList) || !installmentsList.length) {
+                setFeedback('Não há opções de parcelamento disponíveis para esta bandeira.', 'error');
+                installmentsSelect.disabled = true;
+                return;
+              }
+
+              mountInstallments(installmentsList);
+              setFeedback('Parcelas carregadas. Escolha a opção desejada.', 'success');
+            },
+            error() {
+              setFeedback('Não foi possível consultar as parcelas. Tente novamente em instantes.', 'error');
+            },
+          });
+        }
+
+        function detectCardBrand(bin) {
+          if (!sessionId || !window.PagSeguroDirectPayment) {
+            return;
+          }
+
+          window.PagSeguroDirectPayment.getBrand({
+            cardBin: bin,
+            success(response) {
+              detectedBrand = response.brand.name;
+              cardBrandField.textContent = detectedBrand.toUpperCase();
+              setFeedback(`Bandeira ${detectedBrand.toUpperCase()} identificada.`, 'success');
+              fetchInstallments(detectedBrand);
+            },
+            error() {
+              detectedBrand = '';
+              cardBrandField.textContent = '—';
+              installmentsSelect.innerHTML = '<option value="">Selecione a quantidade de parcelas</option>';
+              installmentsSelect.disabled = true;
+              installmentsSelect.selectedIndex = 0;
+              installmentInfo.textContent = 'Não foi possível identificar a bandeira. Confira o número digitado.';
+              setFeedback('Não conseguimos identificar a bandeira do cartão. Verifique os dígitos informados.', 'error');
+            },
+          });
+        }
+
+        function handleInstallmentChange(event) {
+          const option = event.target.selectedOptions[0];
+          if (!option || !option.dataset.total) {
+            installmentInfo.textContent = 'Selecione a quantidade de parcelas preferida.';
+            return;
+          }
+
+          const totalFormatted = formatCurrency(Number(option.dataset.total));
+          installmentInfo.textContent = `Total da cobrança: ${totalFormatted} (${option.dataset.interestFree === 'true' ? 'sem juros' : 'com juros'})`;
+        }
+
+        function createCardToken(data) {
+          setFeedback('Gerando token seguro diretamente com o PagSeguro…', 'info');
+          submitButton.disabled = true;
+
+          window.PagSeguroDirectPayment.createCardToken({
+            cardNumber: data.number,
+            brand: data.brand,
+            cvv: data.cvv,
+            expirationMonth: data.expirationMonth,
+            expirationYear: data.expirationYear,
+            success(response) {
+              const token = response.card && response.card.token;
+              if (!token) {
+                setFeedback('Token não retornado pelo PagSeguro. Tente novamente.', 'error');
+                submitButton.disabled = false;
+                return;
+              }
+
+              tokenField.textContent = token;
+              tokenWrapper.hidden = false;
+              if (installmentSummary) {
+                const option = installmentsSelect.selectedOptions[0];
+                if (option) {
+                  const label = option.textContent;
+                  const total = formatCurrency(Number(option.dataset.total || plan.amount));
+                  installmentSummary.textContent = `Parcelamento escolhido: ${label} (total ${total}).`;
+                }
+              }
+              setFeedback('Token gerado com sucesso! Envie-o ao seu servidor para finalizar o pagamento.', 'success');
+            },
+            error(errorResponse) {
+              console.error('Erro ao gerar token PagSeguro:', errorResponse);
+              setFeedback('Não foi possível gerar o token. Revise os dados e tente novamente.', 'error');
+            },
+            complete() {
+              submitButton.disabled = false;
+            },
+          });
+        }
+
+        function handleSubmit(event) {
+          event.preventDefault();
+
+          if (!sessionId) {
+            setFeedback('Não foi possível iniciar o pagamento: sessão PagSeguro indisponível.', 'error');
+            return;
+          }
+
+          if (!detectedBrand) {
+            setFeedback('Informe um número de cartão válido para identificarmos a bandeira.', 'error');
+            return;
+          }
+
+          if (!installmentsSelect.value) {
+            setFeedback('Escolha a quantidade de parcelas antes de continuar.', 'error');
+            return;
+          }
+
+          const sanitizedNumber = sanitizeDigits(cardNumberInput.value);
+          const sanitizedCvv = sanitizeDigits(cvvInput.value);
+          const expiryDigits = sanitizeDigits(expiryInput.value);
+
+          if (expiryDigits.length < 4) {
+            setFeedback('Informe a validade no formato MM/AA.', 'error');
+            return;
+          }
+
+          const expirationMonth = expiryDigits.slice(0, 2);
+          let expirationYear = expiryDigits.slice(-2);
+          if (expirationYear.length === 2) {
+            expirationYear = `20${expirationYear}`;
+          }
+
+          createCardToken({
+            number: sanitizedNumber,
+            brand: detectedBrand,
+            cvv: sanitizedCvv,
+            expirationMonth,
+            expirationYear,
+          });
+        }
+
+        function formatCardNumber(event) {
+          const sanitized = sanitizeDigits(event.target.value).slice(0, 19);
+          const groups = sanitized.match(/.{1,4}/g) || [];
+          event.target.value = groups.join(' ');
+
+          if (sanitized.length >= 6) {
+            const bin = sanitized.substring(0, 6);
+            if (bin !== currentBin) {
+              currentBin = bin;
+              detectCardBrand(bin);
+            }
+          }
+        }
+
+        function formatExpiry(event) {
+          const sanitized = sanitizeDigits(event.target.value).slice(0, 4);
+          if (sanitized.length <= 2) {
+            event.target.value = sanitized;
+            return;
+          }
+
+          event.target.value = `${sanitized.slice(0, 2)}/${sanitized.slice(2)}`;
+        }
+
+        planName.textContent = plan.name;
+        planPrice.textContent = plan.price;
+        planAmount.textContent = plan.amountLabel;
+        populateBenefits(plan.benefits);
+
+        if (plan.amount === 0) {
+          freePlanNotice.hidden = false;
+          disableForm();
+          return;
+        }
+
+        if (!sessionId) {
+          sessionWarning.hidden = false;
+          disableForm();
+          return;
+        }
+
+        enableForm();
+        installmentsSelect.disabled = true;
+        installmentsSelect.selectedIndex = 0;
+        installmentInfo.textContent = 'As opções aparecerão após identificarmos a bandeira.';
+
+        if (window.PagSeguroDirectPayment) {
+          window.PagSeguroDirectPayment.setSessionId(sessionId);
+        } else {
+          console.warn('Biblioteca PagSeguro DirectPayment não carregada.');
+        }
+
+        installmentsSelect.addEventListener('change', handleInstallmentChange);
+        form.addEventListener('submit', handleSubmit);
+        cardNumberInput.addEventListener('input', formatCardNumber);
+        expiryInput.addEventListener('input', formatExpiry);
+      })();
     </script>
   </body>
 </html>
