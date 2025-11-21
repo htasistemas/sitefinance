@@ -1,0 +1,45 @@
+name: Deploy SiteFinance
+
+on:
+  workflow_dispatch:   # habilita o botão "Run workflow" no GitHub Actions
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código (opcional, só para log)
+        uses: actions/checkout@v4
+
+      - name: Configurar chave SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Deploy no servidor (Docker)
+        run: |
+          ssh -o StrictHostKeyChecking=no root@72.60.156.202 << 'EOF'
+            echo "📂 Indo para a pasta do site..."
+            cd /root/sitefinance   # 👈 ajuste se o caminho for outro
+
+            echo "🔄 Atualizando código..."
+            git fetch --all
+            git reset --hard origin/main   # 👈 ajuste se a branch for outra
+
+            echo "🧹 Derrubando container antigo (se existir)..."
+            docker stop sitefinance || true
+            docker rm sitefinance || true
+
+            echo "🛠️ Recriando imagem Docker do site..."
+            docker build -t sitefinance .
+
+            echo "🚀 Subindo novo container na porta 8080..."
+            docker run -d \
+              --name sitefinance \
+              -p 8080:80 \
+              --restart=always \
+              sitefinance
+
+            echo "✅ Deploy do sitefinance finalizado!"
+            docker ps | grep sitefinance || echo "Container não encontrado após deploy!"
+          EOF
