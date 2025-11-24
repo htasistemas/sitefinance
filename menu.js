@@ -1,5 +1,5 @@
 (function () {
-  const BASE_SITE_VERSION = '1.01';
+  const BASE_SITE_VERSION = (window.SITE_CONFIG && window.SITE_CONFIG.version) || '0.00';
 
   const MENU_TEMPLATE = `
     <header class="topbar" aria-label="Barra de navegação principal">
@@ -107,12 +107,13 @@
   }
 
   function buildVersionMetadata() {
+    const siteVersion = BASE_SITE_VERSION;
     const lastUpdated = new Date(document.lastModified);
 
     if (Number.isNaN(lastUpdated.getTime())) {
       return {
-        build: `${BASE_SITE_VERSION}.000000000000`,
-        label: `Versão ${BASE_SITE_VERSION}`,
+        build: `${siteVersion}.000000000000`,
+        label: `Versão ${siteVersion}`,
       };
     }
 
@@ -129,8 +130,8 @@
     });
 
     return {
-      build: `${BASE_SITE_VERSION}.${stamp}`,
-      label: `Versão ${BASE_SITE_VERSION}.${stamp} • Atualizado em ${updatedDate} às ${updatedTime}`,
+      build: `${siteVersion}.${stamp}`,
+      label: `Versão ${siteVersion} • Atualizado em ${updatedDate} às ${updatedTime}`,
     };
   }
 
