@@ -1,11 +1,22 @@
 function redirecionarParaPagarme(botao) {
   const planoId = botao.dataset.planoId;
+
+  const planoSlug = botao.dataset.plano;
   const planoNome = botao.dataset.planoNome;
 
+  const planoPorId = {
+    1: 'mensal',
+    2: 'semestral',
+    3: 'anual'
+  };
+
   const destino = new URL('pagamento.html', window.location.href);
-  if (planoId) destino.searchParams.set('planoId', planoId);
+  const planoFinal = planoSlug || planoPorId[planoId];
+
+  if (planoFinal) destino.searchParams.set('plano', planoFinal);
   if (planoNome) destino.searchParams.set('planoNome', planoNome);
   destino.searchParams.set('gateway', 'pagarme');
+
 
   window.location.href = destino.toString();
 }
