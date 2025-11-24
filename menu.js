@@ -1,5 +1,5 @@
 (function () {
-  const BASE_SITE_VERSION = '1.01';
+  const BASE_SITE_VERSION = (window.SITE_CONFIG && window.SITE_CONFIG.version) || '0.00';
 
   const MENU_TEMPLATE = `
     <header class="topbar" aria-label="Barra de navegação principal">
@@ -29,7 +29,6 @@
       <nav class="topbar__nav" aria-label="Seções principais">
         <a data-menu-label="home" href="index.html">Home</a>
         <a data-menu-label="features" href="funcionalidades.html">Funcionalidades</a>
-        <a data-menu-label="resources" href="recursos.html">Recursos e soluções</a>
         <a data-menu-label="plans" href="planos.html">Planos</a>
         <a data-menu-label="faq" href="faq.html">FAQ</a>
         <a data-menu-label="about" href="sobre.html">Sobre nós</a>
@@ -107,12 +106,13 @@
   }
 
   function buildVersionMetadata() {
+    const siteVersion = BASE_SITE_VERSION;
     const lastUpdated = new Date(document.lastModified);
 
     if (Number.isNaN(lastUpdated.getTime())) {
       return {
-        build: `${BASE_SITE_VERSION}.000000000000`,
-        label: `Versão ${BASE_SITE_VERSION}`,
+        build: `${siteVersion}.000000000000`,
+        label: `Versão ${siteVersion}`,
       };
     }
 
@@ -129,8 +129,8 @@
     });
 
     return {
-      build: `${BASE_SITE_VERSION}.${stamp}`,
-      label: `Versão ${BASE_SITE_VERSION}.${stamp} • Atualizado em ${updatedDate} às ${updatedTime}`,
+      build: `${siteVersion}.${stamp}`,
+      label: `Versão ${siteVersion} • Atualizado em ${updatedDate} às ${updatedTime}`,
     };
   }
 
