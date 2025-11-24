@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="financepromaster.css" />
     <link rel="stylesheet" href="menu.css" />
     <script src="menu.js" defer></script>
+    <script src="pagamentos.js" defer></script>
   </head>
   <body>
     <header class="topbar" aria-label="Barra de navegação principal">
@@ -109,7 +110,9 @@
               <li>Prioridade em novas implementações.</li>
               
             </ul>
-            <a class="btn btn--ghost" href="pagseguro.html?plano=mensal">Assinar plano mensal</a>
+            <button class="btn btn--ghost js-mercadopago" type="button" data-plano-id="1" data-plano-nome="Plano Mensal">
+              Assinar plano mensal
+            </button>
           </article>
 
           <article class="plan-card plan-card--featured">
@@ -131,7 +134,14 @@
               <li>Acesso total a todas as funcionalidades do sistema.</li>
               <li>Prioridade em novas implementações.</li>
             </ul>
-            <a class="btn btn--primary" href="pagseguro.html?plano=semestral">Assinar plano semestral</a>
+            <button
+              class="btn btn--primary js-mercadopago"
+              type="button"
+              data-plano-id="2"
+              data-plano-nome="Plano Semestral"
+            >
+              Assinar plano semestral
+            </button>
           </article>
 
           <article class="plan-card">
@@ -152,7 +162,9 @@
               <li>Acesso total a todas as funcionalidades do sistema.</li>
               <li>Prioridade em novas implementações.</li>
             </ul>
-            <a class="btn btn--ghost" href="pagseguro.html?plano=anual">Assinar plano anual</a>
+            <button class="btn btn--ghost js-mercadopago" type="button" data-plano-id="3" data-plano-nome="Plano Anual">
+              Assinar plano anual
+            </button>
           </article>
         </div>
         <p class="plans__notice">
@@ -202,6 +214,42 @@
           </div>
           <a class="btn btn--primary" href="planos.html#teste">Quero testar sem compromisso</a>
         </div>
+      </section>
+
+      <section class="section" id="pagamento-mercadopago">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Pagamento seguro</p>
+          <h2>Finalize pelo Mercado Pago</h2>
+          <p class="section__subtitle">
+            Informe seu ID de usuário e escolha a forma de pagamento preferida. Aceitamos PIX, cartão e boleto.
+          </p>
+        </header>
+        <form class="payment-form" id="mercadopago-checkout-form">
+          <div class="payment-form__grid">
+            <label class="payment-form__field">
+              <span>ID do usuário</span>
+              <input type="number" id="checkout-usuario-id" name="usuarioId" required placeholder="Digite seu ID" />
+            </label>
+            <label class="payment-form__field">
+              <span>Plano selecionado</span>
+              <input type="text" id="checkout-plano" name="plano" readonly placeholder="Escolha um plano acima" />
+              <input type="hidden" id="checkout-plano-id" name="planoId" required />
+            </label>
+            <label class="payment-form__field">
+              <span>Forma de pagamento</span>
+              <select id="checkout-meio" name="meioPagamento" required>
+                <option value="">Selecione</option>
+                <option value="pix">PIX</option>
+                <option value="cartao">Cartão de crédito</option>
+                <option value="boleto">Boleto/depósito bancário</option>
+              </select>
+            </label>
+          </div>
+          <div class="payment-form__actions">
+            <button class="btn btn--primary" type="submit">Iniciar pagamento pelo Mercado Pago</button>
+            <p class="payment-form__status" id="checkout-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
       </section>
     </main>
 
