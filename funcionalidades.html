@@ -14,412 +14,934 @@
     <link rel="stylesheet" href="menu.css" />
     <script src="menu.js" defer></script>
 
-    <!-- Ajuste visual: reduz ainda mais o espaço superior da primeira seção -->
+    <!-- Ajustes e novos componentes visuais para a página de funcionalidades -->
     <style>
-      body.funcionalidades .functionality-overview {
-        padding-top: 1.5rem; /* antes 3rem — agora bem mais próximo do topo */
+      body.funcionalidades {
+        background: linear-gradient(180deg, #fafdff 0%, var(--color-sky) 45%, #effaf5 100%);
+      }
+
+      body.funcionalidades main {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(2.5rem, 5vw, 4rem);
+      }
+
+      body.funcionalidades .section {
+        padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 6vw, 4.25rem);
+      }
+
+      /* Hero */
+      .feature-hero {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-hero .section__header {
+        text-align: left;
+        max-width: 40rem;
+      }
+
+      .feature-hero .hero__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: clamp(1.5rem, 4vw, 2.5rem);
+        align-items: center;
+      }
+
+      .feature-hero .hero__cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: var(--gradient-emerald);
+        color: #fff;
+        padding: 0.95rem 1.5rem;
+        border-radius: 14px;
+        font-weight: 700;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .feature-hero .hero__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      .feature-hero .hero__tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.6rem 0.9rem;
+        border-radius: 12px;
+        background: var(--color-primary);
+        color: var(--color-muted);
+        border: 1px solid var(--color-border);
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+
+      .hero__mock {
+        position: relative;
+        background: var(--color-primary);
+        border-radius: 22px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow-strong);
+        border: 1px solid var(--color-border);
+      }
+
+      .hero__mock::after {
+        content: '';
+        position: absolute;
+        inset: 10% -12% -14% -10%;
+        background: var(--gradient-emerald-soft);
+        z-index: -1;
+        filter: blur(28px);
+      }
+
+      .hero__mock-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .hero__pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        background: rgba(10, 138, 91, 0.12);
+        color: var(--color-accent-strong);
+        padding: 0.5rem 0.8rem;
+        border-radius: 999px;
+        font-weight: 600;
+      }
+
+      .hero__mock-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 1rem;
+      }
+
+      .hero__mock-balance {
+        background: var(--color-primary-dark);
+        border-radius: 16px;
+        padding: 1rem;
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .hero__mock-balance h3 {
+        text-align: left;
+        letter-spacing: 0;
+      }
+
+      .hero__cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 0.75rem;
+      }
+
+      .hero__card {
+        background: var(--color-primary);
+        border: 1px solid var(--color-border);
+        border-radius: 14px;
+        padding: 0.85rem;
+        box-shadow: 0 10px 22px rgba(7, 80, 59, 0.08);
+      }
+
+      .hero__chart-stack {
+        background: var(--color-primary);
+        border-radius: 16px;
+        padding: 1rem;
+        border: 1px solid var(--color-border);
+      }
+
+      .hero__chart-bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 0.5rem;
+        height: 160px;
+      }
+
+      .hero__chart-bars span {
+        flex: 1;
+        border-radius: 12px;
+        background: var(--gradient-emerald);
+        box-shadow: var(--shadow-soft);
+      }
+
+      /* Cards principais */
+      .module-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .module-card {
+        background: var(--color-primary);
+        border: 1px solid var(--color-border);
+        border-radius: 18px;
+        padding: 1.25rem;
+        box-shadow: var(--shadow-soft);
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .module-card__icon {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: rgba(10, 138, 91, 0.1);
+        color: var(--color-accent-strong);
+        font-weight: 700;
+      }
+
+      /* Gráficos ilustrativos */
+      .chart-showcase {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .chart-card {
+        background: var(--color-primary);
+        border: 1px solid var(--color-border);
+        border-radius: 18px;
+        padding: 1.2rem;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .chart-card h3 {
+        text-align: left;
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 1rem;
+      }
+
+      .chart-card__body {
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 0.75rem;
+      }
+
+      .chart-pie {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        margin: 0 auto;
+        background: conic-gradient(#0a8a5b 0deg 110deg, #32d28a 110deg 190deg, #cfe4ff 190deg 260deg, #0f3b4a 260deg 320deg, #f4f9ff 320deg 360deg);
+        position: relative;
+      }
+
+      .chart-pie::after {
+        content: '';
+        position: absolute;
+        inset: 22%;
+        background: #fff;
+        border-radius: 50%;
+      }
+
+      .legend {
+        display: grid;
+        gap: 0.4rem;
+      }
+
+      .legend__item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        color: var(--color-muted);
+      }
+
+      .legend__dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+
+      .chart-line {
+        position: relative;
+        height: 180px;
+        background: linear-gradient(180deg, rgba(10, 138, 91, 0.12), rgba(10, 138, 91, 0.02));
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      .chart-line::before {
+        content: '';
+        position: absolute;
+        inset: 20% 8% 28% 8%;
+        background: linear-gradient(90deg, rgba(10, 138, 91, 0.12) 10%, transparent 10%);
+        background-size: 36px 12px;
+      }
+
+      .chart-line__path {
+        position: absolute;
+        inset: 14% 10% 16% 10%;
+        background: linear-gradient(135deg, rgba(10, 138, 91, 0.8), rgba(10, 138, 91, 0.15));
+        clip-path: polygon(0 60%, 20% 48%, 40% 62%, 60% 38%, 80% 54%, 100% 30%, 100% 100%, 0 100%);
+        border-radius: 10px;
+      }
+
+      .chart-bars {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 0.6rem;
+        align-items: end;
+        height: 180px;
+      }
+
+      .chart-bars span {
+        display: block;
+        border-radius: 10px;
+        background: var(--gradient-emerald);
+        box-shadow: var(--shadow-soft);
+      }
+
+      /* Fluxo de uso */
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+      }
+
+      .timeline-step {
+        background: var(--color-primary);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 1rem;
+        box-shadow: var(--shadow-soft);
+        position: relative;
+      }
+
+      .timeline-step__badge {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: rgba(10, 138, 91, 0.12);
+        color: var(--color-accent-strong);
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Cartões de crédito */
+      .credit-area {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.25rem;
+        align-items: start;
+      }
+
+      .credit-card {
+        background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.6), rgba(10, 138, 91, 0.18)),
+          var(--gradient-emerald);
+        color: #fff;
+        border-radius: 18px;
+        padding: 1.25rem;
+        box-shadow: var(--shadow-strong);
+        display: grid;
+        gap: 0.4rem;
+      }
+
+      .credit-card__meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.75rem;
+        font-weight: 600;
+      }
+
+      .credit-table {
+        background: var(--color-primary);
+        border: 1px solid var(--color-border);
+        border-radius: 14px;
+        padding: 1rem;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .credit-table table {
+        width: 100%;
+        border-collapse: collapse;
+        color: var(--color-light);
+      }
+
+      .credit-table th,
+      .credit-table td {
+        padding: 0.65rem 0.5rem;
+        text-align: left;
+        font-size: 0.95rem;
+      }
+
+      .credit-table tbody tr:nth-child(odd) {
+        background: rgba(10, 138, 91, 0.05);
+      }
+
+      /* OFX importação */
+      .ofx-area {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .ofx-table {
+        background: var(--color-primary);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 1rem;
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+      }
+
+      .ofx-table table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .ofx-table th,
+      .ofx-table td {
+        text-align: left;
+        padding: 0.55rem 0.4rem;
+        font-size: 0.9rem;
+      }
+
+      .ofx-table thead {
+        background: rgba(10, 138, 91, 0.08);
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        border: 1px solid var(--color-border);
+        background: var(--color-primary-dark);
+        color: var(--color-light);
+        font-weight: 600;
+      }
+
+      /* Segurança */
+      .security-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+      }
+
+      .security-card {
+        background: var(--color-primary);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 1rem;
+        box-shadow: var(--shadow-soft);
+        display: grid;
+        gap: 0.4rem;
+      }
+
+      /* CTA final */
+      .cta-final {
+        text-align: center;
+        background: var(--gradient-emerald-soft);
+        border: 1px solid var(--color-border);
+        border-radius: 22px;
+        padding: clamp(2rem, 4vw, 3rem);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .cta-final .hero__cta {
+        margin-top: 1rem;
       }
 
       @media (max-width: 768px) {
-        body.funcionalidades .functionality-overview {
-          padding-top: 1rem;
+        .hero__mock-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero__mock {
+          padding: 1.1rem;
+        }
+
+        .chart-pie {
+          width: 140px;
+          height: 140px;
+        }
+
+        .feature-hero .section__header {
+          text-align: center;
+        }
+
+        .hero__grid {
+          text-align: center;
+        }
+
+        .feature-hero .hero__tags {
+          justify-content: center;
         }
       }
     </style>
   </head>
 
   <body class="funcionalidades">
+    <header class="topbar" aria-label="Barra de navegação principal">
+      <a class="topbar__logo" href="index.html">
+        <span class="topbar__logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" role="presentation" focusable="false">
+            <path
+              d="M4 24.5v-6.8a1.2 1.2 0 0 1 1.2-1.2h3.6a1.2 1.2 0 0 1 1.2 1.2v6.8m6-4.3v-8.7a1.2 1.2 0 0 1 1.2-1.2h3.6a1.2 1.2 0 0 1 1.2 1.2v8.7m6-2.4V7.7a1.2 1.2 0 0 1 1.2-1.2H29"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+            <path
+              d="M3 26.6h26"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="2"
+            />
+            <circle cx="26" cy="6.5" r="2" fill="currentColor" />
+          </svg>
+        </span>
+        <span class="topbar__logo-text">
+          <span class="topbar__logo-name">
+            Finance<span class="topbar__logo-em">Pro</span>
+            <span class="topbar__logo-highlight">Master</span>
+          </span>
+          <span class="topbar__logo-subtitle">Inteligência financeira</span>
+        </span>
+      </a>
 
-<header class="topbar" aria-label="Barra de navegação principal">
-  <a class="topbar__logo" href="index.html">
-    <span class="topbar__logo-mark" aria-hidden="true">
-      <svg viewBox="0 0 32 32" role="presentation" focusable="false">
-        <path
-          d="M4 24.5v-6.8a1.2 1.2 0 0 1 1.2-1.2h3.6a1.2 1.2 0 0 1 1.2 1.2v6.8m6-4.3v-8.7a1.2 1.2 0 0 1 1.2-1.2h3.6a1.2 1.2 0 0 1 1.2 1.2v8.7m6-2.4V7.7a1.2 1.2 0 0 1 1.2-1.2H29"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-        />
-        <path
-          d="M3 26.6h26"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-width="2"
-        />
-        <circle cx="26" cy="6.5" r="2" fill="currentColor" />
-      </svg>
-    </span>
-    <span class="topbar__logo-text">
-      <span class="topbar__logo-name">
-        Finance<span class="topbar__logo-em">Pro</span>
-        <span class="topbar__logo-highlight">Master</span>
-      </span>
-      <span class="topbar__logo-subtitle">Inteligência financeira</span>
-    </span>
-  </a>
+      <nav class="topbar__nav" aria-label="Seções principais">
+        <a href="index.html">Home</a>
+        <a href="funcionalidades.html" aria-current="page">Funcionalidades</a>
+        <a href="recursos.html">Recursos e soluções</a>
+        <a href="planos.html">Planos</a>
+        <a href="faq.html">FAQ</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html">Fale conosco</a>
+      </nav>
 
-  <nav class="topbar__nav" aria-label="Seções principais">
-    <a href="index.html">Home</a>
-    <a href="funcionalidades.html" aria-current="page">Funcionalidades</a>
-    <a href="recursos.html">Recursos e soluções</a>
-    <a href="planos.html">Planos</a>
-    <a href="faq.html">FAQ</a>
-    <a href="sobre.html">Sobre nós</a>
-    <a href="contato.html">Fale conosco</a>
-  </nav>
+      <a class="topbar__cta" href="https://app.financepromaster.com.br/">
+        Acesso ao Finance
+      </a>
+    </header>
 
-  <a class="topbar__cta" href="https://app.financepromaster.com.br/">
-    Acesso ao Finance
-  </a>
-</header>
-
-
-<main>
-      <section class="section section--alt functionality-overview" id="visao-geral">
-        <header class="section__header">
-          <p class="eyebrow">Visão geral</p>
-          <h1>Uma plataforma completa para enxergar, decidir e agir com segurança</h1>
-          <p class="section__subtitle">
-            Os dashboards do FinancePro Master nascem de perguntas reais: onde está o dinheiro agora, quais
-            metas estão no caminho certo e que decisão precisa ser tomada hoje. Explore as visualizações e
-            personalize com poucos cliques.
-          </p>
-        </header>
-        <div class="functionality-overview__grid">
-          <article class="functionality functionality--preview">
-            <h2>Central de performance financeira</h2>
-            <p>
-              Troque planilhas por um painel vivo que concentra indicadores de fluxo de caixa, metas e
-              alertas inteligentes. Navegue por abas para mergulhar em gastos, projeções e bem-estar
-              financeiro.
-            </p>
-            <div class="functionality__preview" role="group" aria-label="Exemplos interativos de dashboards">
-              <div class="functionality__tabs" role="tablist">
-                <button class="functionality__tab is-active" type="button" role="tab" aria-selected="true">Visão geral</button>
-                <button class="functionality__tab" type="button" role="tab" aria-selected="false">Gastos</button>
-                <button class="functionality__tab" type="button" role="tab" aria-selected="false">Projeções</button>
-                <button class="functionality__tab" type="button" role="tab" aria-selected="false">Bem-estar</button>
+    <main>
+      <section class="section feature-hero" id="dashboard">
+        <div class="hero__grid">
+          <div>
+            <header class="section__header">
+              <p class="eyebrow">Funcionalidades</p>
+              <h1>Tudo o que você precisa para dominar suas finanças em um único lugar.</h1>
+              <p class="section__subtitle">
+                O Finance Pro Master organiza contas, cartões, categorias, metas e relatórios em um painel
+                claro, visual e acessível de qualquer dispositivo.
+              </p>
+            </header>
+            <div class="hero__tags" aria-label="Atalhos das seções">
+              <a class="hero__tag" href="#modulos">Módulos principais</a>
+              <a class="hero__tag" href="#relatorios">Relatórios e gráficos</a>
+              <a class="hero__tag" href="#cartao-credito">Cartão de crédito</a>
+              <a class="hero__tag" href="#ofx">Importação OFX</a>
+            </div>
+            <a class="hero__cta" href="https://app.financepromaster.com.br/">Começar agora</a>
+          </div>
+          <div class="hero__mock" role="presentation" aria-hidden="true">
+            <div class="hero__mock-header">
+              <div>
+                <p class="eyebrow">Dashboard em tempo real</p>
+                <h3 style="text-align: left; letter-spacing: 0">Visão consolidada</h3>
               </div>
-              <div class="dashboard-preview" data-dashboard-panel>
-                <div class="dashboard-preview__header">
-                  <div>
-                    <p class="dashboard-preview__title">Performance mensal</p>
-                    <p class="dashboard-preview__subtitle">Atualizado há 2 minutos</p>
+              <span class="hero__pill">Postgres ao vivo</span>
+            </div>
+            <div class="hero__mock-grid">
+              <div class="hero__mock-balance">
+                <div class="hero__pill">Saldo total</div>
+                <h3>R$ 18.450,00</h3>
+                <p class="section__subtitle" style="text-align: left; margin: 0">
+                  Contas, cartões e investimentos sincronizados sem cache local para decisões seguras.
+                </p>
+                <div class="hero__cards">
+                  <div class="hero__card">
+                    <p class="eyebrow">Receitas</p>
+                    <p style="font-weight: 700">R$ 7.850</p>
+                    <small class="positivo">+12% vs. mês anterior</small>
                   </div>
-                  <span class="dashboard-preview__chip">Premium</span>
+                  <div class="hero__card">
+                    <p class="eyebrow">Despesas</p>
+                    <p style="font-weight: 700">R$ 4.320</p>
+                    <small class="negativo">-3% de variação</small>
+                  </div>
+                  <div class="hero__card">
+                    <p class="eyebrow">Cartão</p>
+                    <p style="font-weight: 700">R$ 2.180</p>
+                    <small>Fatura fecha em 10 dias</small>
+                  </div>
+                  <div class="hero__card">
+                    <p class="eyebrow">Investimentos</p>
+                    <p style="font-weight: 700">R$ 215.300</p>
+                    <small class="positivo">+14,6% nos últimos 12m</small>
+                  </div>
                 </div>
-                <div class="dashboard-preview__content">
-                  <div class="dashboard-preview__chart dashboard-preview__chart--area">
-                    <div class="chart-area__line"></div>
-                    <div class="chart-area__gradient"></div>
-                  </div>
-                  <div class="dashboard-preview__cards">
-                    <article class="dashboard-preview__card">
-                      <h4>Saldo consolidado</h4>
-                      <p class="dashboard-preview__value">R$ <span data-metric="balance">18.450</span></p>
-                      <span class="dashboard-preview__trend positivo"><span data-metric="balanceTrend">+12%</span> vs. último mês</span>
-                    </article>
-                    <article class="dashboard-preview__card">
-                      <h4>Economia mensal</h4>
-                      <p class="dashboard-preview__value">R$ <span data-metric="savings">1.250</span></p>
-                      <span class="dashboard-preview__trend"><span data-metric="savingsTrend">+3 pts</span> na taxa</span>
-                    </article>
-                    <article class="dashboard-preview__card">
-                      <h4>Índice de bem-estar</h4>
-                      <p class="dashboard-preview__value"><span data-metric="wellbeing">8,7</span>/10</p>
-                      <span class="dashboard-preview__trend positivo">Insights ativos</span>
-                    </article>
-                  </div>
-                  <ul class="dashboard-preview__segments">
-                    <li>
-                      <span class="dashboard-preview__label">Essenciais</span>
-                      <div class="dashboard-preview__bar">
-                        <span class="dashboard-preview__bar-fill" data-progress="essentials" style="width: 32%"></span>
-                      </div>
-                      <span class="dashboard-preview__percent" data-progress-text="essentials">32%</span>
-                    </li>
-                    <li>
-                      <span class="dashboard-preview__label">Qualidade de vida</span>
-                      <div class="dashboard-preview__bar">
-                        <span class="dashboard-preview__bar-fill" data-progress="lifestyle" style="width: 24%"></span>
-                      </div>
-                      <span class="dashboard-preview__percent" data-progress-text="lifestyle">24%</span>
-                    </li>
-                    <li>
-                      <span class="dashboard-preview__label">Investimentos</span>
-                      <div class="dashboard-preview__bar">
-                        <span class="dashboard-preview__bar-fill" data-progress="investments" style="width: 44%"></span>
-                      </div>
-                      <span class="dashboard-preview__percent" data-progress-text="investments">44%</span>
-                    </li>
-                  </ul>
+              </div>
+              <div class="hero__chart-stack">
+                <p class="eyebrow">Despesas por categoria</p>
+                <div class="hero__chart-bars">
+                  <span style="height: 42%"></span>
+                  <span style="height: 68%"></span>
+                  <span style="height: 55%"></span>
+                  <span style="height: 88%"></span>
+                  <span style="height: 61%"></span>
+                  <span style="height: 35%"></span>
+                </div>
+                <div class="legend" style="margin-top: 0.75rem">
+                  <span class="legend__item"><span class="legend__dot" style="background:#0a8a5b"></span>Alimentação</span>
+                  <span class="legend__item"><span class="legend__dot" style="background:#32d28a"></span>Transporte</span>
+                  <span class="legend__item"><span class="legend__dot" style="background:#0f3b4a"></span>Moradia</span>
+                  <span class="legend__item"><span class="legend__dot" style="background:#cfe4ff"></span>Lazer</span>
                 </div>
               </div>
             </div>
-          </article>
-          <aside class="functionality-overview__highlights">
-            <article class="highlight-card">
-              <h3>Dashboards modulares</h3>
-              <p>Personalize indicadores, metas e períodos com filtros avançados e templates prontos.</p>
-            </article>
-            <article class="highlight-card">
-              <h3>Alertas inteligentes</h3>
-              <p>Receba notificações automáticas sobre oportunidades, gastos fora da meta e riscos de fluxo.</p>
-            </article>
-            <article class="highlight-card">
-              <h3>Playbooks conectados</h3>
-              <p>Transforme cada insight em ação com checklists, vídeos e lembretes integrados aos dashboards.</p>
-            </article>
-          </aside>
+          </div>
         </div>
       </section>
 
-      <section class="section" id="capacidades">
-        <header class="section__header">
-          <p class="eyebrow">Ferramentas essenciais</p>
-          <h2>Funcionalidades que acompanham sua evolução financeira</h2>
-          <p class="section__subtitle">
-            Do diagnóstico à expansão, cada módulo é pensado para eliminar fricções e ganhar tempo em tarefas
-            críticas. Combine recursos conforme a maturidade do seu plano financeiro.
-          </p>
-        </header>
-        <div class="functional-points">
-          <article class="functional-point">
-            <h3>Orçamentos flexíveis</h3>
-            <p>Ajuste limites com base em hábitos reais e receba sugestões automáticas para manter o equilíbrio.</p>
-          </article>
-          <article class="functional-point">
-            <h3>Controle de cartões e assinaturas</h3>
-            <p>Monitore faturas, parcelas e recorrências em um só lugar, com alertas antes de cada cobrança.</p>
-          </article>
-          <article class="functional-point">
-            <h3>Metas e planejamento 3-12-36</h3>
-            <p>Crie objetivos por horizonte de tempo, acompanhe previsões de conclusão e simule aportes ideais.</p>
-          </article>
-          <article class="functional-point">
-            <h3>Relatórios inteligentes</h3>
-            <p>Gere análises comparativas, identifique tendências e exporte relatórios prontos para reuniões.</p>
-          </article>
-          <article class="functional-point">
-            <h3>Integrações bancárias e contábeis</h3>
-            <p>Concilie dados de bancos, carteiras digitais e sistemas de contabilidade com segurança.</p>
-          </article>
-          <article class="functional-point">
-            <h3>Trilhas de aprendizado</h3>
-            <p>Conte com conteúdos guiados, mentorias coletivas e sessões individuais conforme o plano.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section section--alt" aria-labelledby="dashboards-titulo">
-        <header class="section__header">
-          <p class="eyebrow">Dashboards exclusivos</p>
-          <h2 id="dashboards-titulo">Painéis prontos para orientar decisões em cada cenário</h2>
-          <p class="section__subtitle">
-            Veja alguns dos dashboards disponíveis no FinancePro Master. Eles podem ser personalizados pela
-            nossa equipe ou pelo seu time para refletir indicadores únicos do negócio.
-          </p>
-        </header>
-        <div class="dashboard-gallery">
-          <article class="dashboard-card">
-            <header class="dashboard-card__header">
-              <div>
-                <span class="dashboard-card__eyebrow">Meu Dashboard</span>
-                <h3 class="dashboard-card__title">Saldo e despesas em tempo real</h3>
-              </div>
-              <span class="dashboard-card__tag">Atualizado agora</span>
-            </header>
-            <div class="dashboard-card__metrics">
-              <article>
-                <p class="dashboard-card__label">Receita (mês)</p>
-                <p class="dashboard-card__value positivo">R$ 7.850,00</p>
-              </article>
-              <article>
-                <p class="dashboard-card__label">Despesa (mês)</p>
-                <p class="dashboard-card__value negativo">R$ 4.320,50</p>
-              </article>
-            </div>
-            <div class="dashboard-card__chart dashboard-card__chart--bars" aria-hidden="true">
-              <div class="dashboard-card__bar" style="height: 35%"></div>
-              <div class="dashboard-card__bar" style="height: 55%"></div>
-              <div class="dashboard-card__bar" style="height: 68%"></div>
-              <div class="dashboard-card__bar" style="height: 80%"></div>
-              <div class="dashboard-card__bar" style="height: 60%"></div>
-              <div class="dashboard-card__bar" style="height: 72%"></div>
-            </div>
-            <p class="dashboard-card__description">
-              Veja rapidamente o balanço dos últimos seis meses e identifique os momentos de maior variação
-              para agir sem atrasos.
-            </p>
-          </article>
-
-          <article class="dashboard-card">
-            <header class="dashboard-card__header">
-              <div>
-                <span class="dashboard-card__eyebrow">Planejamento</span>
-                <h3 class="dashboard-card__title">Metas e evolução do patrimônio</h3>
-              </div>
-              <span class="dashboard-card__tag">3 metas ativas</span>
-            </header>
-            <div class="dashboard-card__metrics dashboard-card__metrics--three">
-              <article>
-                <p class="dashboard-card__label">Reserva de emergência</p>
-                <p class="dashboard-card__value positivo">76% concluída</p>
-              </article>
-              <article>
-                <p class="dashboard-card__label">Quitação de dívidas</p>
-                <p class="dashboard-card__value">R$ 1.980,00</p>
-              </article>
-              <article>
-                <p class="dashboard-card__label">Investimento mensal</p>
-                <p class="dashboard-card__value">R$ 850,00</p>
-              </article>
-            </div>
-            <ul class="dashboard-card__progress">
-              <li>
-                <div class="dashboard-card__progress-row">
-                  <span>Viagem em família</span>
-                  <span>52%</span>
-                </div>
-                <div class="dashboard-card__progress-bar" role="presentation">
-                  <span style="width: 52%"></span>
-                </div>
-              </li>
-              <li>
-                <div class="dashboard-card__progress-row">
-                  <span>Entrada do imóvel</span>
-                  <span>34%</span>
-                </div>
-                <div class="dashboard-card__progress-bar" role="presentation">
-                  <span style="width: 34%"></span>
-                </div>
-              </li>
-              <li>
-                <div class="dashboard-card__progress-row">
-                  <span>Formação dos filhos</span>
-                  <span>88%</span>
-                </div>
-                <div class="dashboard-card__progress-bar" role="presentation">
-                  <span style="width: 88%"></span>
-                </div>
-              </li>
-            </ul>
-            <p class="dashboard-card__description">
-              Compare metas lado a lado e saiba exatamente quanto investir por mês para cumprir cada objetivo
-              no prazo previsto.
-            </p>
-          </article>
-
-          <article class="dashboard-card">
-            <header class="dashboard-card__header">
-              <div>
-                <span class="dashboard-card__eyebrow">Fluxo de caixa</span>
-                <h3 class="dashboard-card__title">Previsão das próximas semanas</h3>
-              </div>
-              <span class="dashboard-card__tag">Modo inteligente</span>
-            </header>
-            <div class="dashboard-card__metrics">
-              <article>
-                <p class="dashboard-card__label">Saldo projetado</p>
-                <p class="dashboard-card__value">R$ 12.480,00</p>
-              </article>
-              <article>
-                <p class="dashboard-card__label">Disponível até o dia 20</p>
-                <p class="dashboard-card__value positivo">R$ 3.270,00</p>
-              </article>
-            </div>
-            <div class="dashboard-card__chart dashboard-card__chart--line" aria-hidden="true">
-              <div class="dashboard-card__line"></div>
-              <div class="dashboard-card__gradient"></div>
-            </div>
-            <p class="dashboard-card__description">
-              Antecipe gastos fixos e receitas previstas para manter folga no caixa e evitar surpresas com
-              pagamentos concentrados.
-            </p>
-          </article>
-
-          <article class="dashboard-card">
-            <header class="dashboard-card__header">
-              <div>
-                <span class="dashboard-card__eyebrow">Investimentos</span>
-                <h3 class="dashboard-card__title">Acompanhamento e rebalanceamento</h3>
-              </div>
-              <span class="dashboard-card__tag">Sugestões automáticas</span>
-            </header>
-            <div class="dashboard-card__metrics dashboard-card__metrics--three">
-              <article>
-                <p class="dashboard-card__label">Patrimônio</p>
-                <p class="dashboard-card__value positivo">R$ 215.300,00</p>
-              </article>
-              <article>
-                <p class="dashboard-card__label">Rentabilidade 12m</p>
-                <p class="dashboard-card__value positivo">+14,6%</p>
-              </article>
-              <article>
-                <p class="dashboard-card__label">Aporte sugerido</p>
-                <p class="dashboard-card__value">R$ 1.150,00</p>
-              </article>
-            </div>
-            <p class="dashboard-card__description">
-              Receba alertas quando um ativo sair da faixa ideal e aplique o rebalanceamento com um clique
-              usando as integrações da plataforma.
-            </p>
-          </article>
-
-          <article class="dashboard-card">
-            <header class="dashboard-card__header">
-              <div>
-                <span class="dashboard-card__eyebrow">Saúde financeira</span>
-                <h3 class="dashboard-card__title">Indicadores de bem-estar</h3>
-              </div>
-              <span class="dashboard-card__tag">Equipe &amp; família</span>
-            </header>
-            <div class="dashboard-card__metrics dashboard-card__metrics--three">
-              <article>
-                <p class="dashboard-card__label">Clima financeiro</p>
-                <p class="dashboard-card__value">7,8/10</p>
-              </article>
-              <article>
-                <p class="dashboard-card__label">Horas poupadas</p>
-                <p class="dashboard-card__value positivo">+18 h/mês</p>
-              </article>
-              <article>
-                <p class="dashboard-card__label">Tarefas concluídas</p>
-                <p class="dashboard-card__value positivo">92%</p>
-              </article>
-            </div>
-            <p class="dashboard-card__description">
-              Entenda como o tempo e o stress financeiro estão distribuídos na equipe ou na família e priorize
-              ações preventivas.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="integ">
+      <section class="section section--alt" id="modulos">
         <header class="section__header section__header--center">
-          <p class="eyebrow">Integração e acompanhamento</p>
-          <h2>Experiência contínua do diagnóstico às revisões estratégicas</h2>
+          <p class="eyebrow">Módulos principais</p>
+          <h2>Funcionalidades que já estão no Finance Pro Master</h2>
+          <p class="section__subtitle">
+            Cada módulo foi construído para refletir como nossos clientes trabalham: dados ao vivo em Postgres,
+            filtros avançados e visão consolidada para decisões rápidas.
+          </p>
         </header>
-        <div class="journey journey--compact">
-          <article class="journey-step">
-            <span class="journey-step__number">1</span>
-            <h3>Onboarding assistido</h3>
-            <p>Em até 48 horas conectamos contas, categorizamos lançamentos e configuramos alertas prioritários.</p>
+        <div class="module-grid">
+          <article class="module-card">
+            <span class="module-card__icon">📊</span>
+            <h3>Dashboard em tempo real</h3>
+            <p>
+              Visualize o saldo consolidado de contas, receitas e despesas com atualização direta do banco de
+              dados, sem cache local para valores críticos.
+            </p>
           </article>
-          <article class="journey-step">
-            <span class="journey-step__number">2</span>
-            <h3>Rotina guiada</h3>
-            <p>Checklists automáticos, agendas de revisão e playbooks mantêm a disciplina financeira sem esforço.</p>
+          <article class="module-card">
+            <span class="module-card__icon">🧾</span>
+            <h3>Gestão de despesas e receitas</h3>
+            <p>
+              Cadastre e acompanhe lançamentos por conta, categoria, subcategoria, forma de pagamento e tipo
+              de movimento em poucos cliques.
+            </p>
           </article>
-          <article class="journey-step">
-            <span class="journey-step__number">3</span>
-            <h3>Expansão estratégica</h3>
-            <p>Dashboards avançados, simulações e mentoria constante sustentam decisões de longo prazo.</p>
+          <article class="module-card">
+            <span class="module-card__icon">🏦</span>
+            <h3>Contas bancárias múltiplas</h3>
+            <p>
+              Administre várias contas com saldos, extratos e lançamentos separados por usuário, mantendo a
+              conciliação sempre alinhada.
+            </p>
           </article>
+          <article class="module-card">
+            <span class="module-card__icon">💳</span>
+            <h3>Cartões e faturas inteligentes</h3>
+            <p>
+              Lance despesas escolhendo a fatura correta a partir da data de fechamento e deixe o sistema
+              calcular parcelas e mês de competência.
+            </p>
+          </article>
+          <article class="module-card">
+            <span class="module-card__icon">⬆️</span>
+            <h3>Importação de extratos (OFX)</h3>
+            <p>
+              Suba arquivos OFX, visualize cada linha do extrato e personalize como cada lançamento será salvo
+              antes de confirmar.
+            </p>
+          </article>
+          <article class="module-card">
+            <span class="module-card__icon">🏷️</span>
+            <h3>Categorias e personalização</h3>
+            <p>
+              Crie categorias, tags e regras para transformar descrições automáticas em nomes claros, mantendo
+              relatórios limpos.
+            </p>
+          </article>
+          <article class="module-card">
+            <span class="module-card__icon">⏱️</span>
+            <h3>Resumo por período</h3>
+            <p>
+              Compare meses, contas ou cartões com filtros flexíveis e visão consolidada para entender onde o
+              dinheiro está indo.
+            </p>
+          </article>
+          <article class="module-card">
+            <span class="module-card__icon">📈</span>
+            <h3>Relatórios avançados</h3>
+            <p>
+              Acompanhe gráficos de evolução de saldo, despesas por categoria e comparativos mensais prontos
+              para exportar.
+            </p>
+          </article>
+          <article class="module-card">
+            <span class="module-card__icon">☁️</span>
+            <h3>Sistema 100% em nuvem</h3>
+            <p>
+              Acesse de qualquer lugar com segurança, desempenho otimizado e arquitetura preparada para
+              múltiplos dispositivos.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="relatorios">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Relatórios visuais</p>
+          <h2>Relatórios visuais para decisões mais rápidas</h2>
+          <p class="section__subtitle">
+            O Finance Pro Master transforma seus lançamentos em gráficos inteligentes para enxergar onde o
+            dinheiro entra, para onde vai e quais ajustes fazer.
+          </p>
+        </header>
+        <div class="chart-showcase">
+          <article class="chart-card">
+            <h3>Despesas por categoria</h3>
+            <div class="chart-card__body">
+              <div class="chart-pie"></div>
+              <div class="legend" aria-label="Legenda das categorias">
+                <span class="legend__item"><span class="legend__dot" style="background:#0a8a5b"></span>Alimentação</span>
+                <span class="legend__item"><span class="legend__dot" style="background:#32d28a"></span>Transporte</span>
+                <span class="legend__item"><span class="legend__dot" style="background:#0f3b4a"></span>Moradia</span>
+                <span class="legend__item"><span class="legend__dot" style="background:#cfe4ff"></span>Lazer</span>
+                <span class="legend__item"><span class="legend__dot" style="background:#f4f9ff; border:1px solid #0a8a5b"></span>Outros</span>
+              </div>
+            </div>
+          </article>
+          <article class="chart-card">
+            <h3>Evolução do saldo mensal</h3>
+            <div class="chart-card__body">
+              <div class="chart-line">
+                <div class="chart-line__path"></div>
+              </div>
+              <p class="section__subtitle" style="text-align: left; margin: 0">
+                Meses com crescimento e quedas ficam evidentes para ajustar metas e aportes.
+              </p>
+            </div>
+          </article>
+          <article class="chart-card">
+            <h3>Receitas x Despesas</h3>
+            <div class="chart-card__body">
+              <div class="chart-bars">
+                <span style="height: 60%"></span>
+                <span style="height: 82%"></span>
+                <span style="height: 50%"></span>
+                <span style="height: 88%"></span>
+                <span style="height: 66%"></span>
+                <span style="height: 74%"></span>
+              </div>
+              <div class="legend">
+                <span class="legend__item"><span class="legend__dot" style="background:#0a8a5b"></span>Receitas</span>
+                <span class="legend__item"><span class="legend__dot" style="background:#cfe4ff"></span>Despesas</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--alt" id="fluxo-uso">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Fluxo real</p>
+          <h2>Veja o passo a passo de uso do Finance Pro Master</h2>
+        </header>
+        <div class="timeline">
+          <article class="timeline-step">
+            <div class="timeline-step__badge">1</div>
+            <h3>Crie sua conta</h3>
+            <p>Cadastre suas contas bancárias e defina preferências de fatura e categorias.</p>
+          </article>
+          <article class="timeline-step">
+            <div class="timeline-step__badge">2</div>
+            <h3>Importe o extrato OFX</h3>
+            <p>Suba o arquivo do banco ou lance manualmente receitas e despesas recorrentes.</p>
+          </article>
+          <article class="timeline-step">
+            <div class="timeline-step__badge">3</div>
+            <h3>Classifique lançamentos</h3>
+            <p>Escolha categorias, cartões e tipos de despesa, com regras automáticas para repetições.</p>
+          </article>
+          <article class="timeline-step">
+            <div class="timeline-step__badge">4</div>
+            <h3>Monitore dashboards</h3>
+            <p>Acompanhe cards e gráficos em tempo real para não perder nenhum vencimento.</p>
+          </article>
+          <article class="timeline-step">
+            <div class="timeline-step__badge">5</div>
+            <h3>Decida com segurança</h3>
+            <p>Ajuste orçamento, compare períodos e tome decisões com base em dados confiáveis.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="cartao-credito">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Cartões de crédito</p>
+          <h2>Faturas claras, parcelas corretas e limite sempre atualizado</h2>
+        </header>
+        <div class="credit-area">
+          <div class="credit-card" aria-label="Resumo do cartão de crédito">
+            <div class="credit-card__meta">
+              <span>Cartão Platinum</span>
+              <span>•••• 9876</span>
+            </div>
+            <p style="font-size: 1.6rem; font-weight: 700">Limite total: R$ 12.000</p>
+            <p>Limite disponível: R$ 8.420</p>
+            <p>Fatura atual: R$ 2.180</p>
+            <p>Fecha em: 22/05 • Vencimento: 30/05</p>
+            <p style="font-weight: 600; margin-top: 0.5rem">
+              Lançamentos automaticamente direcionados para a fatura correta com base na data de fechamento e
+              número de parcelas.
+            </p>
+          </div>
+          <div class="credit-table" aria-label="Exemplo de fatura">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Descrição</th>
+                  <th>Categoria</th>
+                  <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>02/05</td>
+                  <td>Supermercado Aurora</td>
+                  <td>Alimentação</td>
+                  <td>R$ 320,00</td>
+                </tr>
+                <tr>
+                  <td>08/05</td>
+                  <td>Uber</td>
+                  <td>Transporte</td>
+                  <td>R$ 58,00</td>
+                </tr>
+                <tr>
+                  <td>12/05</td>
+                  <td>Assinatura streaming</td>
+                  <td>Recorrência</td>
+                  <td>R$ 49,90</td>
+                </tr>
+                <tr>
+                  <td>15/05</td>
+                  <td>Parcela notebook (2/10)</td>
+                  <td>Equipamentos</td>
+                  <td>R$ 420,00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--alt" id="ofx">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Importação OFX</p>
+          <h2>Importe, personalize e aprove cada lançamento antes de salvar</h2>
+        </header>
+        <div class="ofx-area">
+          <div class="ofx-table" aria-label="Tabela de importação OFX">
+            <table>
+              <thead>
+                <tr>
+                  <th><input type="checkbox" aria-label="Selecionar todos" checked /></th>
+                  <th>Data</th>
+                  <th>Descrição original</th>
+                  <th>Descrição personalizada</th>
+                  <th>Categoria</th>
+                  <th>Tipo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" checked aria-label="Selecionar linha 1" /></td>
+                  <td>03/05</td>
+                  <td>PAG*GELATO</td>
+                  <td>Gelato do Pinguim</td>
+                  <td>Alimentação</td>
+                  <td><span class="pill">Despesa</span></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" checked aria-label="Selecionar linha 2" /></td>
+                  <td>05/05</td>
+                  <td>99*DATA</td>
+                  <td>Transporte / 99 Pop</td>
+                  <td>Transporte</td>
+                  <td><span class="pill">Despesa</span></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" checked aria-label="Selecionar linha 3" /></td>
+                  <td>07/05</td>
+                  <td>TED CLIENTE</td>
+                  <td>Recebimento consultoria</td>
+                  <td>Receitas</td>
+                  <td><span class="pill" style="background:rgba(10,138,91,0.12); color:var(--color-accent-strong)">Receita</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="timeline-step" style="height: 100%">
+            <div class="timeline-step__badge">✓</div>
+            <h3>Personalize tudo</h3>
+            <p>
+              Escolha quais lançamentos importar, crie regras para renomear automaticamente descrições
+              repetidas e associe categorias e cartões antes de salvar.
+            </p>
+            <p style="font-weight: 600; margin-top: 0.5rem">
+              Com a importação OFX, o Finance Pro Master mantém seu histórico organizado e pronto para gerar
+              relatórios claros.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="seguranca">
+        <header class="section__header section__header--center">
+          <p class="eyebrow">Segurança e performance</p>
+          <h2>Multi-dispositivos, nuvem e performance para dados financeiros</h2>
+        </header>
+        <div class="security-grid">
+          <article class="security-card">
+            <h3>Dados em Postgres</h3>
+            <p>Operações gravadas direto no banco, sem cache local para saldos e limites críticos.</p>
+          </article>
+          <article class="security-card">
+            <h3>Segurança e criptografia</h3>
+            <p>Tráfego protegido, sessões autenticadas e controles de acesso por usuário.</p>
+          </article>
+          <article class="security-card">
+            <h3>Performance em nuvem</h3>
+            <p>Arquitetura escalável para responder rapidamente a filtros, gráficos e importações.</p>
+          </article>
+          <article class="security-card">
+            <h3>Multi-dispositivos</h3>
+            <p>Acesse do notebook, tablet ou smartphone com layout responsivo e experiência consistente.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--alt" id="cta-final">
+        <div class="cta-final">
+          <p class="eyebrow">Pronto para começar?</p>
+          <h2 style="text-align: center; text-transform: none">
+            Pronto para ter controle total das suas finanças?
+          </h2>
+          <p class="section__subtitle" style="text-align: center">
+            O Finance Pro Master integra contas, cartões, categorias e relatórios em um só lugar, com dados em
+            Postgres e dashboards prontos para ação.
+          </p>
+          <a class="hero__cta" href="https://app.financepromaster.com.br/">Experimentar o Finance Pro Master</a>
         </div>
       </section>
     </main>
