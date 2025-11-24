@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configuração Mercado Pago | FinancePro Master</title>
+    <link rel="stylesheet" href="financepromaster.css" />
+    <script src="admin-mercadopago.js" defer></script>
+  </head>
+  <body>
+    <main class="section">
+      <header class="section__header section__header--center">
+        <p class="eyebrow">Administração</p>
+        <h1>Credenciais do Mercado Pago</h1>
+        <p class="section__subtitle">
+          Altere as chaves usadas pelo backend sem precisar de deploy. Apenas a chave pública será exibida por completo.
+        </p>
+      </header>
+      <div class="admin-form">
+        <form id="mercadopago-config-form" class="payment-form">
+          <div class="payment-form__grid">
+            <label class="payment-form__field">
+              <span>Public Key</span>
+              <input type="text" id="config-public-key" name="publicKey" required />
+            </label>
+            <label class="payment-form__field">
+              <span>Access Token</span>
+              <input type="text" id="config-access-token" name="accessToken" required />
+            </label>
+            <label class="payment-form__field">
+              <span>Modo Sandbox</span>
+              <select id="config-sandbox" name="modoSandbox">
+                <option value="true">Ativo</option>
+                <option value="false">Desativado</option>
+              </select>
+            </label>
+          </div>
+          <div class="payment-form__actions">
+            <button class="btn btn--primary" type="submit">Salvar configuração</button>
+            <p class="payment-form__status" id="config-status" role="status"></p>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
