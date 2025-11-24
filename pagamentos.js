@@ -1,5 +1,6 @@
 function redirecionarParaPagarme(botao) {
   const planoId = botao.dataset.planoId;
+
   const planoSlug = botao.dataset.plano;
   const planoNome = botao.dataset.planoNome;
 
@@ -15,6 +16,7 @@ function redirecionarParaPagarme(botao) {
   if (planoFinal) destino.searchParams.set('plano', planoFinal);
   if (planoNome) destino.searchParams.set('planoNome', planoNome);
   destino.searchParams.set('gateway', 'pagarme');
+
 
   window.location.href = destino.toString();
 }
