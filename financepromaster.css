@@ -3041,3 +3041,133 @@ body.planos .section--alt:first-of-type {
 
   padding-top: 1rem; /* antes provavelmente 6rem ou mais */
 }
+
+/* Páginas legais e de carreira */
+.legal-hero {
+  padding-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+  background: linear-gradient(135deg, rgba(31, 180, 125, 0.08), rgba(11, 87, 64, 0.04));
+}
+
+.legal-hero__content {
+  max-width: 980px;
+  margin: 0 auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  display: grid;
+  gap: 1rem;
+}
+
+.legal-hero__content h1 {
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+}
+
+.legal-hero__content p {
+  color: var(--color-neutral);
+  line-height: 1.7;
+}
+
+.legal-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.legal-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+  padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+}
+
+@media (min-width: 900px) {
+  .legal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.legal-card {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(10, 138, 91, 0.12);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.legal-card h2 {
+  font-size: 1.2rem;
+}
+
+.legal-card p {
+  color: var(--color-neutral);
+  line-height: 1.7;
+}
+
+.legal-list {
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+  color: var(--color-neutral);
+  line-height: 1.6;
+}
+
+.legal-highlight {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 0.75rem;
+}
+
+.legal-callout {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, rgba(231, 242, 255, 0.9), rgba(215, 244, 232, 0.9));
+  border: 1px solid rgba(10, 138, 91, 0.12);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.legal-callout p {
+  color: var(--color-neutral);
+}
+
+.careers-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+}
+
+.career-card {
+  background: #ffffff;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(10, 138, 91, 0.12);
+  padding: 1.25rem;
+  display: grid;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.career-card h3 {
+  font-size: 1.05rem;
+}
+
+.career-card p,
+.career-card li {
+  color: var(--color-neutral);
+  line-height: 1.6;
+}
+
+.career-card ul {
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+}
