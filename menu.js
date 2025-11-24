@@ -1,4 +1,6 @@
 (function () {
+  const BASE_SITE_VERSION = '1.01';
+
   const MENU_TEMPLATE = `
     <header class="topbar" aria-label="Barra de navegação principal">
       <a class="topbar__logo" href="index.html">
@@ -104,9 +106,60 @@
     highlightCurrent(menu);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', mountMenu);
-  } else {
+  function buildVersionMetadata() {
+    const lastUpdated = new Date(document.lastModified);
+
+    if (Number.isNaN(lastUpdated.getTime())) {
+      return {
+        build: `${BASE_SITE_VERSION}.000000000000`,
+        label: `Versão ${BASE_SITE_VERSION}`,
+      };
+    }
+
+    const stamp = `${lastUpdated.getFullYear()}${String(lastUpdated.getMonth() + 1).padStart(2, '0')}${String(lastUpdated.getDate()).padStart(2, '0')}${String(lastUpdated.getHours()).padStart(2, '0')}${String(lastUpdated.getMinutes()).padStart(2, '0')}`;
+
+    const updatedDate = lastUpdated.toLocaleDateString('pt-BR', {
+      timeZone: 'America/Sao_Paulo',
+    });
+
+    const updatedTime = lastUpdated.toLocaleTimeString('pt-BR', {
+      timeZone: 'America/Sao_Paulo',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    return {
+      build: `${BASE_SITE_VERSION}.${stamp}`,
+      label: `Versão ${BASE_SITE_VERSION}.${stamp} • Atualizado em ${updatedDate} às ${updatedTime}`,
+    };
+  }
+
+  function injectSiteVersion() {
+    const footer = document.querySelector('.footer__bottom');
+
+    if (!footer) {
+      return;
+    }
+
+    const versionInfo = buildVersionMetadata();
+    const versionElement = footer.querySelector('.footer__version') || document.createElement('p');
+
+    versionElement.className = 'footer__version';
+    versionElement.textContent = versionInfo.label;
+
+    if (!versionElement.isConnected) {
+      footer.appendChild(versionElement);
+    }
+  }
+
+  function initializeSiteShell() {
     mountMenu();
+    injectSiteVersion();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeSiteShell);
+  } else {
+    initializeSiteShell();
   }
 })();
