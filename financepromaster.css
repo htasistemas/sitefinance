@@ -2703,6 +2703,16 @@ main {
   font-size: 1rem;
 }
 
+.form__feedback {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-success);
+}
+
+.form__feedback--error {
+  color: var(--color-accent);
+}
+
 .form input::placeholder,
 .form textarea::placeholder {
   color: rgba(111, 138, 135, 0.6);
