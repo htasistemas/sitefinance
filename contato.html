@@ -91,7 +91,7 @@
             >
           </article>
         </div>
-        <form class="form">
+        <form class="form" id="contact-form" novalidate>
           <div class="form__group">
             <label for="nome">Nome</label>
             <input id="nome" name="nome" type="text" placeholder="Como devemos chamar você?" required />
@@ -110,6 +110,7 @@
             ></textarea>
           </div>
           <button class="btn btn--primary" type="submit">Enviar mensagem</button>
+          <p class="form__feedback" id="contact-feedback" role="status" aria-live="polite"></p>
         </form>
       </section>
 
@@ -187,5 +188,57 @@
         </div>
       </div>
     </footer>
+    <script>
+      (function () {
+        const form = document.getElementById('contact-form');
+        const feedback = document.getElementById('contact-feedback');
+
+        if (!form) {
+          return;
+        }
+
+        form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          const formData = new FormData(form);
+          const nome = String(formData.get('nome') || '').trim();
+          const email = String(formData.get('email') || '').trim();
+          const mensagem = String(formData.get('mensagem') || '').trim();
+
+          if (feedback) {
+            feedback.textContent = 'Enviando sua mensagem...';
+          }
+
+          try {
+            const response = await fetch('/api/contato', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ nome, email, mensagem }),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+              throw new Error(result.error || 'Não foi possível enviar sua mensagem.');
+            }
+
+            if (feedback) {
+              feedback.textContent = 'Mensagem enviada com sucesso! Em breve entraremos em contato.';
+              feedback.classList.remove('form__feedback--error');
+            }
+
+            form.reset();
+          } catch (error) {
+            console.error(error);
+            if (feedback) {
+              feedback.textContent = 'Não foi possível enviar sua mensagem agora. Tente novamente em instantes.';
+              feedback.classList.add('form__feedback--error');
+            }
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
