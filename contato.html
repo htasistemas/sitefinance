@@ -107,6 +107,8 @@
               name="mensagem"
               rows="4"
               placeholder="Conte um pouco sobre seus desafios financeiros"
+              minlength="10"
+              required
             ></textarea>
           </div>
           <button class="btn btn--primary" type="submit">Enviar mensagem</button>
@@ -205,8 +207,17 @@
           const email = String(formData.get('email') || '').trim();
           const mensagem = String(formData.get('mensagem') || '').trim();
 
+          if (!nome || !email || !mensagem) {
+            if (feedback) {
+              feedback.textContent = 'Por favor, preencha nome, e-mail e mensagem antes de enviar.';
+              feedback.classList.add('form__feedback--error');
+            }
+            return;
+          }
+
           if (feedback) {
             feedback.textContent = 'Enviando sua mensagem...';
+            feedback.classList.remove('form__feedback--error');
           }
 
           try {
@@ -218,7 +229,7 @@
               body: JSON.stringify({ nome, email, mensagem }),
             });
 
-            const result = await response.json();
+            const result = await response.json().catch(() => ({}));
 
             if (!response.ok) {
               throw new Error(result.error || 'Não foi possível enviar sua mensagem.');
