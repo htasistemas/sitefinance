@@ -105,19 +105,8 @@
     highlightCurrent(menu);
   }
 
-  function buildVersionMetadata() {
+  function buildVersionMetadata(lastUpdated) {
     const siteVersion = BASE_SITE_VERSION;
-    const lastUpdated = new Date(document.lastModified);
-
-    if (Number.isNaN(lastUpdated.getTime())) {
-      return {
-        build: `${siteVersion}.000000000000`,
-        label: `Versão ${siteVersion}`,
-      };
-    }
-
-    const stamp = `${lastUpdated.getFullYear()}${String(lastUpdated.getMonth() + 1).padStart(2, '0')}${String(lastUpdated.getDate()).padStart(2, '0')}${String(lastUpdated.getHours()).padStart(2, '0')}${String(lastUpdated.getMinutes()).padStart(2, '0')}`;
-
     const updatedDate = lastUpdated.toLocaleDateString('pt-BR', {
       timeZone: 'America/Sao_Paulo',
     });
@@ -128,20 +117,57 @@
       minute: '2-digit',
     });
 
+    const stamp = `${lastUpdated.getFullYear()}${String(lastUpdated.getMonth() + 1).padStart(2, '0')}${String(lastUpdated.getDate()).padStart(2, '0')}${String(lastUpdated.getHours()).padStart(2, '0')}${String(lastUpdated.getMinutes()).padStart(2, '0')}`;
+
     return {
       build: `${siteVersion}.${stamp}`,
       label: `Versão ${siteVersion} • Atualizado em ${updatedDate} às ${updatedTime}`,
     };
   }
 
-  function injectSiteVersion() {
+  async function resolveLastUpdated() {
+    const configTimestamp = window.SITE_CONFIG && window.SITE_CONFIG.buildTimestamp;
+
+    if (configTimestamp) {
+      const parsed = new Date(configTimestamp);
+      if (!Number.isNaN(parsed.getTime())) {
+        return parsed;
+      }
+    }
+
+    const configScript = document.querySelector('script[src$="site-config.js"]');
+    if (configScript) {
+      try {
+        const response = await fetch(configScript.src, { method: 'HEAD', cache: 'no-store' });
+        const lastModified = response.headers.get('last-modified');
+        if (lastModified) {
+          const parsed = new Date(lastModified);
+          if (!Number.isNaN(parsed.getTime())) {
+            return parsed;
+          }
+        }
+      } catch (error) {
+        // Mantém o fallback caso o servidor não suporte HEAD ou bloqueie a requisição.
+      }
+    }
+
+    const pageModified = new Date(document.lastModified);
+    if (!Number.isNaN(pageModified.getTime())) {
+      return pageModified;
+    }
+
+    return new Date();
+  }
+
+  async function injectSiteVersion() {
     const footer = document.querySelector('.footer__bottom');
 
     if (!footer) {
       return;
     }
 
-    const versionInfo = buildVersionMetadata();
+    const lastUpdated = await resolveLastUpdated();
+    const versionInfo = buildVersionMetadata(lastUpdated);
     const versionElement = footer.querySelector('.footer__version') || document.createElement('p');
 
     versionElement.className = 'footer__version';
