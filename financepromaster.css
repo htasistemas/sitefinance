@@ -2519,6 +2519,27 @@ main {
   gap: 1rem;
 }
 
+.payment__feedback {
+  padding: 0.75rem 1rem;
+  border-radius: 0.8rem;
+  background: rgba(255, 189, 89, 0.12);
+  color: #b05b00;
+  font-weight: 600;
+  border: 1px solid rgba(255, 189, 89, 0.5);
+}
+
+.payment__feedback[data-state='error'] {
+  background: rgba(240, 60, 60, 0.08);
+  color: #8a1111;
+  border-color: rgba(240, 60, 60, 0.35);
+}
+
+.payment__feedback[data-state='success'] {
+  background: rgba(10, 138, 91, 0.08);
+  color: #0a8a5b;
+  border-color: rgba(10, 138, 91, 0.35);
+}
+
 .payment__form label {
   display: grid;
   gap: 0.4rem;
