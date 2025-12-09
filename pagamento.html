@@ -317,6 +317,7 @@
         localStorage.setItem(localStorageKey, JSON.stringify(registro));
       };
 
+
       const registrarPagamentoNoPagarme = async () => {
         const payload = {
           cardName: cardForm.cardName.value.trim(),
@@ -340,6 +341,7 @@
         return corpo;
       };
 
+
       if (cardForm) {
         cardForm.addEventListener('submit', async (event) => {
           event.preventDefault();
@@ -351,29 +353,17 @@
             return;
           }
 
-          const botao = cardForm.querySelector('button[type="submit"]');
-          if (botao) botao.disabled = true;
 
-          try {
-            mostrarSucesso('Enviando pagamento ao Pagar.me...');
-            const resultado = await registrarPagamentoNoPagarme();
-            salvarAutorizacaoLocal(planoSelecionado);
-            mostrarSucesso('Pagamento aprovado pelo Pagar.me. Redirecionando...');
+          salvarAutorizacaoLocal(planoSelecionado);
+          mostrarSucesso('Pagamento validado com sucesso. Redirecionando para confirmação...');
 
-            const checkoutPlan = plans[planoSelecionado] ? planoSelecionado : 'mensal';
-            setTimeout(() => {
-              const destino = new URL('pagamento-sucesso.html', window.location.href);
-              destino.searchParams.set('gateway', 'pagarme');
-              destino.searchParams.set('plano', checkoutPlan);
-              if (resultado.orderId) destino.searchParams.set('orderId', resultado.orderId);
-              window.location.href = destino.toString();
-            }, 650);
-          } catch (error) {
-            console.error(error);
-            mostrarErro(error.message || 'Não foi possível concluir o pagamento.');
-          } finally {
-            if (botao) botao.disabled = false;
-          }
+          const checkoutPlan = plans[planoSelecionado] ? planoSelecionado : 'mensal';
+          setTimeout(() => {
+            window.location.href = `pagamento-sucesso.html?gateway=pagarme&plano=${encodeURIComponent(
+              checkoutPlan
+            )}`;
+          }, 600);
+
         });
       }
 

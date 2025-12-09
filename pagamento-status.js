@@ -11,10 +11,12 @@ function obterPlanoSelecionado() {
   return params.get('plano');
 }
 
+
 function obterGatewaySelecionado() {
   const params = new URLSearchParams(window.location.search);
   return params.get('gateway');
 }
+
 
 function carregarStatusLocal(mensagemEl, detalhesEl) {
   const plano = obterPlanoSelecionado();
@@ -92,6 +94,16 @@ async function carregarStatus() {
       if (detalhesEl) detalhesEl.textContent = error.message;
       carregarStatusLocal(mensagemEl, detalhesEl);
     }
+
+  } catch (error) {
+    if (mensagemEl) mensagemEl.textContent = 'Não foi possível validar a assinatura.';
+    if (detalhesEl) detalhesEl.textContent = error.message;
+    carregarStatusLocal(mensagemEl, detalhesEl);
+  }
+
+  if (!assinaturaId) {
+    carregarStatusLocal(mensagemEl, detalhesEl);
+
   }
 }
 
