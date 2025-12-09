@@ -78,6 +78,7 @@
                 <p>Pague em até 12x sem juros e ative imediatamente o acesso.</p>
               </header>
               <form class="payment__form" aria-label="Formulário de pagamento com cartão">
+                <div class="payment__feedback" data-payment-feedback aria-live="polite"></div>
                 <label>
                   Nome impresso no cartão
                   <input type="text" name="cardName" placeholder="Nome completo" required />
@@ -228,12 +229,151 @@
 
       const gateway = params.get('gateway');
       const pagarmeMensagem = gateway === 'pagarme' ? ' via Pagar.me' : '';
+      const backendBase = window.BACKEND_BASE_URL || '';
       const cardForm = document.querySelector('#cartao .payment__form');
+      const feedbackEl = document.querySelector('[data-payment-feedback]');
+
+      const localStorageKey = 'financepro.assinatura';
+
+      const limparFeedback = () => {
+        if (feedbackEl) {
+          feedbackEl.textContent = '';
+          feedbackEl.removeAttribute('data-state');
+        }
+      };
+
+      const mostrarErro = (mensagem) => {
+        if (feedbackEl) {
+          feedbackEl.textContent = mensagem;
+          feedbackEl.setAttribute('data-state', 'error');
+        } else {
+          alert(mensagem);
+        }
+      };
+
+      const mostrarSucesso = (mensagem) => {
+        if (feedbackEl) {
+          feedbackEl.textContent = mensagem;
+          feedbackEl.setAttribute('data-state', 'success');
+        }
+      };
+
+      const somenteNumeros = (valor) => valor.replace(/\D+/g, '');
+
+      const validarLuhn = (numero) => {
+        const digits = somenteNumeros(numero);
+        let sum = 0;
+        let shouldDouble = false;
+        for (let i = digits.length - 1; i >= 0; i -= 1) {
+          let digit = parseInt(digits.charAt(i), 10);
+          if (shouldDouble) {
+            digit *= 2;
+            if (digit > 9) digit -= 9;
+          }
+          sum += digit;
+          shouldDouble = !shouldDouble;
+        }
+        return sum % 10 === 0;
+      };
+
+      const validarCamposCartao = (form) => {
+        const nome = form.cardName.value.trim();
+        const numero = form.cardNumber.value.trim();
+        const validade = form.cardExpiry.value.trim();
+        const cvv = form.cardCvv.value.trim();
+        const cpf = form.cpf.value.trim();
+
+        if (nome.length < 8) return 'Informe o nome completo do titular.';
+        const numeroLimpo = somenteNumeros(numero);
+        if (numeroLimpo.length < 13 || numeroLimpo.length > 19 || !validarLuhn(numeroLimpo)) {
+          return 'Número do cartão inválido.';
+        }
+
+        const validadeMatch = validade.match(/^(\d{2})\/(\d{2})$/);
+        if (!validadeMatch) return 'Informe a validade no formato MM/AA.';
+        const mes = parseInt(validadeMatch[1], 10);
+        const ano = parseInt(`20${validadeMatch[2]}`, 10);
+        if (mes < 1 || mes > 12) return 'Mês de validade inválido.';
+        const agora = new Date();
+        const dataValidade = new Date(ano, mes, 0);
+        if (dataValidade < new Date(agora.getFullYear(), agora.getMonth(), 1)) {
+          return 'O cartão está vencido.';
+        }
+
+        if (!/^\d{3,4}$/.test(cvv)) return 'Código de segurança inválido.';
+
+        const cpfLimpo = somenteNumeros(cpf);
+        if (cpfLimpo.length !== 11) return 'CPF inválido. Informe os 11 dígitos.';
+
+        return '';
+      };
+
+      const salvarAutorizacaoLocal = (plano) => {
+        const registro = {
+          plano,
+          status: 'validado',
+          validadoEm: new Date().toISOString(),
+        };
+        localStorage.setItem(localStorageKey, JSON.stringify(registro));
+      };
+
+      const registrarPagamentoNoPagarme = async () => {
+        const payload = {
+          cardName: cardForm.cardName.value.trim(),
+          cardNumber: cardForm.cardNumber.value.trim(),
+          cardExpiry: cardForm.cardExpiry.value.trim(),
+          cardCvv: cardForm.cardCvv.value.trim(),
+          cpf: cardForm.cpf.value.trim(),
+          plano: planoSelecionado,
+        };
+
+        const resposta = await fetch(`${backendBase}/api/pagamentos/pagarme/cartao`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const corpo = await resposta.json();
+        if (!resposta.ok) {
+          throw new Error(corpo.mensagem || corpo.detalhe || 'Não foi possível registrar o pagamento.');
+        }
+        return corpo;
+      };
+
       if (cardForm) {
-        cardForm.addEventListener('submit', (event) => {
+        cardForm.addEventListener('submit', async (event) => {
           event.preventDefault();
-          const checkoutPlan = plans[planoSelecionado] ? planoSelecionado : 'mensal';
-          window.location.href = `pagamento-sucesso.html?gateway=pagarme&plano=${encodeURIComponent(checkoutPlan)}`;
+          limparFeedback();
+
+          const erro = validarCamposCartao(cardForm);
+          if (erro) {
+            mostrarErro(erro);
+            return;
+          }
+
+          const botao = cardForm.querySelector('button[type="submit"]');
+          if (botao) botao.disabled = true;
+
+          try {
+            mostrarSucesso('Enviando pagamento ao Pagar.me...');
+            const resultado = await registrarPagamentoNoPagarme();
+            salvarAutorizacaoLocal(planoSelecionado);
+            mostrarSucesso('Pagamento aprovado pelo Pagar.me. Redirecionando...');
+
+            const checkoutPlan = plans[planoSelecionado] ? planoSelecionado : 'mensal';
+            setTimeout(() => {
+              const destino = new URL('pagamento-sucesso.html', window.location.href);
+              destino.searchParams.set('gateway', 'pagarme');
+              destino.searchParams.set('plano', checkoutPlan);
+              if (resultado.orderId) destino.searchParams.set('orderId', resultado.orderId);
+              window.location.href = destino.toString();
+            }, 650);
+          } catch (error) {
+            console.error(error);
+            mostrarErro(error.message || 'Não foi possível concluir o pagamento.');
+          } finally {
+            if (botao) botao.disabled = false;
+          }
         });
       }
 
