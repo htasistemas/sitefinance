@@ -229,6 +229,7 @@
 
       const gateway = params.get('gateway');
       const pagarmeMensagem = gateway === 'pagarme' ? ' via Pagar.me' : '';
+      const backendBase = window.BACKEND_BASE_URL || '';
       const cardForm = document.querySelector('#cartao .payment__form');
       const feedbackEl = document.querySelector('[data-payment-feedback]');
 
@@ -316,8 +317,33 @@
         localStorage.setItem(localStorageKey, JSON.stringify(registro));
       };
 
+
+      const registrarPagamentoNoPagarme = async () => {
+        const payload = {
+          cardName: cardForm.cardName.value.trim(),
+          cardNumber: cardForm.cardNumber.value.trim(),
+          cardExpiry: cardForm.cardExpiry.value.trim(),
+          cardCvv: cardForm.cardCvv.value.trim(),
+          cpf: cardForm.cpf.value.trim(),
+          plano: planoSelecionado,
+        };
+
+        const resposta = await fetch(`${backendBase}/api/pagamentos/pagarme/cartao`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const corpo = await resposta.json();
+        if (!resposta.ok) {
+          throw new Error(corpo.mensagem || corpo.detalhe || 'Não foi possível registrar o pagamento.');
+        }
+        return corpo;
+      };
+
+
       if (cardForm) {
-        cardForm.addEventListener('submit', (event) => {
+        cardForm.addEventListener('submit', async (event) => {
           event.preventDefault();
           limparFeedback();
 
@@ -326,6 +352,7 @@
             mostrarErro(erro);
             return;
           }
+
 
           salvarAutorizacaoLocal(planoSelecionado);
           mostrarSucesso('Pagamento validado com sucesso. Redirecionando para confirmação...');
@@ -336,6 +363,7 @@
               checkoutPlan
             )}`;
           }, 600);
+
         });
       }
 
