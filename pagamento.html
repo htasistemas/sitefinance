@@ -77,6 +77,10 @@
                 <h3>Cartão de crédito</h3>
                 <p>Pague em até 12x sem juros e ative imediatamente o acesso.</p>
               </header>
+              <p class="payment__note" data-card-warning hidden>
+                Pagamentos com cartão de crédito estão temporariamente indisponíveis. Utilize Pix ou depósito
+                bancário para concluir sua assinatura.
+              </p>
               <form class="payment__form" aria-label="Formulário de pagamento com cartão">
                 <div class="payment__feedback" data-payment-feedback aria-live="polite"></div>
                 <label>
@@ -192,6 +196,8 @@
         }
       };
 
+      const cardPaymentsEnabled = false;
+
       const params = new URLSearchParams(window.location.search);
       const planoPorId = {
         1: 'mensal',
@@ -232,6 +238,7 @@
       const backendBase = window.BACKEND_BASE_URL || '';
       const cardForm = document.querySelector('#cartao .payment__form');
       const feedbackEl = document.querySelector('[data-payment-feedback]');
+      const cardWarning = document.querySelector('[data-card-warning]');
 
       const localStorageKey = 'financepro.assinatura';
 
@@ -343,28 +350,44 @@
 
 
       if (cardForm) {
-        cardForm.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          limparFeedback();
-
-          const erro = validarCamposCartao(cardForm);
-          if (erro) {
-            mostrarErro(erro);
-            return;
+        if (!cardPaymentsEnabled) {
+          const cardSection = document.querySelector('#cartao');
+          if (cardWarning) cardWarning.hidden = false;
+          if (feedbackEl) {
+            mostrarErro('Pagamentos com cartão de crédito estão temporariamente indisponíveis.');
           }
+          cardForm.querySelectorAll('input, button').forEach((elemento) => {
+            elemento.disabled = true;
+          });
+          const submitButton = cardForm.querySelector('button[type="submit"]');
+          if (submitButton) submitButton.textContent = 'Pagamento com cartão indisponível';
+          if (cardSection) {
+            cardSection.setAttribute('aria-disabled', 'true');
+          }
+        } else {
+          cardForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            limparFeedback();
+
+            const erro = validarCamposCartao(cardForm);
+            if (erro) {
+              mostrarErro(erro);
+              return;
+            }
 
 
-          salvarAutorizacaoLocal(planoSelecionado);
-          mostrarSucesso('Pagamento validado com sucesso. Redirecionando para confirmação...');
+            salvarAutorizacaoLocal(planoSelecionado);
+            mostrarSucesso('Pagamento validado com sucesso. Redirecionando para confirmação...');
 
-          const checkoutPlan = plans[planoSelecionado] ? planoSelecionado : 'mensal';
-          setTimeout(() => {
-            window.location.href = `pagamento-sucesso.html?gateway=pagarme&plano=${encodeURIComponent(
-              checkoutPlan
-            )}`;
-          }, 600);
+            const checkoutPlan = plans[planoSelecionado] ? planoSelecionado : 'mensal';
+            setTimeout(() => {
+              window.location.href = `pagamento-sucesso.html?gateway=pagarme&plano=${encodeURIComponent(
+                checkoutPlan
+              )}`;
+            }, 600);
 
-        });
+          });
+        }
       }
 
       const pixButton = document.querySelector('#pix button');
