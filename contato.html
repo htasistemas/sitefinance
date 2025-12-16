@@ -61,7 +61,8 @@
       <section class="section section--alt" id="contato">
         <header class="section__header section__header--center">
           <p class="eyebrow">Contato</p>
-          <h2>Envie sua mensagem</h2>
+          <h2>Fale conosco</h2>
+          <p>Escolha o canal que melhor funciona para você e fale diretamente com nosso time.</p>
         </header>
         <div class="contact__grid">
           <article class="contact-card contact-card--faq">
@@ -81,7 +82,9 @@
           </article>
           <article class="contact-card">
             <h3>WhatsApp Business</h3>
-            <p>Para um atendimento mais ágil em horário comercial.</p>
+            <p>
+              Para um atendimento mais ágil em horário comercial. Respostas prioritárias para assinantes.
+            </p>
             <a
               class="contact-card__link"
               href="https://wa.me/5534992693522"
@@ -90,35 +93,19 @@
               >Iniciar conversa →</a
             >
           </article>
+          <article class="contact-card">
+            <h3>Suporte dedicado</h3>
+            <p>Use o e-mail oficial para solicitações técnicas e acompanhamento de chamados.</p>
+            <a class="contact-card__link" href="mailto:suporte@financepromaster.com"
+              >suporte@financepromaster.com</a
+            >
+          </article>
         </div>
-        <form class="form" id="contact-form" novalidate>
-          <div class="form__group">
-            <label for="nome">Nome</label>
-            <input id="nome" name="nome" type="text" placeholder="Como devemos chamar você?" required />
-          </div>
-          <div class="form__group">
-            <label for="email">E-mail principal</label>
-            <input id="email" name="email" type="email" placeholder="voce@email.com" required />
-          </div>
-          <div class="form__group">
-            <label for="mensagem">Mensagem</label>
-            <textarea
-              id="mensagem"
-              name="mensagem"
-              rows="4"
-              placeholder="Conte um pouco sobre seus desafios financeiros"
-              minlength="10"
-              required
-            ></textarea>
-          </div>
-          <button class="btn btn--primary" type="submit">Enviar mensagem</button>
-          <p class="form__feedback" id="contact-feedback" role="status" aria-live="polite"></p>
-        </form>
       </section>
 
       <section class="section" id="suporte-canais">
         <header class="section__header section__header--center">
-          <h2>Outros canais de atendimento</h2>
+          <h2>Detalhes de atendimento</h2>
         </header>
         <div class="grid grid--two">
           <article class="card card--accent">
@@ -130,11 +117,10 @@
             <a class="card__link" href="planos.html">Ver planos com suporte premium</a>
           </article>
           <article class="card card--accent">
-            <h3>E-mail dedicado</h3>
+            <h3>Horários e prazos</h3>
             <p>
-              Preferiu escrever com calma? Envie suas dúvidas para
-              <a href="mailto:suporte@financepromaster.com">suporte@financepromaster.com</a> e
-              receba retorno em até 24h úteis.
+              Atendimento comercial de segunda a sexta, das 9h às 19h (exceto feriados).
+              E-mails são respondidos em até 24h úteis e contatos via WhatsApp recebem confirmação imediata.
             </p>
             <a class="card__link" href="blog.html">Acessar materiais de apoio</a>
           </article>
@@ -190,66 +176,5 @@
         </div>
       </div>
     </footer>
-    <script>
-      (function () {
-        const form = document.getElementById('contact-form');
-        const feedback = document.getElementById('contact-feedback');
-
-        if (!form) {
-          return;
-        }
-
-        form.addEventListener('submit', async (event) => {
-          event.preventDefault();
-
-          const formData = new FormData(form);
-          const nome = String(formData.get('nome') || '').trim();
-          const email = String(formData.get('email') || '').trim();
-          const mensagem = String(formData.get('mensagem') || '').trim();
-
-          if (!nome || !email || !mensagem) {
-            if (feedback) {
-              feedback.textContent = 'Por favor, preencha nome, e-mail e mensagem antes de enviar.';
-              feedback.classList.add('form__feedback--error');
-            }
-            return;
-          }
-
-          if (feedback) {
-            feedback.textContent = 'Enviando sua mensagem...';
-            feedback.classList.remove('form__feedback--error');
-          }
-
-          try {
-            const response = await fetch('/api/contato', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ nome, email, mensagem }),
-            });
-
-            const result = await response.json().catch(() => ({}));
-
-            if (!response.ok) {
-              throw new Error(result.error || 'Não foi possível enviar sua mensagem.');
-            }
-
-            if (feedback) {
-              feedback.textContent = 'Mensagem enviada com sucesso! Em breve entraremos em contato.';
-              feedback.classList.remove('form__feedback--error');
-            }
-
-            form.reset();
-          } catch (error) {
-            console.error(error);
-            if (feedback) {
-              feedback.textContent = 'Não foi possível enviar sua mensagem agora. Tente novamente em instantes.';
-              feedback.classList.add('form__feedback--error');
-            }
-          }
-        });
-      })();
-    </script>
   </body>
 </html>
