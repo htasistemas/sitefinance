@@ -6,7 +6,7 @@ type PlanoSlug = 'mensal' | 'semestral' | 'anual' | 'teste';
 const router = Router();
 
 const planosValores: Record<PlanoSlug, { descricao: string; valorCentavos: number }> = {
-  mensal: { descricao: 'Assinatura mensal', valorCentavos: 4990 },
+  mensal: { descricao: 'Assinatura mensal', valorCentavos: 3990 },
   semestral: { descricao: 'Assinatura semestral', valorCentavos: 2990 * 6 },
   anual: { descricao: 'Assinatura anual', valorCentavos: 1990 * 12 },
   teste: { descricao: 'Teste de 7 dias', valorCentavos: 0 },

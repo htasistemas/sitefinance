@@ -68,16 +68,56 @@
           padding-top: 1rem;
         }
       }
+      /* Ajuste adicional para aproximar o título do topo */
+      body.planos .section--highlight#planos {
+        padding-block: 0 !important;
+      }
+
+      body.planos .section--highlight#planos .section__header {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+      }
+
+      @media (max-width: 768px) {
+        body.planos .section--highlight#planos {
+          padding-block: 0 !important;
+        }
+      }
+
+      body.planos main {
+        gap: 0;
+      }
+
+      body.planos .topbar {
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+      }
+
+      @media (max-width: 768px) {
+        body.planos .topbar {
+          padding-top: 0.2rem;
+          padding-bottom: 0.2rem;
+        }
+      }
+
+      body.planos .topbar__logo-mark {
+        width: 2.1rem;
+        height: 2.1rem;
+      }
+
+      body.planos .topbar__logo-mark svg {
+        width: 1.35rem;
+        height: 1.35rem;
+      }
+
+      body.planos .topbar__logo-text {
+        gap: 0.15rem;
+      }
     </style>
       <section class="section section--highlight" id="planos">
         <header class="section__header section__header--center">
-          <p class="eyebrow">Assinaturas flexíveis</p>
           <h2>Planos pensados para cada estágio da sua jornada financeira</h2>
         </header>
-        <p class="plans__notice">
-          Pagamentos com cartão de crédito estão temporariamente indisponíveis. Conclua sua assinatura via Pix ou
-          depósito bancário.
-        </p>
         <div class="pricing-grid">
           <article class="plan-card">
             <header class="plan-card__header">
@@ -89,13 +129,12 @@
               <span class="plan-card__currency">R$</span>
               <span class="plan-card__amount">0</span>
               <span class="plan-card__cents">,00</span>
-              <span class="plan-card__period">para teste 10 dias</span>
+              <span class="plan-card__period">para teste 15 dias</span>
             </p>
             <ul class="plan-card__features">
-              <li>Dashboards essenciais e acompanhamento de metas.</li>
               <li>Acesso total a todas as funcionalidades do sistema.</li>
             </ul>
-            <a class="btn btn--ghost" href="https://app.financepromaster.com.br/"><center>Criar conta gratuita</center></a>
+            <a class="btn btn--ghost" href="https://app.financepromaster.com.br/auth?plano=teste"><center>Criar conta gratuita</center></a>
 
           </article>
 
@@ -107,25 +146,24 @@
             </header>
             <p class="plan-card__price">
               <span class="plan-card__currency">R$</span>
-              <span class="plan-card__amount">49</span>
+              <span class="plan-card__amount">39</span>
               <span class="plan-card__cents">,90</span>
               <span class="plan-card__period">por mês</span>
             </p>
             <ul class="plan-card__features">
-              <li>Dashboards essenciais e acompanhamento de metas.</li>
               <li>Acesso total a todas as funcionalidades do sistema.</li>
-              <li>Prioridade em novas implementações.</li>
-
             </ul>
-            <button
-              class="btn btn--primary js-pagarme"
-              type="button"
-              data-plano-id="1"
-              data-plano="mensal"
-              data-plano-nome="Plano Mensal"
-            >
-              Selecionar plano para pagar via Pix ou depósito
-            </button>
+            <div class="plan-card__actions">
+              <button
+                class="btn btn--primary js-infinitepay"
+                type="button"
+                data-plano-id="1"
+                data-plano="mensal"
+                data-periodicidade="MENSAL"
+              >
+                Acessar sistema para pagar
+              </button>
+            </div>
           </article>
 
           <article class="plan-card plan-card--featured">
@@ -143,19 +181,19 @@
             </p>
             <p class="plan-card__note">Total em 6 meses: R$ 179,40</p>
             <ul class="plan-card__features">
-              <li>Dashboards essenciais e acompanhamento de metas.</li>
               <li>Acesso total a todas as funcionalidades do sistema.</li>
-              <li>Prioridade em novas implementações.</li>
             </ul>
-            <button
-              class="btn btn--primary js-pagarme"
-              type="button"
-              data-plano-id="2"
-              data-plano="semestral"
-              data-plano-nome="Plano Semestral"
-            >
-              Selecionar plano para pagar via Pix ou depósito
-            </button>
+            <div class="plan-card__actions">
+              <button
+                class="btn btn--primary js-infinitepay"
+                type="button"
+                data-plano-id="2"
+                data-plano="semestral"
+                data-periodicidade="SEMESTRAL"
+              >
+                Acessar sistema para pagar
+              </button>
+            </div>
           </article>
 
           <article class="plan-card">
@@ -172,23 +210,23 @@
             </p>
             <p class="plan-card__note">Total no ano: R$ 238,80</p>
             <ul class="plan-card__features">
-              <li>Dashboards essenciais e acompanhamento de metas.</li>
               <li>Acesso total a todas as funcionalidades do sistema.</li>
-              <li>Prioridade em novas implementações.</li>
             </ul>
-            <button
-              class="btn btn--ghost js-pagarme"
-              type="button"
-              data-plano-id="3"
-              data-plano="anual"
-              data-plano-nome="Plano Anual"
-            >
-              Selecionar plano para pagar via Pix ou depósito
-            </button>
+            <div class="plan-card__actions">
+              <button
+                class="btn btn--primary js-infinitepay"
+                type="button"
+                data-plano-id="3"
+                data-plano="anual"
+                data-periodicidade="ANUAL"
+              >
+                Acessar sistema para pagar
+              </button>
+            </div>
           </article>
         </div>
         <p class="plans__notice">
-          Comece pelo teste gratuito de 10 dias. Você só será cobrado se optar por continuar após o período
+          Comece pelo teste gratuito de 15 dias. Você só será cobrado se optar por continuar após o período
           de degustação e poderá cancelar diretamente no painel a qualquer momento.
         </p>
       </section>

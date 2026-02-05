@@ -35,14 +35,33 @@
       }
 
       /* Hero */
-      .feature-hero {
+      body.funcionalidades .section.feature-hero {
         position: relative;
         overflow: hidden;
+        padding-top: 0;
+        padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
+      }
+
+      .feature-hero .section__header {
+        margin-top: 0;
+      }
+
+      .feature-hero .section__header .eyebrow {
+        margin-top: 0;
+      }
+
+      .feature-hero .hero__content {
+        margin-top: 0;
       }
 
       .feature-hero .section__header {
         text-align: left;
         max-width: 40rem;
+      }
+
+      .feature-hero .section__header h1 {
+        font-size: clamp(2rem, 3.2vw, 2.75rem);
+        line-height: 1.15;
       }
 
       .feature-hero .hero__grid {
@@ -89,6 +108,7 @@
         position: relative;
         background: var(--color-primary);
         border-radius: 22px;
+        margin-top: 1rem;
         padding: 1.5rem;
         box-shadow: var(--shadow-strong);
         border: 1px solid var(--color-border);
@@ -537,7 +557,7 @@
     <main>
       <section class="section feature-hero" id="dashboard">
         <div class="hero__grid">
-          <div>
+          <div class="hero__content">
             <header class="section__header">
               <p class="eyebrow">Funcionalidades</p>
               <h1>Tudo o que você precisa para dominar suas finanças em um único lugar.</h1>

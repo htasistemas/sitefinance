@@ -72,44 +72,6 @@
           </article>
 
           <section class="payment__methods" aria-label="Opções de pagamento">
-            <article class="payment__method" id="cartao">
-              <header>
-                <h3>Cartão de crédito</h3>
-                <p>Pague em até 12x sem juros e ative imediatamente o acesso.</p>
-              </header>
-              <p class="payment__note" data-card-warning hidden>
-                Pagamentos com cartão de crédito estão temporariamente indisponíveis. Utilize Pix ou depósito
-                bancário para concluir sua assinatura.
-              </p>
-              <form class="payment__form" aria-label="Formulário de pagamento com cartão">
-                <div class="payment__feedback" data-payment-feedback aria-live="polite"></div>
-                <label>
-                  Nome impresso no cartão
-                  <input type="text" name="cardName" placeholder="Nome completo" required />
-                </label>
-                <label>
-                  Número do cartão
-                  <input type="text" name="cardNumber" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000" required />
-                </label>
-                <div class="payment__form-row">
-                  <label>
-                    Validade
-                    <input type="text" name="cardExpiry" inputmode="numeric" maxlength="5" placeholder="MM/AA" required />
-                  </label>
-                  <label>
-                    CVV
-                    <input type="text" name="cardCvv" inputmode="numeric" maxlength="4" placeholder="123" required />
-                  </label>
-                </div>
-                <label>
-                  CPF do titular
-                  <input type="text" name="cpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" required />
-                </label>
-                <button type="submit" class="btn btn--primary">Pagar com cartão</button>
-                <p class="payment__note">A confirmação é enviada por e-mail em até 5 minutos.</p>
-              </form>
-            </article>
-
             <article class="payment__method" id="pix">
               <header>
                 <h3>Pix instantâneo</h3>
@@ -121,9 +83,29 @@
                   aleatória para concluir a transferência.
                 </p>
                 <button class="btn btn--ghost" type="button">Gerar QR Code Pix</button>
+                <figure class="payment__pix-qr" hidden>
+                  <img alt="QR Code Pix" />
+                  <figcaption>Escaneie com o app do seu banco para concluir o pagamento.</figcaption>
+                </figure>
+                <p class="payment__pix-amount">
+                  Valor Pix: <strong data-pix-amount>R$ 0,00</strong>
+                </p>
                 <div class="payment__pix-key">
                   <span class="label">Chave Pix (CNPJ):</span>
                   <code>32.004.110/0001-18</code>
+                </div>
+                <div class="payment__pix-proof">
+                  <label>
+                    E-mail para confirmação
+                    <input type="email" name="pixEmail" placeholder="seuemail@exemplo.com" />
+                  </label>
+                  <a class="btn btn--ghost" data-pix-mail href="#">Enviar comprovante por e-mail</a>
+                  <p class="payment__pix-txid">
+                    Identificador do pagamento (TXID): <strong data-pix-txid>—</strong>
+                  </p>
+                  <p class="payment__note">
+                    Envie o comprovante para <strong>htasistemas@gmail.com</strong> para liberação do acesso.
+                  </p>
                 </div>
                 <p class="payment__note">
                   Validação automática: identificamos o pagamento em até 1 minuto e você
@@ -169,7 +151,7 @@
         },
         mensal: {
           nome: 'Plano Mensal',
-          preco: 'R$ 49,90 / mês',
+          preco: 'R$ 39,90 / mês',
           beneficios: [
             'Acompanhamento contínuo com IA preditiva',
             'Relatórios estratégicos mensais',
@@ -195,8 +177,6 @@
           ]
         }
       };
-
-      const cardPaymentsEnabled = false;
 
       const params = new URLSearchParams(window.location.search);
       const planoPorId = {
@@ -225,6 +205,38 @@
       document.querySelector('[data-payment-plan]').textContent = selectedPlan.nome;
       document.querySelector('[data-payment-price]').textContent = selectedPlan.preco;
 
+      const pixAmountEl = document.querySelector('[data-pix-amount]');
+      const pixEmailInput = document.querySelector('input[name="pixEmail"]');
+      const pixMailLink = document.querySelector('[data-pix-mail]');
+      const pixTxidEl = document.querySelector('[data-pix-txid]');
+
+      const formatCurrency = (valor) =>
+        valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+      const parsePlanAmount = (preco) => {
+        const match = preco.match(/(\d+[.,]?\d*)/);
+        if (!match) return 0;
+        return Number(match[1].replace('.', '').replace(',', '.')) || 0;
+      };
+
+      const planAmount = parsePlanAmount(selectedPlan.preco);
+      if (pixAmountEl) pixAmountEl.textContent = formatCurrency(planAmount);
+
+      const generateTxid = (email) => {
+        const base = `${email.toLowerCase().trim()}|${Date.now()}`;
+        let hash = 0;
+        for (let i = 0; i < base.length; i += 1) {
+          hash = (hash << 5) - hash + base.charCodeAt(i);
+          hash |= 0;
+        }
+        const hex = Math.abs(hash).toString(16).toUpperCase();
+        const date = new Date();
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const d = String(date.getDate()).padStart(2, '0');
+        return `FPM${y}${m}${d}${hex}`.slice(0, 25);
+      };
+
       const benefitsList = document.querySelector('[data-payment-benefits]');
       benefitsList.innerHTML = '';
       selectedPlan.beneficios.forEach((benefit) => {
@@ -234,86 +246,8 @@
       });
 
       const gateway = params.get('gateway');
-      const pagarmeMensagem = gateway === 'pagarme' ? ' via Pagar.me' : '';
       const backendBase = window.BACKEND_BASE_URL || '';
-      const cardForm = document.querySelector('#cartao .payment__form');
-      const feedbackEl = document.querySelector('[data-payment-feedback]');
-      const cardWarning = document.querySelector('[data-card-warning]');
-
       const localStorageKey = 'financepro.assinatura';
-
-      const limparFeedback = () => {
-        if (feedbackEl) {
-          feedbackEl.textContent = '';
-          feedbackEl.removeAttribute('data-state');
-        }
-      };
-
-      const mostrarErro = (mensagem) => {
-        if (feedbackEl) {
-          feedbackEl.textContent = mensagem;
-          feedbackEl.setAttribute('data-state', 'error');
-        } else {
-          alert(mensagem);
-        }
-      };
-
-      const mostrarSucesso = (mensagem) => {
-        if (feedbackEl) {
-          feedbackEl.textContent = mensagem;
-          feedbackEl.setAttribute('data-state', 'success');
-        }
-      };
-
-      const somenteNumeros = (valor) => valor.replace(/\D+/g, '');
-
-      const validarLuhn = (numero) => {
-        const digits = somenteNumeros(numero);
-        let sum = 0;
-        let shouldDouble = false;
-        for (let i = digits.length - 1; i >= 0; i -= 1) {
-          let digit = parseInt(digits.charAt(i), 10);
-          if (shouldDouble) {
-            digit *= 2;
-            if (digit > 9) digit -= 9;
-          }
-          sum += digit;
-          shouldDouble = !shouldDouble;
-        }
-        return sum % 10 === 0;
-      };
-
-      const validarCamposCartao = (form) => {
-        const nome = form.cardName.value.trim();
-        const numero = form.cardNumber.value.trim();
-        const validade = form.cardExpiry.value.trim();
-        const cvv = form.cardCvv.value.trim();
-        const cpf = form.cpf.value.trim();
-
-        if (nome.length < 8) return 'Informe o nome completo do titular.';
-        const numeroLimpo = somenteNumeros(numero);
-        if (numeroLimpo.length < 13 || numeroLimpo.length > 19 || !validarLuhn(numeroLimpo)) {
-          return 'Número do cartão inválido.';
-        }
-
-        const validadeMatch = validade.match(/^(\d{2})\/(\d{2})$/);
-        if (!validadeMatch) return 'Informe a validade no formato MM/AA.';
-        const mes = parseInt(validadeMatch[1], 10);
-        const ano = parseInt(`20${validadeMatch[2]}`, 10);
-        if (mes < 1 || mes > 12) return 'Mês de validade inválido.';
-        const agora = new Date();
-        const dataValidade = new Date(ano, mes, 0);
-        if (dataValidade < new Date(agora.getFullYear(), agora.getMonth(), 1)) {
-          return 'O cartão está vencido.';
-        }
-
-        if (!/^\d{3,4}$/.test(cvv)) return 'Código de segurança inválido.';
-
-        const cpfLimpo = somenteNumeros(cpf);
-        if (cpfLimpo.length !== 11) return 'CPF inválido. Informe os 11 dígitos.';
-
-        return '';
-      };
 
       const salvarAutorizacaoLocal = (plano) => {
         const registro = {
@@ -324,77 +258,107 @@
         localStorage.setItem(localStorageKey, JSON.stringify(registro));
       };
 
-
-      const registrarPagamentoNoPagarme = async () => {
-        const payload = {
-          cardName: cardForm.cardName.value.trim(),
-          cardNumber: cardForm.cardNumber.value.trim(),
-          cardExpiry: cardForm.cardExpiry.value.trim(),
-          cardCvv: cardForm.cardCvv.value.trim(),
-          cpf: cardForm.cpf.value.trim(),
-          plano: planoSelecionado,
+      const pixButton = document.querySelector('#pix button');
+      const buildPixPayload = ({ chave, nome, cidade, valor, txid = '***' }) => {
+        const pad = (id, value) => `${id}${String(value.length).padStart(2, '0')}${value}`;
+        const sanitize = (text, maxLen) => {
+          const normalized = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          return normalized.replace(/[^\x20-\x7E]/g, '').trim().slice(0, maxLen);
         };
 
-        const resposta = await fetch(`${backendBase}/api/pagamentos/pagarme/cartao`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
+        const nomeFmt = sanitize(nome, 25);
+        const cidadeFmt = sanitize(cidade, 15);
+        const chaveFmt = sanitize(chave, 77).replace(/\D+/g, '');
+        const txidFmt = sanitize(txid || '***', 25) || '***';
 
-        const corpo = await resposta.json();
-        if (!resposta.ok) {
-          throw new Error(corpo.mensagem || corpo.detalhe || 'Não foi possível registrar o pagamento.');
-        }
-        return corpo;
+        const merchantAccountInfo =
+          pad('00', 'br.gov.bcb.pix') +
+          pad('01', chaveFmt);
+
+        const payload =
+          '000201' +
+          pad('01', '11') +
+          pad('26', merchantAccountInfo) +
+          pad('52', '0000') +
+          pad('53', '986') +
+          pad('54', valor.toFixed(2)) +
+          pad('58', 'BR') +
+          pad('59', nomeFmt) +
+          pad('60', cidadeFmt) +
+          pad('62', pad('05', txidFmt));
+
+        const crc16 = (str) => {
+          let crc = 0xffff;
+          for (let i = 0; i < str.length; i += 1) {
+            crc ^= str.charCodeAt(i) << 8;
+            for (let j = 0; j < 8; j += 1) {
+              crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1);
+              crc &= 0xffff;
+            }
+          }
+          return crc.toString(16).toUpperCase().padStart(4, '0');
+        };
+
+        const payloadWithCrc = payload + '6304';
+        return payloadWithCrc + crc16(payloadWithCrc);
       };
 
-
-      if (cardForm) {
-        if (!cardPaymentsEnabled) {
-          const cardSection = document.querySelector('#cartao');
-          if (cardWarning) cardWarning.hidden = false;
-          if (feedbackEl) {
-            mostrarErro('Pagamentos com cartão de crédito estão temporariamente indisponíveis.');
-          }
-          cardForm.querySelectorAll('input, button').forEach((elemento) => {
-            elemento.disabled = true;
-          });
-          const submitButton = cardForm.querySelector('button[type="submit"]');
-          if (submitButton) submitButton.textContent = 'Pagamento com cartão indisponível';
-          if (cardSection) {
-            cardSection.setAttribute('aria-disabled', 'true');
-          }
-        } else {
-          cardForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            limparFeedback();
-
-            const erro = validarCamposCartao(cardForm);
-            if (erro) {
-              mostrarErro(erro);
-              return;
-            }
-
-
-            salvarAutorizacaoLocal(planoSelecionado);
-            mostrarSucesso('Pagamento validado com sucesso. Redirecionando para confirmação...');
-
-            const checkoutPlan = plans[planoSelecionado] ? planoSelecionado : 'mensal';
-            setTimeout(() => {
-              window.location.href = `pagamento-sucesso.html?gateway=pagarme&plano=${encodeURIComponent(
-                checkoutPlan
-              )}`;
-            }, 600);
-
-          });
-        }
-      }
-
-      const pixButton = document.querySelector('#pix button');
       if (pixButton) {
         pixButton.addEventListener('click', () => {
-          alert(`Gerando QR Code Pix${pagarmeMensagem} para ${selectedPlan.nome}.`);
+          const pixKeyEl = document.querySelector('#pix .payment__pix-key code');
+          const qrWrapper = document.querySelector('#pix .payment__pix-qr');
+          const qrImg = qrWrapper ? qrWrapper.querySelector('img') : null;
+          const pixKey = pixKeyEl ? pixKeyEl.textContent.trim() : '';
+          const emailConfirmacao = pixEmailInput ? pixEmailInput.value.trim() : '';
+          if (!pixKey || !qrWrapper || !qrImg) return;
+          if (!emailConfirmacao) {
+            alert('Informe o e-mail para confirmação antes de gerar o QR Code Pix.');
+            return;
+          }
+
+          const txid = generateTxid(emailConfirmacao);
+          if (pixTxidEl) pixTxidEl.textContent = txid;
+
+          const qrData = buildPixPayload({
+            chave: pixKey,
+            nome: 'Torresoft Solucoes Empresariais',
+            cidade: 'Uberlandia',
+            valor: planAmount,
+            txid,
+          });
+          const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(qrData)}`;
+          qrImg.removeAttribute('src');
+          qrImg.loading = 'eager';
+          qrImg.decoding = 'async';
+          qrImg.referrerPolicy = 'no-referrer';
+          qrImg.src = qrUrl;
+          qrWrapper.hidden = false;
+          qrImg.style.display = 'block';
         });
+      }
+
+      if (pixMailLink) {
+        const updatePixMail = () => {
+          const emailConfirmacao = pixEmailInput ? pixEmailInput.value.trim() : '';
+          const txid = pixTxidEl ? pixTxidEl.textContent.trim() : '';
+          const subject = `Comprovante de pagamento - ${selectedPlan.nome}`;
+          const body = [
+            'Olá, segue comprovante de pagamento via Pix.',
+            '',
+            `Plano: ${selectedPlan.nome}`,
+            `Valor: ${formatCurrency(planAmount)}`,
+            txid && txid !== '—' ? `TXID: ${txid}` : 'TXID: ',
+            emailConfirmacao ? `E-mail para confirmação: ${emailConfirmacao}` : 'E-mail para confirmação: ',
+            '',
+            'Anexei o comprovante.'
+          ].join('%0D%0A');
+          pixMailLink.href = `mailto:htasistemas@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+        };
+
+        updatePixMail();
+        if (pixEmailInput) {
+          pixEmailInput.addEventListener('input', updatePixMail);
+        }
       }
     </script>
     <footer class="footer" aria-label="Rodapé principal">
